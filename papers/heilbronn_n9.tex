@@ -75,8 +75,8 @@ so $a \approx 0.19377$, $b \approx 0.82656$, $c \approx 0.26017$, $d \approx 0.3
 \[
  C_9 = \bigl( (a,1),\ (1,a),\ (1,b),\ (b,1),\ (0,b),\ (b,0),\ (c,0),\ (0,c),\ (d,d) \bigr).
 \]
-% SRC: papers/paper3/check_closed_form.py (exact recognition of the exp 44 / exp 103 certified centre in Q(sqrt 65))
-$C_9$ is symmetric under the reflection in the diagonal $y = x$; exactly $11$ of its $84$ triangles have the minimum area, and every other triangle is larger by at least $1.5\cdot10^{-3}$ (Lemma~\ref{lem:ident}).
+% SRC: papers/paper3/check_closed_form_exact.py (exact identification of the exp 44 / exp 103 certified centre in Q(sqrt 65))
+$C_9$ is symmetric under the reflection in the diagonal $y = x$; exactly $11$ of its $84$ triangles have the minimum area, and every other triangle is strictly larger, the smallest excess being $\approx 1.529\cdot10^{-3}$ (Lemma~\ref{lem:ident}).
 
 \begin{theorem}\label{thm:main}
 Let $\tstar = (9\sqrt{65}-55)/320 = 0.054875999170896\ldots$. Every configuration of nine points in the unit square has a triangle of area at most $\tstar$, that is, $H(9) = \tstar$. A configuration $P \in Q^9$ has $f(P) = \tstar$ if and only if, after relabelling, $P = g(C_9)$ for one of the eight symmetries $g$ of the square; these are four distinct point sets.
@@ -115,7 +115,7 @@ There is a configuration $x^* \in Q^9$, with $\|x^* - \tilde x\|_\infty \le 4.65
 % SRC: local_certs.json "9": basin_radius 0.00011786328420762071; 44/NOTES.md step 7 "Theorem used"; certify_interval.py l.517-547
 
 \begin{proof}[Sketch of the argument implemented by the certifier]
-Let $M$ be the $19\times19$ matrix whose rows are $[\sigma_T\nabla\Delta_T,\,-1]$ for the $11$ ties ($\sigma_T$ the sign of the area) and $[n_w, 0]$ for the $8$ wall contacts ($n_w$ the inward normal), acting on $(\delta x, \tau)$. With an approximate inverse $C$, the quantity $\beta = \|I - CM(\tilde x)\|_\infty + 6\rho\|C\|_\infty$ is bounded exactly; $\beta < 1$ proves $M(x^*)$ nonsingular with $\|M^{-1}\|_\infty \le \|C\|_\infty/(1-\beta)$, and the entries of $y = -(M^{-1})_{\text{last},\cdot}$ are bounded below by $y_{\min} > 0$. For a displacement $\delta x$ that keeps the points in $Q$, with $\delta = \|\delta x\|_\infty$, put $\tau = \min_T \sigma_T\nabla\Delta_T\cdot\delta x$ and $s = M(\delta x,\tau) \ge 0$. Then $-\tau = y\cdot s \ge y_{\min}\|s\|_\infty \ge c\,\delta$ with $c = y_{\min}/\|M^{-1}\|_\infty$. The quadratic remainder of a triangle area is at most $4\delta^2$, so some tie has $\sigma_T\Delta_T(x^*+\delta x) \le \tstar - c\delta + 4\delta^2 < \tstar$ for $0 < \delta < c/4$; the radius is also capped at $\tstar/10$ so that the signs $\sigma_T$ do not change. All bounds are computed in exact rational arithmetic; floats only choose $C$ and the active set. (One exception, not used in the basin argument: in the check that non-tied triangles exceed $\tstar$, triangles whose double-precision area exceeds $\tilde t$ by more than $10^{-6}$ are not re-checked exactly; for $n = 9$ the smallest such margin is $1.5\cdot10^{-3}$, see Lemma~\ref{lem:ident}.) The certifier stores $\rho_b = \min(c/4, \tstar/10)$ rounded to a double. % SRC: 44/NOTES.md step 7; certify_interval.py l.535-545
+Let $M$ be the $19\times19$ matrix whose rows are $[\sigma_T\nabla\Delta_T,\,-1]$ for the $11$ ties ($\sigma_T$ the sign of the area) and $[n_w, 0]$ for the $8$ wall contacts ($n_w$ the inward normal), acting on $(\delta x, \tau)$. With an approximate inverse $C$, the quantity $\beta = \|I - CM(\tilde x)\|_\infty + 6\rho\|C\|_\infty$ is bounded exactly; $\beta < 1$ proves $M(x^*)$ nonsingular with $\|M^{-1}\|_\infty \le \|C\|_\infty/(1-\beta)$, and the entries of $y = -(M^{-1})_{\text{last},\cdot}$ are bounded below by $y_{\min} > 0$. For a displacement $\delta x$ that keeps the points in $Q$, with $\delta = \|\delta x\|_\infty$, put $\tau = \min_T \sigma_T\nabla\Delta_T\cdot\delta x$ and $s = M(\delta x,\tau) \ge 0$. Then $-\tau = y\cdot s \ge y_{\min}\|s\|_\infty \ge c\,\delta$ with $c = y_{\min}/\|M^{-1}\|_\infty$. The quadratic remainder of a triangle area is at most $4\delta^2$, so some tie has $\sigma_T\Delta_T(x^*+\delta x) \le \tstar - c\delta + 4\delta^2 < \tstar$ for $0 < \delta < c/4$; the radius is also capped at $\tilde t/10$ so that the signs $\sigma_T$ do not change. All bounds are computed in exact rational arithmetic; floats only choose $C$ and the active set. (One exception, not used in the basin argument: in the check that non-tied triangles exceed $\tstar$, triangles whose double-precision area exceeds $\tilde t$ by more than $10^{-6}$ are not re-checked exactly; for $n = 9$ this is superseded by the exact check of Lemma~\ref{lem:ident}.) The certifier stores $\rho_b = \min(c/4, \tilde t/10)$ rounded to a double. Appendix~\ref{app:basin} gives the argument in full, with all constants for $n = 9$. % SRC: 44/NOTES.md step 7; certify_interval.py l.535-545
 \end{proof}
 
 \subsection{The global exclusion}
@@ -132,15 +132,22 @@ Proposition~\ref{prop:bb} is what the branch and bound of Sections~\ref{sec:redu
 
 \subsection{The identification}
 \begin{lemma}\label{lem:ident}
-$x^* = C_9$ up to the labelling, and $\tstar = (9\sqrt{65}-55)/320$. Exactly $11$ triangles of $C_9$ have area $\tstar$, and all others have area $> \tstar + 1.5\cdot10^{-3}$.
+$x^* = C_9$ up to the labelling, and $\tstar = (9\sqrt{65}-55)/320$. Exactly $11$ triangles of $C_9$ have area $\tstar$, and all others have area $> \tstar$ (the smallest excess is $\approx 1.529\cdot10^{-3}$).
 \end{lemma}
 \begin{proof}
-The script \texttt{check\_closed\_form.py} (in the repository) recognises each coordinate of the rational centre $\tilde x$ as an element of $\Q(\sqrt{65})$, which gives $C_9$, and checks in exact arithmetic in $\Q(\sqrt{65})$: $\|C_9 - \tilde x\|_\infty < 2.33\cdot10^{-32} < r$; exactly $11$ triangles of $C_9$ have area exactly $(9\sqrt{65}-55)/320$ (the other $73$ exceed it by at least $1.529\cdot10^{-3}$, evaluated to $30$ digits); $C_9$ is symmetric in the diagonal, and its coordinates equal to $0$ or $1$ are those of $\tilde x$ (the script copies them), so it has the same eight wall contacts; and $(9\sqrt{65}-55)/320$ lies in $[t_{\rm lower},t_{\rm upper}]$, within $2\cdot10^{-32} < r$ of the polished value $\tilde t$ (whose 32-decimal display is $0.05487599917089670897281099710229$). Since $\|C_9-\tilde x\|_\infty < 10^{-31}$ while every non-tied triangle of $\tilde x$ exceeds $\tilde t$ by far more, the $11$ tied triangles of $C_9$ are exactly the ties of $\tilde x$, with the same orientations, and the diagonal symmetry of $C_9$ induces the same permutation of labels as that of $\tilde x$. Hence $C_9$ lies in the parametrised family, is a zero of the tie system, and lies in the Krawczyk ball of radius $r$ around $(\tilde u,\tilde t)$ (the parameters $u$ are coordinates of points of the configuration, see Remark~\ref{rem:ident}). By uniqueness of the zero in that ball, $C_9 = x^*$ and $\tstar = (9\sqrt{65}-55)/320$.
+The script \texttt{check\_closed\_form\_exact.py} (in the repository) uses \texttt{sympy} only to \emph{propose} $C_9$ from the rational centre $\tilde x$. It then checks the following in exact arithmetic in $\Q(\sqrt{65})$, with numbers stored as pairs $(a,b)$ of rationals meaning $a + b\sqrt{65}$ and signs decided exactly (by comparing $a^2$ with $65b^2$); it stops on any failure. Put $v = (9\sqrt{65}-55)/320$.
+(1) $t_{\rm lower} < v < t_{\rm upper}$.
+(2) Every coordinate of $C_9$ lies in $[0,1]$, and the coordinates of $\tilde x$ equal to $0$ or $1$ (its eight wall contacts) are the same coordinates of $C_9$, with the same values.
+(3) Every coordinate of $C_9$ is within $r(1-10^{-6})$ of the same coordinate of $\tilde x$, where $r$ is the stored existence radius (the margin covers the double rounding of $r$); the distance is $\approx 2.32\cdot10^{-32}$.
+(4) For each of the $84$ triangles, $\lvert\Delta(C_9)\rvert$ is either exactly $v$ or strictly greater than $v$; exactly $11$ are equal to $v$.
+(5) The $11$ tied triangles of $C_9$, with their orientation signs, are exactly the triangles of $\tilde x$ whose area is minimal to relative precision $10^{-20}$, with the same signs; and the point set $C_9$ is invariant under $(x,y)\mapsto(y,x)$.
+
+From (3) and (5): the points of $\tilde x$ are at pairwise sup distance $> 0.17$, and each point of $C_9$ is within $10^{-31}$ of the point of $\tilde x$ with the same label, so the diagonal reflection permutes the labels of $C_9$ exactly as it permutes those of $\tilde x$. With (2), $C_9 = p(u_C)$ for the affine parametrisation $p$ of the certifier (Appendix~\ref{app:basin}, \eqref{eq:param}), in which every parameter is a coordinate of a point up to sign and an additive constant; hence $\|u_C - \tilde u\|_\infty \le \|C_9 - \tilde x\|_\infty < r$. By (4) and (5), $(u_C, v)$ is a zero of the reduced tie system. Its last component satisfies $\lvert v - \tilde t\rvert < 10^{-32} < r$: the certifier prints $\tilde t$ rounded down to $32$ decimals as $0.05487599917089670897281099710229$, and $v$ exceeds this by $3.6\cdot10^{-33}$. So $(u_C, v)$ lies in the Krawczyk ball of radius $r$ around $(\tilde u,\tilde t)$, and by uniqueness of the zero in that ball (Lemma~\ref{lem:krawczyk}), $C_9 = x^*$ and $\tstar = v$. By (4), $f(C_9) = v$.
 \end{proof}
-% SRC: papers/paper3/check_closed_form.py output (dist 2.3247e-32, r 4.649e-32, 11 tied, min margin 0.001529); re-run of certify_interval for n = 9: t_polished 5487599917089670897281099710229e-32, 6 tie orbits
+% SRC: papers/paper3/check_closed_form_exact.py output (ALL EXACT CHECKS PASSED; dist 2.32e-32, 11 tied, smallest excess 0.001529); re-run of certify_interval for n = 9: t_polished 5487599917089670897281099710229e-32, parametrisation printed from build_param
 
 \begin{remark}\label{rem:ident}
-The step ``the parameters $u$ are coordinates'' uses an implementation detail of the certifier: for $n = 9$ the stored point-displacement bound $\rho$ equals $r$ exactly, so each point coordinate is $\pm$ one parameter plus a constant, and the sup distance of $C_9$ from $\tilde x$ bounds its distance from $\tilde u$. We checked this from the stored data, not by an independent proof. The identification is not needed for the optimality statement itself: without it, the proof gives $H(9) = f(x^*) \in [t_{\rm lower}, t_{\rm upper}]$ with $x^*$ unique up to symmetry, and $C_9$ agrees with $x^*$ to $10^{-31}$.
+Two inputs of this proof are not stored in \texttt{local\_certs.json} and are taken from a re-run of the (deterministic) certifier on the same input, which reproduces the stored record exactly ($r$, $\rho$, $\rho_b$, $t_{\rm lower}$, $t_{\rm upper}$, the points): the 32-digit display of $\tilde t$, and the parametrisation \eqref{eq:param}. The exact script checks only the coordinates of $C_9$, not the component $\tilde t$. The identification is not needed for the optimality statement itself: without it, the proof gives $H(9) = f(x^*) \in [t_{\rm lower}, t_{\rm upper}]$ with $x^*$ unique up to symmetry, and $C_9$ agrees with $x^*$ to $10^{-31}$.
 \end{remark}
 
 \subsection{Proof of Theorem~\ref{thm:main} from (A)--(C)}
@@ -201,7 +208,7 @@ and $\tau > 2T$. Write these rows, scaled by $D^2$ to integer coefficients, as $
 \[
 \tau \le \frac{1}{s}\Bigl(\mu^{\mathsf T}H + \sum_{u\ne\tau}\max\bigl(-r_u \underline u,\, -r_u \overline u\bigr)\Bigr),
 \]
-where $[\underline u,\overline u]$ is the box interval of a coordinate or the exact range of $x_a y_b$ over the box. If the right side is $\le 2TD^2$ (checked as an integer inequality) the box is discarded. Rounding of the duals and solver inaccuracy can only make this test fail, never make it pass falsely. A box with $s \le 0$, or where the solver does not report an optimal solution, is simply split. % SRC: bb2.py lp_bound2; 103/NOTES.md P2; 110/NOTES.md (a)
+where $[\underline u,\overline u]$ is the box interval of a coordinate or the exact range of $x_a y_b$ over the box. If the right side is $\le 2TD^2$ (checked as an integer inequality) the box is discarded. Rounding of the duals and solver inaccuracy can only make this test fail, never make it pass falsely. A box with $s \le 0$, or where the solver does not report an optimal solution, is simply split. Appendix~\ref{app:p2} lists every row and states and proves the certificate (Lemma~\ref{lem:farkas}). % SRC: bb2.py lp_bound2; 103/NOTES.md P2; 110/NOTES.md (a)
 
 \subsection{Cover by the basin ball}\label{sec:cover}
 If all box widths are at most $D/1000$, a float search proposes a symmetry $g$ and a matching $\pi$ of the box points to the points of $g(\tilde x)$; the box is then discarded if, in exact rational arithmetic, every endpoint of every coordinate interval is within $R$ of the matched coordinate of $g(\tilde x)$. Such a box lies in the sup-ball of radius $R$ around $\pi(g(\tilde x))$, which is exactly the conclusion of Proposition~\ref{prop:bb} for the configurations in it. % SRC: bb.py covered(); bb2.py make_problem cover_width=D//1000
@@ -232,6 +239,7 @@ These checks test the implementation; they are not part of the proof.
 \item \emph{Re-proofs for $n = 5$--$8$.} With the same code (experiment~110): $n = 5$ and $n = 6$ in the weaker form $H(n) \le \tstar_n(1+10^{-3})$, with node counts identical to those of experiment~103 ($1\,120$ and $9\,973$ without the diagonal reduction); $n = 7$ in exact mode (optimum unique up to symmetry) in $0.85$--$0.86$ million nodes, with and without the diagonal reduction and with LP skips; $n = 8$ in exact mode in $4\,252\,598$ nodes and $538$\,s on $14$ workers (experiment~103: $4\,256\,822$ nodes). All with zero failures. For $n = 5, 6$ only the weaker form is possible, since $n = 5$ is certified locally only at second order (no basin radius) and $n = 6$ has a one-parameter family of optima. The known optima for $n = 7, 8$ \cite{ZC,DZ} are reproduced. % SRC: 110/NOTES.md Validation table; 103/NOTES.md Results and "n = 5 and 6 are only eps-mode"
 \item \emph{Random soundness test} (\texttt{test\_sound2.py}, $n = 7, 8, 9$, $600$ random boxes each near the optimum and its mirror images, with $T = 0.8\,\tstar_n$ so that the tests fire): no sampled configuration with all $\lvert\Delta\rvert > T$ lies in a box discarded by P1 or violates a determined orientation; no sampled point of the domain is removed by P0; no sample beats a certified P2 bound; the rational re-derivation agrees with the integer certificate on every tested box ($210$, $270$, $310$ LP boxes certified). A separate test of P0 on $20\,000$ random boxes at $n = 9$ ($5.6$ million domain samples) removed none. % SRC: 110/NOTES.md Validation bullets
 \item \emph{Audit.} During the runs a random sample of P2 certificates (each already checked exactly by the integer code) is re-derived from the row definitions with rational arithmetic, independently of the integer code; a mismatch aborts. At $n = 5$ all $314$ were audited, at $n = 8$ $2\,701$; none disagreed. % SRC: 110/NOTES.md Validation table
+\item \emph{Clean-room cross-check of P2.} A second checker (\texttt{clean\_room/check\_p2.py}) was written from Appendix~\ref{app:p2} and a neutral certificate format alone, without access to the search code. It recomputes the orientation pattern from the $64$ corner tuples of each box, rebuilds every row from its meaning, and decides each certificate in exact integer arithmetic. Certificates were dumped from the unmodified search code through its audit hook (\texttt{dump\_p2.py}). The checker accepted all $292\,120$ P2 certificates of a complete $n = 7$ run (whose node count, $853\,071$, equals that of the earlier run), a $10\%$ sample of $136\,972$ from a complete $n = 8$ run, and $8\,970$ sampled from four root boxes at $n = 9$: $438\,062$ certificates, none rejected. Its negative tests reject altered certificates (one multiplier halved, an area row's orientation flipped, the box widened, a row dropped, $T$ halved). For $n = 7$ this checks every P2 discard of that run independently; for $n = 9$ it is a sample, and a complete independent check would need per-leaf certificates from a full run. % SRC: 110/results/p2dump/*.log, clean_room/check_p2.py output 2026-11-13
 \item \emph{Negative control.} With $n = 5$, $T = \tstar_5(1-10^{-3})$ and no cover, the claim is false, so the search must fail. It does: $5$ failures after $509$ nodes (with the diagonal reduction) and failures after $438$ nodes (without), at grid-floor boxes next to the optimum. % SRC: 110/NOTES.md "Negative control"; results/val/n5_negative_control*.txt
 \end{itemize}
 
@@ -265,7 +273,7 @@ wall time & $57\,636$\,s ($16.0$\,h) \\
 \end{tabular}
 \end{table}
 
-Consistency: the discarded and covered boxes number $179\,297\,387$; the remaining $179\,297\,351$ nodes were split; a forest of binary trees with $36$ roots and $179\,297\,351$ internal nodes has $179\,297\,387$ leaves, as observed. Nodes reaching the LP stage ($358\,594\,738$ minus the P0, P1 and cover discards, $285\,079\,731$) equal LPs solved plus LP skips. The failure log is empty. The $32$ covered boxes lie around the symmetry images of the optimum that are compatible with the diagonal reduction. % SRC: arithmetic on stats.json; 110/NOTES.md Result (fails.jsonl empty, stderr empty, covers)
+Consistency: the discarded and covered boxes number $179\,297\,387$; the remaining $179\,297\,351$ nodes were split; a forest of binary trees with $36$ roots and $179\,297\,351$ internal nodes has $179\,297\,387$ leaves, as observed. Nodes reaching the LP stage ($358\,594\,738$ minus the P0, P1 and cover discards, $285\,079\,731$) equal LPs solved plus LP skips. The failure log is empty. The script \texttt{verify\_run.py} (in the repository) re-checks these facts from the saved run files (\texttt{stats.json}, \texttt{progress.log}, \texttt{fails.jsonl}) and the local certificate: the run finished and its last log line agrees with the statistics; $\mathrm{fail} = 0$ and the failure log is empty; leaves minus internal nodes equals $36$, the number of root boxes; $0 < T \le t_{\rm lower}(1-10^{-9}) < t_{\rm lower}$ in exact rationals, with the $t_{\rm lower}$ of the certificate; and the float weight tally is within $10^{-9}$ of $1$. It passes. This is a consistency check of the counters the run recorded; it does not re-derive any box or re-run any test, so it is not an independent check of the computation. The $32$ covered boxes lie around the symmetry images of the optimum that are compatible with the diagonal reduction. % SRC: arithmetic on stats.json; 110/NOTES.md Result (fails.jsonl empty, stderr empty, covers)
 
 % =====================================================================
 \section{Limitations and what an independent check needs}\label{sec:limits}
@@ -274,7 +282,7 @@ Consistency: the discarded and covered boxes number $179\,297\,387$; the remaini
 \item \emph{Not independently checked.} As stated in Remark~\ref{rem:status}, this is an AI-assisted computer proof that only its author has examined. % SRC: 110/NOTES.md "Not yet independently reviewed"
 \item \emph{No stored certificates.} The leaves of the tree are not stored (there are about $1.8\cdot10^8$); the proof can be re-checked only by re-running the search, about $16$ hours on $14$ workers. Every P2 discard was decided by the exact integer certificate; the independent rational re-derivation (audit) was additionally run on a random $0.02\%$ of them (about $1$ in $5\,000$). % SRC: 103/NOTES.md Limitations; stats.json audited / p2
 \item \emph{Trust base} as in Section~\ref{sec:sound}; none of it formally verified. P1 at $n = 9$ uses the 64-bit integer kernel of experiment~110, whose agreement with a rational computation was tested only on samples.
-\item \emph{Identification.} The equality $x^* = C_9$ uses the Krawczyk ball of the local certificate and the observation in Remark~\ref{rem:ident}; the optimality and uniqueness statements do not depend on it.
+\item \emph{Identification.} The equality $x^* = C_9$ is checked exactly in $\Q(\sqrt{65})$, but uses two values from a re-run of the certifier that are not stored (Remark~\ref{rem:ident}); the optimality and uniqueness statements do not depend on it.
 \end{itemize}
 
 An independent check would need at least the following.
@@ -286,10 +294,180 @@ An independent check would need at least the following.
 
 % =====================================================================
 \section*{Data and code availability}
-The code (branch and bound, drivers, tests, local certifier, the identification script) and the run logs and statistics will be available in the public repository accompanying this paper, \repourl. % SRC: task instructions (repository placeholder)
+The code (branch and bound, drivers, tests, local certifier, the exact identification script \texttt{check\_closed\_form\_exact.py}, the run-accounting check \texttt{verify\_run.py}, the certificate dump \texttt{dump\_p2.py} and the clean-room checker \texttt{check\_p2.py}), the run logs and statistics, and the sampled $n = 9$ certificates are available in the public repository accompanying this paper, \repourl, with SHA-256 checksums of the proof inputs. % SRC: task instructions (repository placeholder)
 
 \section*{Use of AI tools}
 The author used Claude, an AI system developed by Anthropic, for computation (writing and running search, certification and analysis code) and for drafting text. All claims were checked against the computational records; the author takes responsibility for the content. AI systems are not authors of this work.
+
+% =====================================================================
+\appendix
+
+\section{The P2 certificate}\label{app:p2}
+% SRC: 110-n9-proof/bb2.py Problem2._build_lp, k_fill, k_matvec, lp_bound2, audit2, process; 103-global-proof/bb.py Problem.__init__ (tri, pairs, tw, tws, colscale)
+
+This appendix is derived from \texttt{bb2.py} (experiment~110) and the parts of \texttt{bb.py} (experiment~103) that it inherits. Throughout, $n = 9$, $D = 2^{24}$, the $m = 84$ triples are $t = (i,j,k)$ with $i<j<k$, and the $72$ ordered pairs are $p = (a,b)$, $a \ne b$.
+
+\subsection*{A.1 The box and the orientation pattern}
+P2 is applied to a box $B = \prod_k [\ell_k/D, h_k/D]$ \emph{after} P0 and P1 have run on it. P0 changes the integer endpoints in place, only raising $\ell_k$ and lowering $h_k$, and returns ``empty'' as soon as some $\ell_k > h_k$; so on every box that reaches P2, $0 \le \ell_k \le h_k \le D$. Coordinates $k < 9$ are $x_k$, coordinates $9 + i$ are $y_i$.
+
+P1 computes, for each triple $t$, the minimum $m_t$ and maximum $M_t$ of the integer $D^2\cdot 2\Delta_t$ over the $64$ corner tuples, and sets
+\[
+ \sigma_t = +1 \ \text{if } m_t \ge -T_2,\qquad \sigma_t = -1 \ \text{if not, and } M_t \le T_2,\qquad \sigma_t = 0 \ \text{otherwise},
+\]
+with $T_2 = \lfloor 2TD^2\rfloor$ (and discards the box if $\max(M_t,-m_t) \le T_2$ for some $t$). Since $2\Delta_t = x_jy_k - x_jy_i - x_iy_k - x_ky_j + x_ky_i + x_iy_j$ is multilinear in the six coordinates, $m_t \le D^2\,2\Delta_t(P) \le M_t$ for every $P \in B$.
+
+\begin{lemma}\label{lem:orient}
+If $\sigma_t \ne 0$ and $P \in B$ has $\lvert\Delta_t(P)\rvert > T$, then $\sigma_t\,2\Delta_t(P) > 2T$.
+\end{lemma}
+\begin{proof}
+If $\sigma_t = +1$, then $D^2\,2\Delta_t(P) \ge m_t \ge -T_2 \ge -2TD^2$, so $2\Delta_t(P) < -2T$ is impossible, and $\lvert 2\Delta_t(P)\rvert > 2T$ forces $2\Delta_t(P) > 2T$. The case $\sigma_t = -1$ is symmetric.
+\end{proof}
+
+There is no case split on orientations. The pattern $\sigma$ is a deduction valid for every configuration in $B$ that matters (those with $f > T$); a triple with $\sigma_t = 0$ simply contributes no row. So the relaxation below contains every $P \in B \cap \Omega$ with $f(P) > T$, and nothing has to be covered by other cases.
+
+\subsection*{A.2 Variables, rows and bounds}
+The integer model has $91$ columns, in this order: $u_0 = \hat\tau$; $u_{1+i} = X_i$ and $u_{10+i} = Y_i$ ($i = 0,\dots,8$); $u_{19+p} = W_p$ for the $72$ pairs. For a configuration $P$ the \emph{intended values} are
+\[
+ X_i = Dx_i,\quad Y_i = Dy_i,\quad W_{ab} = D^2 x_a y_b,\quad \hat\tau = D^2 \min_{t:\ \sigma_t \ne 0} \sigma_t\, 2\Delta_t(P),
+\]
+so that $D^2\,2\Delta_t = L_t(W) := W_{ij} - W_{ik} + W_{jk} - W_{ji} + W_{ki} - W_{kj}$. The $465$ rows $G_\iota u \le H_\iota$ have integer coefficients; each is $D^2$ times a row in natural units. For a pair $p = (a,b)$ write $X^-_p = \ell_a$, $X^+_p = h_a$, $Y^-_p = \ell_{9+b}$, $Y^+_p = h_{9+b}$.
+\begin{enumerate}[label=(R\arabic*)]
+\item \emph{Area rows} ($168$): for each triple $t$, row $2t$ is $\hat\tau - L_t(W) \le 0$ and row $2t+1$ is $\hat\tau + L_t(W) \le 0$. Row $2t$ is \emph{switched on} iff $\sigma_t = +1$, row $2t+1$ iff $\sigma_t = -1$. The rows are present in the LP for all triples (fixed structure); a switched-off row has upper bound $+\infty$ in the float LP.
+\item \emph{McCormick rows} ($4\cdot72 = 288$), for each pair $p = (a,b)$:
+\[
+\begin{aligned}
+ -W_p + X^-_p Y_b + Y^-_p X_a &\le X^-_p Y^-_p, &\qquad -W_p + X^+_p Y_b + Y^+_p X_a &\le X^+_p Y^+_p,\\
+ W_p - X^+_p Y_b - Y^-_p X_a &\le -X^+_p Y^-_p, & W_p - X^-_p Y_b - Y^+_p X_a &\le -X^-_p Y^+_p .
+\end{aligned}
+\]
+They are $D^2$ times $(x_a - x^-)(y_b - y^-) \ge 0$, $(x^+ - x_a)(y^+ - y_b) \ge 0$, $(x^+ - x_a)(y_b - y^-) \ge 0$, $(x_a - x^-)(y^+ - y_b) \ge 0$ with $w = x_ay_b$, and hold at the intended values for \emph{every} $P \in B$. Their coefficients are rewritten for each box.
+\item \emph{Ordering rows} ($8$): $D X_i - D X_{i+1} \le 0$, valid on $\Omega$.
+\item \emph{Mean row} ($1$): $D\sum_i X_i \le D^2 n/2 = 9\cdot 2^{47}$, valid on $\Omega$.
+\end{enumerate}
+Column bounds used by the certificate (the $\hat\tau$ bound is not used): $X_i \in [\ell_i, h_i]$, $Y_i \in [\ell_{9+i}, h_{9+i}]$, and $W_{ab} \in [\underline W_{ab}, \overline W_{ab}]$, the minimum and maximum of the four integer products $\{\ell_a,h_a\}\cdot\{\ell_{9+b},h_{9+b}\}$; since $x_a y_b$ is bilinear on a rectangle, $D^2x_ay_b$ lies in this range for every $P \in B$. We write $[\underline u_c, \overline u_c]$ for the bound of column $c \ge 1$.
+
+\subsection*{A.3 The multipliers}
+HiGHS solves $\max \hat\tau$ over these rows in natural units (floating point). Let $\lambda = \max(-\text{row dual}, 0)$ componentwise. Then the code sets $\lambda_\iota = 0$ for every area row that is switched off (including both rows of every triple with $\sigma_t = 0$, and the wrong-orientation row of every determined triple). If $\lambda_{\max} = \max_\iota\lambda_\iota$ is not positive, P2 fails. Otherwise $S = 49 - \max(0, \lceil\log_2\lambda_{\max}\rceil)$ and $\mu_\iota = \lfloor \lambda_\iota 2^S\rfloor$; the code asserts $0 \le \mu_\iota < 2^{50}$. Nothing below depends on how $\mu$ was obtained: the solver, its tolerances, the scaling and the rounding only influence whether the test succeeds.
+
+\subsection*{A.4 The exact test}
+Put $r = G^{\mathsf T}\mu \in \mathbb{Z}^{91}$, $s = r_0$ (the $\hat\tau$ coefficient; only area rows have one, equal to $+1$), and
+\[
+ N = \mu^{\mathsf T} H + \sum_{c=1}^{90} \max\bigl(-r_c\,\underline u_c,\ -r_c\,\overline u_c\bigr) \in \mathbb{Z}.
+\]
+Let $2TD^2 = \mathfrak p/\mathfrak q$ in lowest terms. The box is discarded by P2 if and only if $s > 0$ and $N\mathfrak q \le s\mathfrak p$, that is, $N \le 2TD^2 s$; the comparison is in Python integers.
+
+\begin{lemma}[P2 certificate]\label{lem:farkas}
+Let $B$ be a box with integer endpoints in $[0,D]$ and orientation pattern $\sigma$ as in A.1, and let $\mu \in \mathbb{Z}_{\ge0}^{465}$ with $\mu_\iota = 0$ for every switched-off area row. If $s > 0$ and $N \le 2TD^2 s$, then no $P \in B \cap \Omega$ has $f(P) > T$.
+\end{lemma}
+\begin{proof}
+Suppose $P \in B\cap\Omega$ and $f(P) > T$, and let $u$ be the intended values. Since $s = \sum_{\iota\ \text{area}} \mu_\iota > 0$ and $\mu$ vanishes on switched-off rows, some triple has $\sigma_t \ne 0$; so $\hat\tau$ is defined, and by Lemma~\ref{lem:orient} (every $\lvert\Delta_t(P)\rvert > T$) $\hat\tau > 2TD^2$. Every row with $\mu_\iota > 0$ holds at $u$: a switched-on area row of triple $t$ reads $\hat\tau \le \sigma_t D^2 2\Delta_t(P)$, true by definition of $\hat\tau$; McCormick rows hold since $P \in B$; ordering and mean rows hold since $P \in \Omega$. Multiplying by $\mu_\iota \ge 0$ and adding,
+\[
+ s\hat\tau + \sum_{c \ge 1} r_c u_c = \mu^{\mathsf T} G u \le \mu^{\mathsf T} H .
+\]
+Each $u_c$ ($c \ge 1$) lies in $[\underline u_c, \overline u_c]$, so $-r_c u_c \le \max(-r_c\underline u_c, -r_c\overline u_c)$. Hence $s\hat\tau \le N \le 2TD^2 s$, and since $s > 0$, $\hat\tau \le 2TD^2$, a contradiction.
+\end{proof}
+
+The lemma gives exactly what P2 is used for in (S2): $\min_{\sigma_t\ne0}\sigma_t 2\Delta_t \le 2T$ on $B\cap\Omega$, so no configuration with $f > T$ (configurations with $f = T$ exactly are not excluded, and need not be, since $T < \tstar$).
+
+\subsection*{\texorpdfstring{A.5 Exactness of $r = G^{\mathsf T}\mu$}{A.5 Exactness of r}}
+The products are computed in numba's 64-bit integers, which wrap silently on overflow; overflow is excluded as follows. Write $\mu = 2^{25}\mu^{\rm h} + \mu^{\rm l}$ with $0 \le \mu^{\rm h}, \mu^{\rm l} < 2^{25}$ (possible since $\mu < 2^{50}$), compute $r^{\rm h} = G^{\mathsf T}\mu^{\rm h}$ and $r^{\rm l} = G^{\mathsf T}\mu^{\rm l}$ in int64, and recombine $r = 2^{25}r^{\rm h} + r^{\rm l}$ in Python integers; $N$ is formed in Python integers. Every entry of $G$ has absolute value at most $D = 2^{24}$: area and $W$-coefficients are $\pm1$, ordering and mean coefficients $\pm D$, and McCormick coefficients are endpoints in $[0,D]$ (A.1; \texttt{bb2.py} does not re-assert this at run time, \texttt{bb.py} did). So each product is below $2^{24}\cdot2^{25} = 2^{49}$ in absolute value. Column counts: $\hat\tau$ has $2m = 168$ nonzeros; $W_{ab}$ has $14 + 4 = 18$ (seven triples contain $\{a,b\}$, two rows each, plus four McCormick rows); $X_a$ at most $32 + 2 + 1 = 35$; $Y_b$ has $32$. Hence every partial sum is below $168\cdot2^{49} < 2^{57}$. The code computes the maximum column count when the model is built and asserts $\text{count}\cdot D\cdot2^{25} < 2^{62}$. The McCormick right-hand sides and $W$ bounds are products of two endpoints, at most $2^{48}$, and the mean right-hand side is $9\cdot2^{47}$.
+
+\subsection*{A.6 What the lemma does not cover}
+Everything that decides a P2 discard is covered: the code discards only through the test of A.4, applied to the same box (after P0) whose endpoints were written into $G$, $H$ and the bounds immediately before. The following parts of the code are outside the lemma and cannot discard a box: the early return when the float LP value exceeds $2T(1+10^{-7})+10^{-12}$; non-optimal solver status; $\lambda_{\max} \le 0$ or $s \le 0$; LP skips. The audit (a rational re-derivation of a random $0.02\%$ of certificates, which also rejects any nonzero multiplier on a switched-off row) is an additional check and not part of the lemma. The lemma does rely on two facts about the implementation that we checked by reading the code, not by proof: that the zeroing \texttt{lam[:2*m][\textasciitilde act] = 0} acts on a view of \texttt{lam} (it does: a basic slice of a NumPy array is a view), and that numba's int64 arithmetic is exact in the absence of overflow.
+
+% =====================================================================
+\section{The local certificate and its basin radius}\label{app:basin}
+% SRC: 44-interval-certificate/certify_interval.py (build_param, contraction, hess_l1, precond_inverse, tie_row, certify l.433-547); 103-global-proof/results/local_certs.json key "9"; re-run of certify(9) on 102-laws-small-n optima_small.json (values Y, Z0, Z2, L, ||C||, beta, y bounds, parametrisation)
+
+This appendix is derived from \texttt{certify\_interval.py} (experiment~44), run unchanged on the $n = 9$ optimum by \texttt{get\_certs.py} (experiment~103); the numbers are those of the stored record (\texttt{local\_certs.json}, key \texttt{"9"}) and, for intermediate quantities not stored there, of a re-run of the same deterministic code, which reproduces the stored record exactly. Norms: $\|v\|_\infty = \max_i\lvert v_i\rvert$ for vectors and $\|A\|_\infty = \max_i\sum_k\lvert A_{ik}\rvert$ for matrices. $A_T$ denotes the \emph{signed} area of a triple $T = (i,j,k)$, $i<j<k$ (not doubled).
+
+\subsection*{B.1 The reduced tie system}
+The float stage finds $11$ ties (relative tolerance $10^{-6}$) and $8$ wall contacts (tolerance $10^{-8}$), all positively loaded in the KKT stress LP, no rattlers, and the symmetry group $\{\mathrm{id}, (x,y)\mapsto(y,x)\}$. With the labels of $\tilde x$ (the order of $C_9$ in Section~\ref{sec:intro}), the exact equivariant, wall-respecting affine parametrisation built by the certifier is, with $u \in \R^5$,
+\begin{equation}\label{eq:param}
+\begin{gathered}
+ p_0 = (-u_0, 1),\ p_1 = (1, -u_0),\ p_2 = (1, u_1),\ p_3 = (u_1, 1),\ p_4 = (0, u_2),\\
+ p_5 = (u_2, 0),\ p_6 = (-u_3, 0),\ p_7 = (0, -u_3),\ p_8 = (-u_4, -u_4).
+\end{gathered}
+\end{equation}
+Every coordinate is a constant or $\pm$ one parameter, so the maximal row sum of the coefficient matrix is $b_{\max} = 1$. The $11$ ties form $6$ orbits under the reflection ($5$ of size $2$, one of size $1$). With one representative $T_k$ and its sign $\sigma_k$ per orbit, the unknowns $w = (u, t) \in \R^6$ and
+\[
+ F_k(w) = \sigma_k A_{T_k}(p(u)) - t, \qquad k = 1,\dots,6 .
+\]
+The Jacobian has numerical rank $6$ (no orbit is dropped): \emph{first-order mode}. Newton's method, with exact residuals and iterates rounded to the grid $2^{-110}$, gives $\tilde w = (\tilde u, \tilde t)$ with $\|F(\tilde w)\|_\infty \approx 8.5\cdot10^{-33}$; $\tilde x = p(\tilde u)$ is stored as \texttt{points\_exact} (dyadic rationals with denominators up to $2^{108}$).
+
+\subsection*{B.2 Existence and uniqueness}
+Since $F$ is quadratic, $DF_k(w) - DF_k(\tilde w) = (\sigma_k H_k(u - \tilde u), 0)$ with $H_k$ the constant Hessian of $u \mapsto A_{T_k}(p(u))$, so $\|DF_k(w) - DF_k(\tilde w)\|_1 \le L_k\|w - \tilde w\|_\infty$ with $L_k = \sum_{l,l'}\lvert(H_k)_{ll'}\rvert$; for $n = 9$, $L = (2,2,2,2,2,3)$. Let $R$ be the float inverse of $DF(\tilde w)$ rounded to dyadic rationals ($50$-bit integer matrix over a power of two). The code computes, in exact rational arithmetic,
+\[
+ Y = \|RF(\tilde w)\|_\infty,\qquad Z_0 = \|I - R\,DF(\tilde w)\|_\infty,\qquad Z_2 = \max_i \sum_k \lvert R_{ik}\rvert L_k .
+\]
+\begin{lemma}\label{lem:krawczyk}
+If $r > 0$ satisfies $Y + Z_0 r + Z_2r^2/2 \le r$ and $Z_0 + Z_2 r < 1$, then $F$ has exactly one zero $w^*$ in the closed ball $\bar B = \{\|w - \tilde w\|_\infty \le r\}$.
+\end{lemma}
+\begin{proof}
+Let $\Phi(w) = w - RF(w)$. For $w \in \bar B$, $D\Phi(w) = I - R\,DF(\tilde w) - R(DF(w) - DF(\tilde w))$ and $\|R(DF(w) - DF(\tilde w))\|_\infty \le Z_2\|w-\tilde w\|_\infty$ (row $i$: $\sum_k\lvert R_{ik}\rvert L_k\|w - \tilde w\|_\infty$), so $\|D\Phi(w)\|_\infty \le Z_0 + Z_2\|w - \tilde w\|_\infty$. Then $\|\Phi(w) - \tilde w\|_\infty \le \|\Phi(\tilde w) - \tilde w\|_\infty + \int_0^1 \|D\Phi(\tilde w + \theta(w-\tilde w))\|_\infty\, r\,d\theta \le Y + Z_0r + Z_2r^2/2 \le r$, so $\Phi(\bar B) \subset \bar B$, and $\Phi$ is a contraction on $\bar B$ with constant $Z_0 + Z_2r < 1$. It has exactly one fixed point. Since $Z_0 < 1$, $R\,DF(\tilde w)$ is invertible, hence so is $R$, and the fixed points of $\Phi$ are exactly the zeros of $F$.
+\end{proof}
+The code tries $r = \max(2Y/(1-Z_0), 10^{-40})$ and multiplies by $4$ until both inequalities hold. For $n = 9$: $Y = 2.3247\cdot10^{-32}$, $Z_0 = 6.78\cdot10^{-15}$, $Z_2 = 15.31$, and the first trial $r = 2Y/(1-Z_0) = 4.6494\cdot10^{-32}$ succeeds (the first inequality reduces to $Z_2 r \le 1 - Z_0$). Write $w^* = (u^*,\tstar)$ and $x^* = p(u^*)$. Every coordinate of $x^*$ is within $\rho = b_{\max} r = r$ of $\tilde x$, and $\tstar \in [\tilde t - r, \tilde t + r] \subset [t_{\rm lower}, t_{\rm upper}]$ (the endpoints are rounded outward to $32$ decimals).
+
+\subsection*{\texorpdfstring{B.3 The exact active set at $x^*$}{B.3 The exact active set at x*}}
+At $x^*$ the six solved equations and their images under the reflection give $11$ triangles with $\sigma_TA_T(x^*) = \tstar$ exactly ($\sigma_T$ the sign at $\tilde x$; it is the sign at $x^*$ because $\lvert A_T\rvert \approx \tstar$ and $\rho$ is tiny), and $x^*$ has the $8$ wall contacts of \eqref{eq:param} exactly. (The check that all other triangles exceed $\tstar$ at $x^*$ is needed for $f(x^*) = \tstar$, not for the basin inequality; for $n = 9$ the certifier does it in double precision with margin $\ge 10^{-6}$, and it is superseded by the exact check of Lemma~\ref{lem:ident}.)
+
+\subsection*{B.4 The stress matrix and the multipliers}
+Let $N = 2\cdot9 + 1 = 19$. Columns $2j, 2j+1$ of the $19\times19$ matrix $M(x)$ belong to $x_j, y_j$, column $18$ to an auxiliary variable $\tau$. Rows: for each of the $11$ exact ties $T$, the row $[\sigma_T\nabla A_T(x),\, -1]$, where $\partial A_T/\partial x_i = (y_j - y_k)/2$, $\partial A_T/\partial y_i = (x_k - x_j)/2$ and cyclically; for each of the $8$ wall contacts $(j,c)$, the row $[n_w e_{2j+c},\, 0]$ with $n_w = +1$ on a side $\{\cdot = 0\}$ and $n_w = -1$ on a side $\{\cdot = 1\}$. Since there are exactly $19$ exact constraints, all are used (no vertex selection). A tie row has $6$ coordinate entries, each half a difference of two coordinates, so each moves by at most $\rho$ between $\tilde x$ and $x^*$:
+\[
+ \|M(x^*) - M(\tilde x)\|_\infty \le 6\rho .
+\]
+Let $C$ be the float inverse of $M(\tilde x)$, rounded to a dyadic matrix, and
+\[
+ \beta = \|I - C M(\tilde x)\|_\infty + 6\rho\,\|C\|_\infty \qquad(\text{exact}).
+\]
+\begin{lemma}\label{lem:stress}
+If $\beta < 1$, then $M^* = M(x^*)$ is invertible, $\|(M^*)^{-1}\|_\infty \le \bar m := \|C\|_\infty/(1-\beta)$, and every entry satisfies $\lvert ((M^*)^{-1} - C)_{ik}\rvert \le \varepsilon := \|C\|_\infty\beta/(1-\beta)$. Consequently $y := -(\text{row } 18 \text{ of } (M^*)^{-1})$ satisfies $y^{\mathsf T}M^* = -e_{18}^{\mathsf T}$ and $y_k \ge y_k^- := -C_{18,k} - \varepsilon$.
+\end{lemma}
+\begin{proof}
+$E = I - CM^*$ has $\|E\|_\infty \le \|I - CM(\tilde x)\|_\infty + \|C\|_\infty\|M(\tilde x) - M^*\|_\infty \le \beta < 1$, so $CM^* = I - E$ is invertible with $\|(CM^*)^{-1}\|_\infty \le 1/(1-\beta)$; hence $C$ and $M^*$ are invertible and $(M^*)^{-1} = (CM^*)^{-1}C$. Further $(M^*)^{-1} - C = ((CM^*)^{-1} - I)C = (CM^*)^{-1}EC$, of norm at most $\beta\|C\|_\infty/(1-\beta)$, which bounds each entry.
+\end{proof}
+For $n = 9$: $\|C\|_\infty = 46.0492$, $\|I - CM(\tilde x)\|_\infty = 3.70\cdot10^{-14}$, $6\rho\|C\|_\infty = 1.3\cdot10^{-29}$, $\beta = 3.70\cdot10^{-14}$, $\varepsilon = 1.70\cdot10^{-12}$, $\bar m = 46.04921456503519$. The lower bounds $y_k^-$ are $0.0464$--$0.1128$ on the tie rows and $0.0217$--$0.0332$ on the wall rows; $y_{\min} := \min_k y_k^- = 0.0217100466552658$.
+
+\subsection*{B.5 Uniform decrease and the basin radius}
+Put $c = y_{\min}/\bar m$ ($= 4.71453\cdot10^{-4}$ for $n = 9$).
+\begin{lemma}[uniform decrease]\label{lem:decrease}
+Let $d \in \R^{18}$ with $x^* + d \in Q^9$ and $\delta = \|d\|_\infty > 0$. Then some exact tie $T$ has $\sigma_T\nabla A_T(x^*)\cdot d \le -c\,\delta$.
+\end{lemma}
+\begin{proof}
+Let $\tau = \min_T \sigma_T\nabla A_T(x^*)\cdot d$ over the $11$ ties and $s = M^*(d,\tau)$. A tie row gives $s_T = \sigma_T\nabla A_T(x^*)\cdot d - \tau \ge 0$. A wall row gives $s_w = n_w d_{2j+c} \ge 0$, because the coordinate is $0$ (resp.\ $1$) at $x^*$ and stays in $[0,1]$. So $s \ge 0$, and by Lemma~\ref{lem:stress}
+\[
+ -\tau = y^{\mathsf T}M^*(d,\tau) = y\cdot s \ge y_{\min}\sum_k s_k \ge y_{\min}\|s\|_\infty .
+\]
+Also $\delta \le \|(d,\tau)\|_\infty = \|(M^*)^{-1}s\|_\infty \le \bar m\|s\|_\infty$. Hence $-\tau \ge (y_{\min}/\bar m)\,\delta = c\delta$, and the minimising tie $T$ has $\sigma_T\nabla A_T(x^*)\cdot d = \tau \le -c\delta$.
+\end{proof}
+This is the inequality that turns strictly positive multipliers into a decrease: positivity of every $y_k$ makes $y\cdot s$ control $\|s\|_\infty$, and invertibility of $M^*$ makes $\|s\|_\infty$ control $\delta$.
+
+\begin{theorem}\label{thm:basin}
+Let $\rho_b = \min(c/4, \tilde t/10)$. Every $x \in Q^9$ with $0 < \|x - x^*\|_\infty < \rho_b$ has $f(x) < \tstar$. For $n = 9$, $\rho_b = c/4$, stored as the double $\rho_b' = 1.1786328420762071\cdot10^{-4}$.
+\end{theorem}
+\begin{proof}
+Let $d = x - x^*$, $0 < \delta < c/4$, and take $T = (i,j,k)$ from Lemma~\ref{lem:decrease}. Since $A_T$ is quadratic,
+\[
+ A_T(x) = A_T(x^*) + \nabla A_T(x^*)\cdot d + \tfrac12\bigl[(d_j - d_i)\times(d_k - d_i)\bigr],
+\]
+with $\times$ the planar cross product; each component of $d_j - d_i$, $d_k - d_i$ has absolute value $\le 2\delta$, so the last term is at most $\tfrac12(4\delta^2 + 4\delta^2) = 4\delta^2$ in absolute value. Hence
+\[
+ \sigma_TA_T(x) \le \tstar - c\delta + 4\delta^2 = \tstar - \delta(c - 4\delta) < \tstar .
+\]
+On the other side, $\|\nabla A_T\|_1 \le 6\cdot\frac12 = 3$ (coordinates in $[0,1]$), so $\sigma_TA_T(x) \ge \tstar - 3\delta - 4\delta^2 > 0$ because $\delta \le \tilde t/10$ and $\tilde t$ is within $10^{-31}$ of $\tstar$. Thus $\lvert A_T(x)\rvert < \tstar$ and $f(x) < \tstar$.
+\end{proof}
+Since $y_{\min}$ and $\bar m$ are a lower and an upper bound, $c$ is a lower bound for the true $y$-ratio, which is all the proof uses. For $n = 9$ the cap $\tilde t/10 \approx 5.5\cdot10^{-3}$ is not binding.
+
+\subsection*{B.6 How the branch and bound uses the radius}
+\texttt{bb.py} (\texttt{load\_covers}) reads the stored doubles $\rho_b'$ and $\rho' = $ \texttt{box\_rho} $= 4.649442470662108\cdot10^{-32}$ as exact rationals and sets
+\[
+ R = \rho_b'(1 - 10^{-6}) - \rho' - 2^{-60} \approx 1.1786316634\cdot10^{-4}.
+\]
+\emph{Claim:} $R + \rho < \rho_b$, where $\rho$ is the exact point-displacement bound. Indeed $\rho - \rho' \le 2^{-53}\rho < 2^{-60}$ (round to nearest), so $R + \rho < \rho_b'(1-10^{-6})$; and $\rho_b' \le \rho_b(1 + 2^{-53})$, so $\rho_b'(1 - 10^{-6}) < \rho_b$.
+The cover test (\texttt{covered}) is applied to a box $B$ (after P0) of width at most $D/1000$. Floating point proposes a symmetry $g$ (one of the eight maps $c + M(p - c)$, $c = (\frac12,\frac12)$, applied to $\tilde x$ in exact rationals) and an assignment $i \mapsto j(i)$ of box points to points of $g(\tilde x)$, which must be injective (checked on integers). The box is covered iff, in exact rationals, for every $i$ and both coordinates, both endpoints $\ell/D$ and $h/D$ are within $R$ of the coordinate of $g(\tilde x)_{j(i)}$. As the sup-ball is a product of intervals, every $P \in B$ then has $\|P - \pi(g(\tilde x))\|_\infty \le R$ with $\pi$ the relabelling, so $\|g^{-1}(\pi^{-1}P) - x^*\|_\infty \le R + \rho < \rho_b$ (symmetries of the square are sup-norm isometries), and Theorem~\ref{thm:basin} applies to $g^{-1}(\pi^{-1}P)$.
+
+\subsection*{B.7 Points not justified by the code alone}
+(i) Two values used in Lemma~\ref{lem:ident}, the 32-digit display of $\tilde t$ and the parametrisation \eqref{eq:param}, come from a re-run of the certifier and are not stored (Remark~\ref{rem:ident}). (ii) The certifier's check that non-tied triangles exceed $\tstar$ uses double precision for margins above $10^{-6}$; for $n = 9$ this is replaced by the exact check of Lemma~\ref{lem:ident}. (iii) The cap uses $\tilde t$ rather than $\tstar$; the proof of Theorem~\ref{thm:basin} shows this is harmless. We found no step of B.2--B.6 that the code does not justify.
 
 % =====================================================================
 \begin{thebibliography}{99}

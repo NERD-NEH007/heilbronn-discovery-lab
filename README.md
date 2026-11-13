@@ -100,6 +100,23 @@ Also note:
   polynomial against the stored digits.
 - n = 97 is not certified (d = 2).
 
+## Independent verification of the n = 9 proof
+
+The proof has not yet been independently checked; checks are welcome. What can be checked, and how:
+
+| what | how | time |
+|---|---|---|
+| the optimum is exactly C in Q(√65): 11 triangles of area exactly (9√65 − 55)/320, the other 73 strictly larger, C inside the certificate's existence box with the same ties | `python code/exp110/check_closed_form_exact.py` (all exact; nsimplify only proposes C) | 2 s |
+| the saved run is complete and consistent: done, 0 failures, leaves − internal nodes = 36 roots, T ≤ t_lower(1 − 10⁻⁹) | `python code/exp110/verify_run.py certificates/exp110/results/run_n9 certificates/exp103/local_certs.json` | 1 s |
+| P2 certificates, by an independently written checker (written from the paper's Appendix A, without the search code) | `python code/exp110/clean_room/check_p2.py certificates/exp110/p2dump/*.gz` (8 970 sampled n = 9 certificates; tests: `clean_room/test_check_p2.py`). Dump your own with `code/exp110/dump_p2.py`. In our runs it accepted all 292 120 P2 certificates of a full n = 7 run, 136 972 from n = 8 and the 8 970 from n = 9, and rejected none | 15 s |
+| the search itself | re-run it: `code/exp110/README.md` (n = 7 and 8 in minutes, n = 9 about 16 h on 14 workers) | 16 h |
+| the files are the ones used | `MANIFEST-n9.sha256` (`sha256sum -c MANIFEST-n9.sha256`) | 1 s |
+
+Trusted components, and their status:
+- **The search code** (`code/exp110/bb2.py`, `code/exp103/bb.py`): every discard is decided in exact integer arithmetic. The LP solver (HiGHS) only proposes multipliers. P2 has been cross-checked by the clean-room checker on samples (all of n = 7; a sample at n = 9); P0, P1 and the cover test have not been re-implemented independently. `verify_run.py` checks the run's recorded counters for consistency; it does not re-derive the boxes.
+- **The local certificate** (`code/exp44/certify_interval.py`): this closes the neighbourhood of the optimum. The appendices of the n = 9 paper (`papers/heilbronn_n9.pdf`) derive the P2 certificate and the basin radius; an external review of that derivation is welcome.
+- **Python, numpy, numba and the OS:** standard.
+
 ## Not included
 
 - **Record coordinates 19 ≤ n ≤ 36.** These belong to the record site and its contributors and are not

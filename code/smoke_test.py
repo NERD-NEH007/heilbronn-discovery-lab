@@ -67,8 +67,19 @@ check('record 22: 34 critical triangles (< 37 = 2n-7)', set(cnt.values()) == {34
       f'(t = {float(Fr(m, 2 * D2)):.16f}, counts at 1e-12..1e-2: {sorted(set(cnt.values()))}, next {100 * float(nxt):.3f}% above)')
 
 # 6. n = 9 closed form (paper 3) and exp 110 import
-r = subprocess.run([sys.executable, os.path.join(HERE, 'exp110', 'check_closed_form.py')], capture_output=True, text=True, timeout=120)
-check('exp 110 check_closed_form.py runs', r.returncode == 0, '(' + (r.stdout.strip().splitlines() or ['no output'])[-1][:90] + ')')
+r = subprocess.run([sys.executable, os.path.join(HERE, 'exp110', 'check_closed_form_exact.py')], capture_output=True, text=True, timeout=120)
+check('exp 110 exact closed form (Q(sqrt 65))', r.returncode == 0 and 'ALL EXACT CHECKS PASSED' in r.stdout,
+      '(' + (r.stdout.strip().splitlines() or ['no output'])[-1][:90] + ')')
+ROOT = os.path.dirname(HERE)
+r = subprocess.run([sys.executable, os.path.join(HERE, 'exp110', 'verify_run.py'),
+                    os.path.join(ROOT, 'certificates', 'exp110', 'results', 'run_n9'),
+                    os.path.join(ROOT, 'certificates', 'exp103', 'local_certs.json')], capture_output=True, text=True, timeout=60)
+check('exp 110 n = 9 run accounting (verify_run.py)', r.returncode == 0 and 'RUN VERIFIED' in r.stdout)
+r = subprocess.run([sys.executable, os.path.join(HERE, 'exp110', 'clean_room', 'test_check_p2.py')], capture_output=True, text=True, timeout=120)
+check('clean-room P2 checker: negative tests', r.returncode == 0)
+r = subprocess.run([sys.executable, os.path.join(HERE, 'exp110', 'clean_room', 'check_p2.py'),
+                    os.path.join(ROOT, 'certificates', 'exp110', 'p2dump', 'n9_r0.jsonl.gz')], capture_output=True, text=True, timeout=120)
+check('clean-room P2 checker on n = 9 sample (root 0)', r.returncode == 0 and 'rejected 0' in r.stdout, '(' + r.stdout.strip()[-60:] + ')')
 try:
     sys.path.insert(0, os.path.join(HERE, 'exp110')); import bb2
     check('exp 110 bb2 imports', hasattr(bb2, 'Problem2'))
