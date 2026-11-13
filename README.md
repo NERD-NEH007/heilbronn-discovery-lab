@@ -4,9 +4,10 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
 (place n points in [0,1]^2 to maximise the minimum triangle area t). Author of all three papers: Ethan Hendren.
 
 1. **A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal.**
-   **A computer-assisted proof that the known 9-point configuration is optimal, H(9) = (9√65−55)/320; the code was
-   written with AI assistance (Claude, Anthropic) and the proof has not yet been independently checked: independent
-   verification is welcome.** (`papers/heilbronn_n9.pdf`; code `code/exp110/`, run logs `certificates/exp110/`.)
+   (`papers/heilbronn_n9.pdf`; code `code/exp110/`, run logs `certificates/exp110/`.)
+   Result: H(9) = (9√65 − 55)/320, attained only by the known configuration up to the symmetries of the square.
+   **The code was written with AI assistance (Claude, Anthropic), and the proof has not yet been independently
+   checked. Independent verification is welcome.**
 2. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. arXiv: TBD. (`papers/heilbronn_structure.pdf`)
 3. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
