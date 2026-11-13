@@ -1,0 +1,63 @@
+Family phylogeny (exp 64 base atlas; library at commit 091485f; n2A = n^2 x min area; R = published record)
+
+F12  window 19-20 (2 sizes, 2 members); holds best at - (lifetime 0); records -; from None -> to None
+      n2A: 19:4.832 20:5.165
+F9   window 21-22 (2 sizes, 3 members); holds best at [22] (lifetime 1); records [22]; from S16 -> to S24
+      n2A: 21:4.952 22:5.213R
+F13  window 23-24 (2 sizes, 2 members); holds best at - (lifetime 0); records -; from None -> to None
+      n2A: 23:5.101 24:5.222
+F14  window 23-24 (2 sizes, 2 members); holds best at [24] (lifetime 1); records [24]; from S24 -> to S31
+      n2A: 23:4.948 24:5.253R
+F10  window 25-26 (2 sizes, 3 members); holds best at [26] (lifetime 1); records [26]; from S31 -> to S39
+      n2A: 25:5.079 26:5.322R
+F15  window 27-28 (2 sizes, 2 members); holds best at [28] (lifetime 1); records [28]; from S39 -> to F6
+      n2A: 27:5.156 28:5.465R
+F6   window 28-30 (3 sizes, 6 members); holds best at [29, 30] (lifetime 2); records [29, 30]; from F15 -> to F3
+      n2A: 28:5.277 29:5.314R 30:5.465R
+F3   window 30-35 (6 sizes, 15 members); holds best at [31, 32, 33, 34] (lifetime 4); records [31, 32, 33, 34]; from F6 -> to F11
+      n2A: 30:5.435 31:5.609R 32:5.950R 33:5.603R 34:5.681R 35:5.525
+F11  window 35-36 (2 sizes, 3 members); holds best at [35] (lifetime 1); records [35]; from F3 -> to S67
+      n2A: 35:5.544R 36:5.483
+F2   window 36-42 (7 sizes, 16 members); holds best at [37, 38, 39, 40, 41, 42] (lifetime 6); records -; from S67 -> to F7
+      n2A: 36:5.473 37:5.614 38:5.608 39:5.714 40:5.887 41:5.641 42:5.692
+F7   window 43-44 (2 sizes, 5 members); holds best at [43, 44] (lifetime 2); records -; from F2 -> to F8
+      n2A: 43:5.464 44:5.464
+F8   window 44-46 (3 sizes, 5 members); holds best at [45, 46] (lifetime 2); records -; from F7 -> to F1
+      n2A: 44:5.418 45:5.429 46:5.475
+F16  window 46-48 (2 sizes, 2 members); holds best at - (lifetime 0); records -; from None -> to None
+      n2A: 46:5.420 48:5.497
+F1   window 47-55 (9 sizes, 18 members); holds best at [47, 48, 49, 50, 51, 52, 54, 55] (lifetime 8); records -; from F8 -> to F4
+      n2A: 47:5.466 48:5.542 49:5.556 50:5.481 51:5.423 52:5.363 53:5.246 54:5.303 55:5.253
+F17  window 53-54 (2 sizes, 2 members); holds best at [53] (lifetime 1); records -; from F1 -> to F1
+      n2A: 53:5.259 54:5.216
+F18  window 54-55 (2 sizes, 2 members); holds best at - (lifetime 0); records -; from None -> to None
+      n2A: 54:5.200 55:5.249
+F4   window 56-61 (6 sizes, 15 members); holds best at [56, 57, 58, 59, 60] (lifetime 5); records -; from F1 -> to F5
+      n2A: 56:5.194 57:5.260 58:5.219 59:5.155 60:5.120 61:5.045
+F5   window 60-64 (5 sizes, 12 members); holds best at [61, 62, 63, 64] (lifetime 4); records -; from F4 -> to None
+      n2A: 60:5.054 61:5.067 62:5.124 63:5.157 64:5.167
+
+Timeline (# = holds the library best at n, + = member, . = none); bottom row: family of the CURRENT certified best
+      1222222222233333333334444444444555555555566666
+      9012345678901234567890123456789012345678901234
+F12   ++............................................
+F9    ..+#..........................................
+F13   ....++........................................
+F14   ....+#........................................
+F10   ......+#......................................
+F15   ........+#....................................
+F6    .........+##..................................
+F3    ...........+####+.............................
+F11   ................#+............................
+F2    .................+######......................
+F7    ........................##....................
+F8    .........................+##..................
+F16   ...........................+.+................
+F1    ............................######+##.........
+F17   ..................................#+..........
+F18   ...................................++.........
+F4    .....................................#####+...
+F5    .........................................+####
+holder 19:S10 20:S14 21:S16 22:F9 23:S24 24:F14 25:S31 26:F10 27:S39 28:F15 29:F6 30:F6 31:F3 32:F3 33:F3 34:F3 35:F11 36:S67 37:F2 38:F2 39:F2 40:F2 41:F2 42:F2 43:F7 44:F7 45:F8 46:F8 47:F1 48:F1 49:F1 50:F1 51:F1 52:F1 53:F17 54:F1 55:F1 56:F4 57:F4 58:F4 59:F4 60:F4 61:F5 62:F5 63:F5 64:F5
+current 20:S14  21:S16  22:F9  23:S24  24:F14  25:S31  26:F10  27:S39  28:F15  29:F6  30:F6  31:F3  32:F3  33:F3  34:F3  35:F11  36:S67  37:F2  38:F2  39:F2  40:F2  41:F2  42:F2  43:F7  44:F7  45:F8  46:F8  47:F1  48:F1  49:F1  50:F1  51:F1  52:F1  53:S117  54:F17  55:F1  56:F4  57:F4  58:F4  59:F4  60:F4  61:F4  62:F5  63:F5  64:F5
+base window edges (holder changes) n = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 31, 35, 36, 37, 43, 45, 47, 53, 54, 56, 61]; robust edges (exp 67) n = [29, 31, 36, 37, 43, 53, 54, 56]

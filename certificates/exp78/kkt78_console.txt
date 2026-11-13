@@ -1,0 +1,14 @@
+{'n': 46, 'active': 87, 'ties': 85, 'walls': 6, 'core': 45, 'rattlers': 1, 'unknowns': 182, 'd': 0, 'Y0': '3.25e-55', 'Z0': '1.48e-11', 'Z2': '3.35e+05', 'radius': '6.5e-55', 't': '0.00264', 'lam_min': '0.000113', 'mu_min': '0.000399', 'gap_rel': '0.000168', 'unloaded_ties': 2, 'tangent_dim': 0, 'smallest_sv': '0.000474', 'certified': True} eigs None
+{'n': 49, 'active': 93, 'ties': 93, 'walls': 6, 'core': 49, 'rattlers': 0, 'unknowns': 198, 'd': 0, 'Y0': '3.26e-55', 'Z0': '9.14e-13', 'Z2': '6.02e+04', 'radius': '6.52e-55', 't': '0.00232', 'lam_min': '5.05e-05', 'mu_min': '0.000255', 'gap_rel': '0.00765', 'unloaded_ties': 0, 'tangent_dim': 0, 'smallest_sv': '0.00203', 'certified': True} eigs None
+{'n': 51, 'active': 95, 'ties': 95, 'walls': 7, 'core': 51, 'rattlers': 0, 'unknowns': 205, 'd': 1, 'Y0': '3.26e-55', 'Z0': '5.36e-12', 'Z2': '5.03e+04', 'radius': '6.52e-55', 't': '0.0021', 'lam_min': '5.2e-05', 'mu_min': '0.00022', 'gap_rel': '0.00546', 'unloaded_ties': 0, 'tangent_dim': 1, 'smallest_sv': '0.0022', 'certified': True} eigs [-0.0012088049699365863]
+{'n': 53, 'active': 101, 'ties': 99, 'walls': 6, 'core': 52, 'rattlers': 1, 'unknowns': 210, 'd': 0, 'Y0': '3.24e-55', 'Z0': '7.11e-12', 'Z2': '1.92e+05', 'radius': '6.49e-55', 't': '0.00188', 'lam_min': '5.18e-06', 'mu_min': '0.000471', 'gap_rel': '0.00434', 'unloaded_ties': 2, 'tangent_dim': 0, 'smallest_sv': '0.000895', 'certified': True} eigs None
+{'n': 62, 'active': 119, 'ties': 117, 'walls': 6, 'core': 61, 'rattlers': 1, 'unknowns': 246, 'd': 0, 'Y0': '3.26e-55', 'Z0': '3.87e-12', 'Z2': '1.35e+05', 'radius': '6.52e-55', 't': '0.00133', 'lam_min': '0.000146', 'mu_min': '0.00021', 'gap_rel': '0.00193', 'unloaded_ties': 2, 'tangent_dim': 0, 'smallest_sv': '0.00114', 'certified': True} eigs None
+{'n': 65, 'active': 121, 'ties': 118, 'walls': 6, 'core': 62, 'rattlers': 3, 'unknowns': 249, 'd': 1, 'Y0': '3.26e-55', 'Z0': '1.26e-11', 'Z2': '3.13e+05', 'radius': '6.51e-55', 't': '0.00123', 'lam_min': '4.11e-05', 'mu_min': '0.000129', 'gap_rel': '-0.000415', 'unloaded_ties': 0, 'certified': False, 'reason': 'another triangle within reach of t'} eigs None
+{'n': 76, 'certified': False, 'reason': 'LinAlgError: singular / divergent (degenerate optimum?)', 'secs': '0'} eigs None
+{'n': 81, 'active': 149, 'ties': 146, 'walls': 8, 'core': 77, 'rattlers': 4, 'unknowns': 309, 'd': 1, 'Y0': '3.25e-55', 'Z0': '1.46e-11', 'Z2': '2.41e+05', 'radius': '6.49e-55', 't': '0.000762', 'lam_min': '5.47e-06', 'mu_min': '0.000192', 'gap_rel': '-4.75e-05', 'unloaded_ties': 0, 'certified': False, 'reason': 'another triangle within reach of t'} eigs None
+{'n': 89, 'certified': False, 'reason': 'LinAlgError: singular / divergent (degenerate optimum?)', 'secs': '0'} eigs None
+{'n': 100, 'certified': False, 'reason': 'LinAlgError: singular / divergent (degenerate optimum?)', 'secs': '0'} eigs None
+
+real	0m29.440s
+user	0m0.015s
+sys	0m0.031s

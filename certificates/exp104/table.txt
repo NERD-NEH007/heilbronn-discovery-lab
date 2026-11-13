@@ -1,0 +1,33 @@
+          5 | 0.19245008972987525483 | proved exact                       | deg    2 | 27*x^2 + (-1)
+   6 family | 1/8                    | proved exact                       | deg    1 | 8*x - 1
+  6 primary | 1/8                    | proved exact                       | deg    1 | 8*x - 1
+          7 | 0.08385900900751340663 | proved exact                       | deg    3 | 152*x^3 + 12*x^2 + (-14)*x + 1
+          8 | 0.07237642431844414703 | proved exact                       | deg    2 | 108*x^2 + 6*x + (-1)
+          9 | 0.05487599917089670897 | proved exact                       | deg    2 | 320*x^2 + 110*x + (-7)
+         10 | 0.04653741958254177256 | proved exact                       | deg    3 | 3456*x^3 + (-1764)*x^2 + 268*x + (-9)
+         11 | 1/27                   | proved exact                       | deg    1 | 27*x - 1
+         12 | 0.03259885869181969821 | proved exact                       | deg    3 | 64*x^3 + 80*x^2 + 28*x + (-1)
+         13 | 0.02701991666911136174 | not found up to degree 200         | deg None | 
+         14 | 0.02430397962099248674 | proved exact                       | deg    3 | 320*x^3 + 768*x^2 + (-60)*x + 1
+         15 | 0.02121054100549062829 | not found up to degree 200         | deg None | 
+         16 | 7/341                  | proved exact                       | deg    1 | 341*x - 7
+         17 | 0.01726167707252392588 | not found up to degree 200         | deg None | 
+         18 | 0.01552605994070249294 | not found up to degree 200         | deg None | 
+         19 | 0.01394786208148450128 | not found up to degree 150         | deg None | 
+         20 | 0.01293819671472701761 | proved exact                       | deg   19 | 13194139533312*x^19 + (-66795331387392)*x^18 + 83906481094656*x^17 + 151616640516096*x^16 + (-588551179730944)*x^15 + 735727495151616*x^14 + (-379150988738560)*x^13 + (-52007960313856)*x^12 + 184412823093248*x^11 + (-112538665877504)*x^10 + 36639640453120*x^9 + (-7316050804736)*x^8 + 936902328320*x^7 + (-77944031232)*x^6 + 4181109760*x^5 + (-140924160)*x^4 + 2882608*x^3 + (-36684)*x^2 + 359*x + (-2)
+         21 | 0.01147376078570121026 | not found up to degree 150         | deg None | 
+         22 | 0.01077165680964309420 | not found up to degree 150         | deg None | 
+         23 | 0.00975728971331477225 | not found up to degree 150         | deg None | 
+         24 | 0.00912014302053691266 | not found up to degree 150         | deg None | 
+         25 | 0.00826159454672493211 | not found up to degree 150         | deg None | 
+         26 | 0.00787270736191304968 | not found up to degree 150         | deg None | 
+         27 | 0.00710671130640773226 | not found up to degree 150         | deg None | 
+         28 | 0.00697108621252536783 | not found up to degree 70          | deg None | 
+         29 | 0.00631890275200536665 | not found up to degree 70          | deg None | 
+         30 | 0.00607241630312459621 | not found up to degree 70          | deg None | 
+         31 | 0.00583706884581844380 | not found up to degree 70          | deg None | 
+         32 | 0.00581090220763199441 | not found up to degree 70          | deg None | 
+         33 | 0.00514548835898886541 | not found up to degree 70          | deg None | 
+         34 | 0.00491472000424517204 | not found up to degree 70          | deg None | 
+         35 | 0.00452533174928917804 | not found up to degree 70          | deg None | 
+         36 | 0.00442536319032457180 | not found up to degree 70          | deg None | 

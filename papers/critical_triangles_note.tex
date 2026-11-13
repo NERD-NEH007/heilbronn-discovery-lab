@@ -1,0 +1,370 @@
+% Paper 2: short note on the 2n-7 conjecture for critical triangles.
+% Every numerical claim carries a hidden "% SRC:" comment; items to verify are marked "% CHECK".
+% Revised 2026-11-13 after N. Sudermann-Merx's reply (conjecture is existential); see experiments/112-rattler-repair.
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black]{hyperref}
+
+\setlist{itemsep=1pt,topsep=3pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\core}{\mathrm{core}}
+
+\begin{document}
+
+\title[Critical triangles in Heilbronn configurations]{Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions}
+
+\author{Ethan Hendren}
+\email{eehendren007@gmail.com}
+
+\date{November 2026}
+
+\begin{abstract}
+Sudermann-Merx conjectured that an optimal configuration of $n \ge 5$ points in the unit square for Heilbronn's triangle problem has at least $2n-7$ critical (minimal-area) triangles; the intended reading is existential (\emph{some} optimal configuration). We compare this reading, and the universal one (\emph{every} optimal configuration), with the best-known configurations. The record for $n = 22$ has exactly $34 < 37$ critical triangles, and two separately written computer-assisted certificates show that an exact local maximum with exactly these 34 ties lies within $1.2\cdot10^{-7}$ of the published coordinates. Its two rattlers (points on no loaded constraint), however, can be moved without changing the minimum area until each lies on two minimal triangles, which gives $38 \ge 37$ (checked in exact rational arithmetic). Such moves are needed only at the records $n = 22, 29, 35$, the only records below $2n-7$ as stored (exact count); with them every record for $5 \le n \le 36$ has at least $2n-7$ critical triangles, so the records are consistent with the existential reading; the universal reading fails at $n = 22$ (and, under exact counting or after moving rattlers off their ties, at $21, 29, 35, 36$) unless those records are not optimal. Both effects follow from the rank--nullity count behind the conjecture: when that count is tight and the rattlers are placed generically, the number of critical triangles is $2n + 1 - w - d$, with $w$ loaded walls and $d$ flat directions, so it is below $2n-7$ if and only if $w + d > 8$. Our best-known configurations for $n = 40$ and $81$ (not records, not known to be optimal) have $w = 8$, $d = 1$ and remain one short after the same moves.
+\end{abstract}
+
+\maketitle
+
+% =====================================================================
+\section{Introduction}
+
+For $P = (p_1,\dots,p_n)$ in the unit square $Q = [0,1]^2$ let $f(P)$ be the smallest area of a triangle with vertices in $P$, and $H(n) = \max f$. Optimal configurations are proved for $n \le 8$; $n = 9$ has been proved optimal by a computer-assisted proof \cite{N9} (AI-assisted and not yet independently checked), and $n = 10$ is computed to global optimality within solver tolerance (no rigorous proof) \cite{SM}; best-known configurations for $n \le 36$ are collected, with exact verification, on the record site \cite{Stead}. % SRC: experiments/LITERATURE.md Sec. 1; report_tex/heilbronn_report.tex Sec. 2; STATUS.md row 110 (n = 9 proved, not yet independently reviewed)
+Sudermann-Merx derives from a counting argument \cite[Sec.~7.1]{SM} the following conjecture. A triangle is \emph{critical} if its area equals the minimum up to the solver tolerance \cite[Sec.~5.1]{SM}; for the best-known configurations with $n \ge 11$ two areas are treated as equal if they differ by less than $10^{-12}$ \cite[Sec.~7]{SM}.
+
+\begin{conjecture}[{Sudermann-Merx \cite[Conjecture~1]{SM}}]\label{conj:SM}
+An optimal configuration of $n \ge 5$ points has at least $2n-7$ critical triangles.
+\end{conjecture}
+% Verbatim from arXiv 2603.11107v3 (HTML), Sec. 7.1; checked 2026-11-12.
+
+The statement admits two readings:
+\begin{itemize}
+\item[(U)] \emph{universal}: every optimal configuration has at least $2n-7$ critical triangles;
+\item[(E)] \emph{existential}: some optimal configuration has at least $2n-7$ critical triangles.
+\end{itemize}
+The author of the conjecture intends (E) \cite{SMpc}. The difference matters because of \emph{rattlers}, points that lie on no loaded constraint: if a rattler can be moved without decreasing $f$, an optimal configuration comes with a whole family of equally good ones, whose numbers of critical triangles differ.
+
+A second conjecture concerns the boundary.
+
+\begin{conjecture}[{Monji, Modir and Kocuk \cite[Conjecture~1, Sec.~3.2.3]{MMK}}]\label{conj:MMK}
+For any optimal solution of the Heilbronn triangle problem with at least nine points, each edge of the unit square $[0,1]^2$ contains exactly two points.
+\end{conjecture}
+% Verbatim from arXiv 2512.14505v1 Sec. 3.2.3; arXiv author order Monji, Modir, Kocuk; checked 2026-11-12.
+
+The records for $n = 21, 22, 23, 25, 31, 33, 34$ have an edge with a single point (6 or 7 boundary points), so they are inconsistent with Conjecture~\ref{conj:MMK} unless they are not optimal; the statement predates records 31--34. % SRC: report_tex Sec. Phase 3 (Published conjectures); experiments/LITERATURE.md Sec. 2; 101-red-team/NOTES.md claim 27
+The rest of this note concerns Conjecture~\ref{conj:SM}.
+
+\subsection*{Results}
+\begin{enumerate}[label=(\arabic*)]
+\item The record for $n = 22$ has exactly 34 minimal triangles, and the next triangle is $1.6\%$ larger; $34 < 37 = 2n-7$. Moving its two rattlers, with $f$ unchanged, to points where each lies on two minimal triangles gives 38 (Theorem~\ref{thm:22}).
+\item With such moves the records $21, 22, 29, 35, 36$ all reach $2n-7$; every other record for $5 \le n \le 36$ attains $2n-7$ as stored, so every record is consistent with (E). Under exact counting (records 29, 35), or with the rattlers placed so that they lie on no tie (records 21, 35, 36), they have fewer than $2n-7$ critical triangles; so (U) fails at each of $n = 21, 22, 29, 35, 36$ unless the record is not optimal (Section~\ref{sec:more}).
+\item When the count of Proposition~\ref{prop:count} is tight and the rattlers are placed generically, the number of critical triangles is $2n + 1 - w - d$ (Corollary~\ref{cor:repair}); it is below $2n-7$ iff $w + d > 8$, which with the observed $d \le 1$ means $w = 8$, $d = 1$.
+\item Our best-known configurations for $n = 40$ and $81$ have $w = 8$, $d = 1$ and stay at $2n-8$ after the rattler moves (Section~\ref{sec:ours}). They are the only configurations we know that fall below $2n-7$ under reading (E); they are not records and not known to be optimal.
+\item A core-based variant, $\#\{\text{loaded ties}\} \ge 2\cdot\core-7$, fails at $n = 40, 81, 89$ (Section~\ref{sec:repair}).
+\end{enumerate}
+None of the configurations with $n \ge 11$ is known to be optimal. Every statement about Conjecture~\ref{conj:SM} below therefore has the form ``if the best-known configuration at $n$ is optimal, then \dots''.
+
+% =====================================================================
+\section{Definitions and conventions}\label{sec:defs}
+
+Near $P$ with $f(P) = t > 0$ the orientation $\sigma_T$ of each triangle $T$ is fixed, and $P$ is a local maximum of $f$ if and only if $(P,t)$ is a local solution of $\max \tau$ subject to $\sigma_T\Delta_T(P) \ge \tau$ for all $T$ and $0 \le x_i,y_i \le 1$. Every local maximum with $t > 0$ admits KKT multipliers \cite[Thm.~2.3]{Trela}: $\lambda_T \ge 0$ on tied triangles with $\sum\lambda_T = 1$, and $\mu \ge 0$ on wall contacts. % SRC: experiments/LITERATURE.md Sec. 1 (Trela)
+
+\begin{definition}
+Fix the KKT pair in the relative interior of the set of multipliers.
+\begin{enumerate}[label=(\alph*)]
+\item A \emph{tie} is a triangle of area exactly $t$; it is \emph{loaded} if $\lambda_T > 0$. A \emph{loaded wall} is a wall contact with $\mu > 0$; $w$ denotes the number of loaded walls.
+\item The \emph{core} is the set of points in some loaded constraint; the other points are \emph{rattlers}. A rattler may still lie on unloaded ties. We write $\core$ also for the number of core points.
+\item $d$ is the dimension of the kernel of the Jacobian $J$ of the loaded constraints with respect to (core coordinates, $\tau$): the number of first-order \emph{flat directions}.
+\end{enumerate}
+The set of KKT multipliers is a polytope, and all points of its relative interior have the same positive multipliers, so (a)--(c) are well defined. At the symmetric sizes $36$ and $42$ of the tables, where multipliers are not unique, core and rattlers are those of the vertex multiplier used by our certificate, whose loaded set can be smaller.
+\end{definition}
+
+With the core fixed, each rattler can be moved within its \emph{feasible region}, the set of positions at which every triangle through it has area at least $t$; this leaves $f$ unchanged, so if a configuration is optimal, so is every configuration obtained in this way.
+
+\begin{definition}[counting conventions]\label{def:conv}
+For a stored configuration we use four counts of critical triangles:
+\begin{itemize}
+\item \emph{tolerance count}: triangles within $10^{-6}$ (relative) of the minimum;
+\item \emph{exact count}: triangles within $10^{-9}$ (relative) at the stored coordinates; this agrees with the number of exact ties at the certified exact optimum and excludes near-ties lying $2\cdot10^{-9}$ to $4\cdot10^{-8}$ above $t$;
+\item \emph{after nudge}: the number of loaded ties, which is the exact count after the rattlers have been moved so that every unloaded tie through a rattler becomes strictly larger while every other triangle stays above $t$;
+\item \emph{after repair}: the exact count after the rattlers have been moved, one at a time and greedily, to vertices of their feasible regions (intersections of two lines $|\Delta(p,a,b)| = t$ or walls) with the most ties through them (Section~\ref{sec:more}).
+\end{itemize}
+\end{definition}
+% SRC: notes_drafts/appendix.md (A.1 column definitions); experiments/78-independent-certificate/NOTES.md (78b); experiments/112-rattler-repair/repair.py (TOL = 1e-9, greedy single-point vertex moves of points with <= 1 tie)
+The nudge minimises and the repair (approximately) maximises the count over the rattler positions, so they are the natural counts for readings (U) and (E) respectively. With the threshold $10^{-12}$ that \cite[Sec.~7]{SM} uses for best-known configurations, the published records $21, 22, 29, 35, 36$ have $37, 34, 49, 60, 72$ critical triangles; at $n = 35$ this is below the exact count $62$ because two exact ties differ by more than $10^{-12}$ in the published double-precision coordinates. At record $31$ only $46$ triangles lie within $10^{-12}$, against $56$ within $10^{-9}$ (and within $10^{-6}$), because its published coordinates are less precise; we use the $10^{-9}$ count, by which record $31$ ($56 \ge 55$) is not short. The record site's own enumeration also reports 62 minimal triangles at $n = 35$ (62 within relative $10^{-9}$; read 12 November 2026). % SRC: recomputed in this review (Fraction arithmetic on 04-size-ladder/records/verified.json)
+
+% =====================================================================
+\section{The count behind \texorpdfstring{$2n-7$}{2n-7}}\label{sec:count}
+
+\begin{proposition}\label{prop:count}
+For every configuration,
+\[
+  \#\{\text{loaded ties}\} + w \;\ge\; 2\cdot\core + 1 - d .
+\]
+\end{proposition}
+
+\begin{proof}
+$J$ has one row per loaded constraint and $2\cdot\core+1$ columns. Its rank is at most the number of rows and, by rank--nullity, equals $2\cdot\core + 1 - d$.
+\end{proof}
+
+With no rattlers ($\core = n$), $d = 0$ and at most 8 loaded walls (each wall holds at most two points \cite[Lemma~4]{SM}, \cite[proof of Thm.~4.3]{Trela}) this is exactly $\#\{\text{loaded ties}\} \ge 2n-7$, the classical minimax / isostatic count (cf.\ \cite{CGSY}) from which Conjecture~\ref{conj:SM} is derived \cite[Sec.~7.1]{SM}. % SRC: experiments/101-red-team/NOTES.md issue 2
+The number of loaded ties can therefore drop below $2n-7$ in three ways: (i) rattlers ($\core < n$); (ii) fewer than 8 loaded walls; (iii) flat directions ($d \ge 1$, a second-order maximum). In the record $n = 22$ all three occur. Rattlers, however, can be moved onto ties, and once they are, fewer loaded walls mean more critical triangles, not fewer (Corollary~\ref{cor:repair}).
+
+\begin{corollary}\label{cor:repair}
+Suppose Proposition~\ref{prop:count} holds with equality, the only ties not through a rattler are loaded, and each rattler is placed at a point of its feasible region where it lies on exactly two ties, no two rattlers lying on a common tie. Then the configuration has exactly
+\[
+  2\cdot\core + 1 - d - w + 2(n - \core) \;=\; 2n + 1 - w - d
+\]
+critical triangles. This is less than $2n - 7$ if and only if $w + d > 8$; since $w \le 8$, this requires $d \ge 1$, and with $d \le 1$ (as in all our data, Section~\ref{sec:correct}) it means $w = 8$ and $d = 1$.
+\end{corollary}
+
+\begin{proof}
+The loaded ties number $2\cdot\core + 1 - d - w$ by assumption, and the rattlers add two ties each, all distinct.
+\end{proof}
+
+A generic vertex of a feasible region is the intersection of two tie lines, so the placement of the corollary is what the repair produces at every size where we ran it (each moved rattler ends on exactly two ties, Table~\ref{tab:records}). Without equality in Proposition~\ref{prop:count} (at the symmetric sizes, where multipliers are not unique) the count after repair can be larger. In particular the shortfall at $n = 22$, where $w = 6$ and $d = 1$, is entirely due to the rattlers: $2n + 1 - w - d = 38$.
+
+% =====================================================================
+\section{The record \texorpdfstring{$n = 22$}{n = 22}}\label{sec:22}
+
+Let $P_{22}$ be the best-known configuration for $n = 22$ (found by Sudermann-Merx, October 2026) as published on the record site \cite{Stead} (coordinates in Appendix~\ref{app:coords}); the site lists its 34 minimal triangles but does not relate them to Conjecture~\ref{conj:SM}.
+
+\begin{theorem}\label{thm:22}
+\begin{enumerate}[label=(\alph*)]
+\item At the published coordinates (computed exactly in rational arithmetic), exactly $34$ triangles have area within relative $10^{-12}$ of the minimum $t = 0.0107716568096426\ldots$, and the count is the same for every relative tolerance from $10^{-12}$ to $10^{-2}$; the next smallest triangle is $1.614\%$ above $t$.
+\item There is an exact configuration $P^*$ within sup distance $1.2\cdot10^{-7}$ of the published coordinates (and within $7.6\cdot10^{-34}$ of a polished rational copy of them, displaced from them along the flat direction; $f(P^*)$ exceeds the published minimum by $4\cdot10^{-14}$, relatively) that is a local maximum of $f$, strict in the coordinates of its 20 core points (the 2 rattlers are free). At $P^*$ exactly $34$ triangles are ties, all loaded; $6$ wall contacts are loaded; $d = 1$, and the Lagrangian is negative definite on the flat direction.
+\item Moving the two rattlers of the published configuration, by $0.0085$ and $0.0019$, to points that each lie on two tie lines (placed exactly in rational arithmetic) leaves the exact minimum unchanged and creates four new ties; the resulting configuration has $38 \ge 37 = 2n-7$ critical triangles (within relative $10^{-12}$).
+\item Consequently, if $P_{22}$ is optimal, then reading (U) of Conjecture~\ref{conj:SM} fails for $n = 22$ ($34 < 37$), while reading (E) holds for $n = 22$ ($38 \ge 37$).
+\end{enumerate}
+\end{theorem}
+% SRC: (a) experiments/101-red-team/NOTES.md (what checks out: Fraction arithmetic, 1e-12..1e-2, next 1.614%); notes_drafts/appendix_data.json n=22 (tol1e6 = active = loaded = 34, bound 37)
+% SRC: (b) notes_drafts/conjecture_note_draft.md Sec. 1 (exp 44 radius 7.6e-34); experiments/78-independent-certificate/NOTES.md (n = 22: 34 ties, 6 walls, core 20, eigenvalue -0.0137)
+% SRC: (c) experiments/112-rattler-repair/results/n22.json; exact_check.py rerun 2026-11-13: "exact min unchanged: True; exact ties before 2, after 6; ties within rel 1e-12 after: 38"; distances 0.00851, 0.00195 recomputed
+
+\begin{proof}[Evidence]
+(a) is a computation in rational arithmetic on the published decimal coordinates. (b) is established by two separately written certificates.
+The first (reduced system) parametrises the core, polishes it on a dyadic grid, and proves existence and uniqueness of a zero of the tie system in a sup-ball by the radii-polynomial (Krawczyk-type) inequalities $Y + Z_0 r + Z_2r^2/2 \le r$, $Z_0 + Z_2 r < 1$, all bounds computed exactly; the radius is $7.6\cdot10^{-34}$ and $t^*$ is enclosed to 30 digits. It then proves every other triangle larger than $t^*$ on the ball and, in second-order mode, certifies the KKT system in $(u, \tau, \lambda)$ by the same test, proves $\lambda > 0$ and $\mu > 0$, and proves the second-order sufficient condition with an exact bound on its margin. Floating point only selects the loaded sets, the symmetry, the stress vertex and the preconditioners; a wrong choice can make the proof fail but cannot make a false proof pass. One step is not of this kind: the core is mirror symmetric, the KKT system is certified in the symmetry-reduced variables, and the lift of the reduced KKT point to a KKT point of the full system is a hand argument (invariance of the full Lagrangian gradient under the mirror), checked numerically (residual $\le 2\cdot10^{-33}$). % SRC: experiments/44-interval-certificate/NOTES.md (Lifting to full space); experiments/108-presubmission/NOTES.md; STATUS.md row 108 % SRC: experiments/44-interval-certificate/NOTES.md; notes_drafts/conjecture_note_draft.md Sec. 1
+The second uses the full KKT system (core coordinates, $\tau$, one multiplier per loaded constraint) without symmetry reduction, a Newton--Kantorovich test in exact rationals (radius $\approx 6\cdot10^{-55}$), and the same post-checks; it gives the same 34 loaded ties, 6 loaded walls, core 20 and a negative second-order eigenvalue ($-0.0137$) on the one-dimensional tangent space. Every step of the second code is exact except this eigenvalue, which is computed in floating point on an exactly computed tangent space; its margin exceeds the float error by many orders of magnitude (the smallest margin over all sizes checked is $2.4\cdot10^{-5}$), but this step is not an interval enclosure. Since the second code works in the full variables, it does not need the symmetry lift of the first. % SRC: experiments/78-independent-certificate/NOTES.md
+Neither code is formally verified. (c) is a computation in rational arithmetic: each moved rattler is the exact intersection of two of its tie lines, and all $\binom{22}{3}$ areas are recomputed exactly. (d) follows from (a) and (c), since moving rattlers within their feasible regions does not change $f$.
+\end{proof}
+
+\begin{remark}[structure]
+The counts are consistent with Proposition~\ref{prop:count} at equality: $34 + 6 = 40 = 2\cdot20 + 1 - 1$, and with Corollary~\ref{cor:repair}: $34 + 2\cdot 2 = 38 = 2\cdot22 + 1 - 6 - 1$. The 20-point core is exactly symmetric under the diagonal mirror $(x,y)\mapsto(y,x)$, and the 2 rattlers are off the mirror by $3.7\cdot10^{-4}$. The flat direction preserves the mirror symmetry, and along it the minimum area changes by about $-0.45\,h^2$ for a step of size $h$. The square's edges carry $2, 1, 2, 1$ points (6 boundary points). Record 22 is the first size at which rattlers, only 6 loaded walls and $d = 1$ occur together; for $5 \le n \le 21$ the bound $2n-7$ holds as stored (Section~\ref{sec:small}). % SRC: notes_drafts/conjecture_note_draft.md Sec. 1, 3c; experiments/101-red-team/NOTES.md issue 11
+\end{remark}
+
+Part (c) is due to N. Sudermann-Merx \cite{SMpc}, who pointed out that the free points of record 22 can be moved to restore the bound. It corrects our earlier reading of (a) and (b) as a counterexample to Conjecture~\ref{conj:SM} unless the record is not optimal: (a) and (b) contradict only reading (U).
+
+% =====================================================================
+\section{The records under both readings}\label{sec:more}
+
+Two effects make the exact count smaller than a tolerance count. % SRC: experiments/78-independent-certificate/NOTES.md (78b); notes_drafts/conjecture_note_draft.md Sec. 3b
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Near-ties.} At the certified optimum of record 29, two triangles lie $3.7\cdot10^{-8}$ (relative) above $t$. The exact count is $49 < 51$; under a tolerance reading it is $51 = 2n-7$.
+\item \emph{Unloaded ties through rattlers.} At records 21, 35 and 36 some ties pass through rattlers and carry zero multiplier. An LP over rattler directions shows that the rattlers can be moved so that all of these triangles grow strictly while every other triangle stays above $t$; this was possible at every size with rattlers except a degenerate $n = 46$ configuration of an earlier library. The result is an equally good configuration in which exactly the loaded ties are critical.
+\end{enumerate}
+The repair goes the other way: it moves rattlers onto ties. % SRC: experiments/112-rattler-repair/NOTES.md and results/n21,22,29,35,36.json
+At records 22, 29 and 35 it moves two, one and one rattlers, each to a vertex lying on exactly two ties; at record 36 it moves four of the eight rattlers from one tie to two; at record 21 the stored count $37$ already exceeds $2n-7 = 35$ and no move is made. For records 22, 29, 35 and 36 we re-placed the moved rattlers exactly (each at the rational intersection of two tie lines) and checked in rational arithmetic that the exact minimum is unchanged. % SRC: exact_check.py rerun 2026-11-13: n=29, 35, 36 "exact min unchanged: True" (exact ties 1->3, 1->3, 1->9)
+
+\begin{table}[htbp]
+\centering\small
+\caption{Records under the counting conventions of Definition~\ref{def:conv}. ``Nudge'' and ``repair'' are the counts relevant to readings (U) and (E).}\label{tab:records}
+% SRC: notes_drafts/appendix_data.json (n = 21, 22, 29, 35, 36: tol1e6, active, loaded, bound, core, walls_loaded); experiments/112-rattler-repair/results/n*.json (ties_after)
+\begin{tabular}{@{}rrrrrrrrr@{}}
+\toprule
+$n$ & tolerance & exact & after nudge & after repair & $2n-7$ & core & rattlers & loaded walls \\
+\midrule
+21 & 37 & 37 & 33 & 37 & 35 & 19 & 2 & 6 \\
+22 & 34 & 34 & 34 & 38 & 37 & 20 & 2 & 6 \\
+29 & 51 & 49 & 49 & 51 & 51 & 28 & 1 & 8 \\
+35 & 63 & 62 & 59 & 63 & 63 & 33 & 2 & 8 \\
+36 & 72 & 72 & 60 & 76 & 65 & 28 & 8 & 8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\emph{Reading (E).} After repair every record in Table~\ref{tab:records} has at least $2n-7$ critical triangles, with equality at 29 and 35; none of them contradicts reading (E). A sweep of the published records $19 \le n \le 36$ (exact count) finds no other record below $2n-7$, and $5 \le n \le 18$ satisfy the bound as stored (Section~\ref{sec:small}), so every record for $5 \le n \le 36$ is consistent with reading (E). % SRC: experiments/112-rattler-repair/NOTES.md (Full sweep); recomputed in this review (1e-9 counts on verified.json: below 2n-7 only at 22, 29, 35) At $n = 21, 22, 29, 35$ the counts after repair equal $2n + 1 - w - d$ with $d = 0, 1, 0, 0$, as in Corollary~\ref{cor:repair}; at the symmetric size 36, where Proposition~\ref{prop:count} is not tight, the count exceeds it. % SRC: 2n+1-w-d: 21: 43-6-0=37; 22: 45-6-1=38; 29: 59-8-0=51; 35: 71-8-0=63; d values from Sec. "What the data say" (d = 1 only at 22, 24, 40, 51 in 21..64)
+
+\emph{Reading (U).} If a record is optimal, so are its nudged and repaired versions, and (U) requires all of them to have at least $2n-7$ critical triangles. This fails at record 22 under every convention (the published configuration itself has 34); under exact counting at records 29 and 35; and after the nudge at records 21, 35 and 36. So reading (U) fails at each of $n = 21, 22, 29, 35, 36$ unless the record there is not optimal. Under the $10^{-6}$ tolerance count with rattlers as published, only record 22 is short ($37 \ge 35$, $51 \ge 51$, $63 \ge 63$, $72 \ge 65$). Since a rattler is free, reading (U) can only hold at sizes where every optimum is rattler-free or its rattlers cannot avoid ties; this is why (E) is the natural reading. % SRC: experiments/101-red-team/NOTES.md issue 3; notes_drafts/conjecture_note_draft.md Sec. 3b
+
+Each nudged configuration was re-checked in exact rational arithmetic: only the loaded ties lie within $10^{-9}$ of its minimum, and the minimum equals the original exactly. For record 36 the nudge moves the 8 rattlers by $10^{-5}$; the exact minimum is unchanged and exactly 60 triangles lie within $10^{-9}$ of it. % SRC: notes_drafts/appendix.md (A.1 notes); notes_drafts/conjecture_note_draft.md Sec. 3b
+All five records are certified local maxima, strict in the core coordinates, by the first certificate; all except record 36 also by the second, whose scope excludes symmetric configurations with non-unique multipliers. % SRC: notes_drafts/appendix.md (A.1 notes)
+
+% =====================================================================
+\section{Our configurations: \texorpdfstring{$n = 39$, $40$ and $81$}{n = 39, 40 and 81}}\label{sec:ours}
+
+For $37 \le n \le 64$ no configurations are published. Our certified best-known configurations at eighteen of these sizes have fewer than $2n-7$ critical triangles after the nudge (Appendix~\ref{app:table}), so they would contradict reading (U) if optimal; as stored, only $n = 39$ ($69 < 71$, exact count) and $n = 40$ ($64 < 73$, every convention) are short, and all others attain $2n-7$ without any move. % SRC: notes_drafts/appendix_data.json; experiments/101-red-team/NOTES.md issue 3
+We ran the repair at $n = 39$, $40$ and, from an extended library, $n = 81$. In these runs the minimum changed by at most $3.1\cdot10^{-11}$ (relative) in floating point, owing to rounding of the vertex coordinates; unlike the records, they were not re-checked exactly. % SRC: experiments/112-rattler-repair/results/n39,n40,n40_global,n81.json (min_after_rel 0, -2.2e-12, -3.0e-11)
+\begin{itemize}
+\item $n = 39$: one rattler moved from no tie to two, $69 \to 71 = 2n-7$.
+\item $n = 40$: four rattlers moved from no tie to two each, $64 \to 72 < 73$. Allowing each rattler to move anywhere in the square, rather than within distance $0.2$, gives the same $72$.
+\item $n = 81$: three rattler moves, $149 \to 154 < 155$.
+\end{itemize}
+% SRC: experiments/112-rattler-repair/results/n39.json (moves [[11,0,2]]), n40.json and n40_global.json (RAD=2; moves 24..27 0->2), n81.json (moves [[33,0,2],[34,0,2],[62,1,2]], 149 -> 154)
+Both $n = 40$ and $n = 81$ have $w = 8$ and $d = 1$, and their counts after repair equal $2n + 1 - w - d = 2n - 8$, as Corollary~\ref{cor:repair} predicts. They are therefore the only configurations we know that fall below $2n-7$ under reading (E). They are not records and are not known to be optimal (they are much less likely to be optimal than the records), and the repair only explores greedy one-at-a-time vertex moves of rattlers with the core fixed: another placement, or another optimal configuration with a different core, could have more critical triangles. Our $n = 89$ configuration has the same structure ($w = 8$, $d = 1$; Section~\ref{sec:repair}); we have not run the repair there.
+
+% =====================================================================
+\section{A core-based variant}\label{sec:repair}
+
+Rattlers account for most shortfalls under (U), which suggests replacing $n$ by the core size, i.e.\ requiring at least $2\cdot\core - 7$ loaded ties. This fails. % SRC: notes_drafts/conjecture_note_draft.md Sec. 4; experiments/101-red-team/NOTES.md issue 3
+\begin{itemize}
+\item our $n = 40$: core $36$, $64 < 65$ loaded ties; % SRC: notes_drafts/appendix_data.json n=40 (core 36, loaded 64)
+\item $n = 81$: $146 < 147$; $n = 89$: $164 < 165$ (best-known configurations from an extended library, certified by the first code; the second code, run on the first code's polished centre, agrees). % SRC: notes_drafts/conjecture_note_draft.md Sec. 4 (certs_r21)
+\end{itemize}
+All three are second-order maxima ($d = 1$) with 8 loaded walls (at $n = 40$ the first code certifies the symmetry-reduced system and uses the same lift as at $n = 22$; at all three the second code's eigenvalue step is in floating point, Section~\ref{sec:22}). Any such configuration at which Proposition~\ref{prop:count} is tight has $\#\{\text{loaded ties}\} = 2\cdot\core + 1 - 1 - 8 = 2\cdot\core - 8$, so the variant fails whenever such an optimum exists. This is the same mechanism as in Corollary~\ref{cor:repair}: once the rattlers are counted, $w = 8$ and $d = 1$ leave exactly one triangle missing. A version that holds wherever we looked is the full count of Proposition~\ref{prop:count}, but it is automatic and not a conjecture.
+
+% =====================================================================
+\section{What the data say about the count}\label{sec:correct}
+
+The correct counting statement is Proposition~\ref{prop:count}, and its content lies in two observations we cannot prove. Over the 44 sizes $21 \le n \le 64$ (records for $n \le 36$, our certified bests above): % SRC: experiments/101-red-team/NOTES.md issue 2; notes_drafts/conjecture_note_draft.md Sec. 3
+\begin{itemize}
+\item equality holds at 36 sizes; the excess is positive only at the 8 symmetric sizes $24$, $26$, $28$, $30$, $32$, $36$, $38$, $42$, where multipliers are not unique;
+\item $d \le 1$ everywhere, with $d = 1$ at $22, 24, 40, 51$ (and, in an extended library $60 \le n \le 100$, at $65, 76, 81, 89, 100$; the only uncertified best there, $n = 97$, has $d = 2$ after re-polishing, which neither code handles).
+\end{itemize}
+A third, separately written code (vertices of the multiplier polytope; run on the library of its time, an earlier version of ours) found the number of positive multipliers at an extreme KKT point equal to $2\cdot\core + 1 - d$ in every case. % SRC: notes_drafts/conjecture_note_draft.md Sec. 3 (exp 76)
+If $d \le 1$ held at optima, Proposition~\ref{prop:count} would give $\#\{\text{loaded ties}\} \ge 2\cdot\core - 8$ at every optimum, with equality only if $d = 1$, 8 walls are loaded and the count is tight; and under the placement hypotheses of Corollary~\ref{cor:repair} reading (E) could fail only at an optimum with $w = 8$ and $d = 1$. But $d \le 1$ is empirical, and it fails in other regions (Remark~\ref{rem:regions}).
+
+\subsection{Small \texorpdfstring{$n$}{n}}\label{sec:small}
+We rebuilt the record configurations for $5 \le n \le 18$ with our own search (exact minimum within $2\cdot10^{-13}$ of the site's at every $n$). Their tie counts for $5 \le n \le 16$ are $4, 6, 8, 12, 11, 16, 28, 20, 20, 26, 25, 64$, equal to Sudermann-Merx's table \cite[Table~10]{SM}. As stored, the bound $2n-7$ holds for every $n$ from $5$ to $21$ (record $21$ falls below it only after the nudge), with equality at $9$, $17$ and $19$ (and later at $27$), and in particular at the proven optima $5 \le n \le 9$ ($n = 9$ by the computer-assisted proof mentioned in the introduction) and at the solver-optimal $n = 10$. The proven $n = 5$ optimum is already a second-order maximum ($d = 1$: $4 + 6 = 10 = 2\cdot5 + 1 - 1$), so the $-d$ term is needed at the smallest $n$, although $2n-7 = 3$ is far below its 4 ties. % SRC: notes_drafts/conjecture_note_draft.md Sec. 3c; STATUS.md row 102; STATUS.md row 110 (n = 9)
+
+\begin{remark}[other regions]\label{rem:regions}
+The count of Proposition~\ref{prop:count} has the natural form $2n + 1 - w_{\max} - d$, where $w_{\max}$ is the largest possible number of loaded walls. In a triangle $w_{\max} = 6$, so the natural bound is $2n-5$; in the record site's convex-hull variant (no walls, but a 6-dimensional affine gauge) it is also $2n-5$. % SRC: experiments/105-shape-universality/theory_tri.md (Counting); STATUS.md row 105
+Even the weaker $2n-7$ fails there for the stored configurations: at the triangle record $n = 15$ (15 ties, $2n-7 = 23$; the site's counts also give $n = 16$ with $24 < 25$ and $n = 19$ with $30 < 31$) and at the convex $n = 7$ (6 ties $< 7$, $d = 3$), a value that matches, numerically, the convex-variant optimum for which the record site lists a machine-checked proof \cite{Stead}. In regular hexagons, pentagons and the disk our best configurations fall below $2n-7$ at hexagon $n = 17, 20, 23, 26, 28, 30$, pentagon $8, 13, 17, 19, 30$ and disk $10, 11, 14, 22, 26$; most carry $d \ge 1$ (for the disk $d$ includes one rotation mode). We have not run the rattler repair in these regions, so these counts bear on a universal reading only; the large values of $d$ also leave room for shortfalls under an existential reading. These $d$ values are first-order counts at configurations that may be non-isolated, and outside the square our searches are converged only at small $n$; we state them as remarks, not as counterexamples to any published statement. % SRC: experiments/105-shape-universality/NOTES.md (lines 75-78); experiments/107-half-turn-test/NOTES.md (Wall law, Search quality)
+\end{remark}
+
+% =====================================================================
+\section{Conclusion}
+Read existentially, as intended, Conjecture~\ref{conj:SM} is consistent with every record for $5 \le n \le 36$: all but records 22, 29 and 35 attain $2n-7$ as stored, and moving rattlers onto minimal triangles, with the minimum area unchanged, brings these three to at least $2n-7$. Read universally, it fails at record 22 (and at 21, 29, 35, 36 under exact counting or after a nudge) unless those records are not optimal, mainly because rattlers are free and can be placed on no tie. Both facts follow from the rank--nullity count of Proposition~\ref{prop:count}: when it is tight and rattlers are placed generically, an optimum has $2n + 1 - w - d$ critical triangles, so the existential reading can fail only through 8 loaded walls together with a flat direction (if $d \le 1$). This happens at our best-known configurations for $n = 40$ and $81$, which stay one short after the repair; whether such a configuration can be optimal is the question on which the existential reading turns. Proving $d \le 1$ at isolated optima in the square, and understanding when $w = 8$ and $d = 1$ can occur together, would be natural next steps.
+
+\section*{Data availability}
+Coordinates, certificates and check scripts are available in the public repository \url{https://github.com/NERD-NEH007/heilbronn-discovery-lab}.
+
+\section*{Acknowledgements}
+We thank N. Sudermann-Merx for pointing out that the free points of record 22 can be moved to restore the bound \cite{SMpc}. We thank the maintainer and contributors of the record site \cite{Stead}; the configurations for $n \le 36$ used here are theirs.
+
+\section*{Use of AI tools}
+The author used Claude, an AI system developed by Anthropic, for computation (writing and running search, certification and analysis code) and for drafting text. All claims were checked against the computational records; the author takes responsibility for the content. AI systems are not authors of this work.
+
+% =====================================================================
+\appendix
+\section{Counts for every short size}\label{app:table}
+
+Table~\ref{tab:appendix} lists every best configuration for $21 \le n \le 64$ whose exact or after-nudge count is below $2n-7$, plus the symmetric sizes 36 and 42, whose rattlers are those of the certificate vertex. Records ($n \le 36$) are as published \cite{Stead}; $n \ge 39$ are our best-known configurations. Every configuration is certified as a local maximum, strict in its core coordinates, by the first code of Section~\ref{sec:22}, and all except 36 and 42 also by the second. Each nudged configuration was re-checked exactly: only the loaded ties lie within $10^{-9}$ of the minimum, which equals the original, except at $n = 48$, where it is $6.9\cdot10^{-12}$ (relative) larger because the smallest triangle of the float coordinates passes through a rattler. The column ``repaired'' is given where the repair was run (Sections~\ref{sec:more} and~\ref{sec:ours}); for the other sizes the stored exact count already attains $2n-7$. % SRC: notes_drafts/appendix.md (A.1 header and notes); notes_drafts/appendix_data.json (n = 48 nudged_min_rel_change 6.87e-12); experiments/112-rattler-repair/results
+
+\begin{table}[htbp]
+\centering\small
+\caption{Critical-triangle counts (Definition~\ref{def:conv}). $t$ is the minimum area of the stored coordinates (double precision); --- means the repair was not run.}\label{tab:appendix}
+% SRC: notes_drafts/appendix_data.json (fields t, tol1e6, active, loaded, bound, core, walls_loaded); notes_drafts/appendix.md A.1; experiments/112-rattler-repair/results (repaired)
+\begin{tabular}{@{}rlcrrrrrrr@{}}
+\toprule
+$n$ & source & $t$ & tol. & exact & nudged & repaired & $2n-7$ & core & walls \\
+\midrule
+21 & record & 0.0114737607857012 & 37 & 37 & 33 & 37 & 35 & 19 & 6 \\
+22 & record & 0.0107716568096426 & 34 & 34 & 34 & 38 & 37 & 20 & 6 \\
+29 & record & 0.00631890275200533 & 51 & 49 & 49 & 51 & 51 & 28 & 8 \\
+35 & record & 0.00452533174928682 & 63 & 62 & 59 & 63 & 63 & 33 & 8 \\
+36 & record & 0.00442536319032373 & 72 & 72 & 60 & 76 & 65 & 28 & 8 \\
+39 & ours & 0.00375688857911436 & 71 & 69 & 63 & 71 & 71 & 35 & 8 \\
+40 & ours & 0.00367925596270148 & 64 & 64 & 64 & 72 & 73 & 36 & 8 \\
+41 & ours & 0.00335600664538908 & 75 & 75 & 71 & --- & 75 & 39 & 8 \\
+42 & ours & 0.00322671198576815 & 80 & 80 & 76 & --- & 77 & 40 & 8 \\
+45 & ours & 0.0027388694293478 & 83 & 83 & 81 & --- & 83 & 44 & 8 \\
+47 & ours & 0.00251148370220518 & 88 & 88 & 80 & --- & 87 & 43 & 7 \\
+48 & ours & 0.00240571120138749 & 91 & 91 & 87 & --- & 89 & 46 & 6 \\
+50 & ours & 0.00220583426639587 & 93 & 93 & 91 & --- & 93 & 49 & 8 \\
+54 & ours & 0.00184375431261033 & 102 & 102 & 100 & --- & 101 & 53 & 7 \\
+55 & ours & 0.00175393320968469 & 105 & 105 & 101 & --- & 103 & 53 & 6 \\
+56 & ours & 0.00166067465779543 & 106 & 106 & 102 & --- & 105 & 54 & 7 \\
+57 & ours & 0.00162070223658626 & 108 & 108 & 106 & --- & 107 & 56 & 7 \\
+58 & ours & 0.00155538638320151 & 109 & 109 & 103 & --- & 109 & 55 & 8 \\
+59 & ours & 0.0014809335887336 & 112 & 112 & 108 & --- & 111 & 57 & 7 \\
+60 & ours & 0.00143068843181549 & 113 & 113 & 109 & --- & 113 & 58 & 8 \\
+61 & ours & 0.00137799466204069 & 116 & 116 & 114 & --- & 115 & 60 & 7 \\
+63 & ours & 0.00130255371849222 & 121 & 121 & 115 & --- & 119 & 60 & 6 \\
+64 & ours & 0.00127561137155806 & 122 & 122 & 118 & --- & 121 & 62 & 7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As stored, every size in the table with $n \ge 41$ attains at least $2n-7$; these sizes are short only after the nudge, and so bear only on reading (U). % SRC: notes_drafts/appendix_data.json
+
+\section{Coordinates}\label{app:coords}
+
+\subsection*{The record \texorpdfstring{$n = 22$}{n = 22}}
+Published coordinates \cite{Stead}, as IEEE doubles; points 20 and 21 are the rattlers. % SRC: notes_drafts/appendix.md A.2 (copy of experiments/04-size-ladder/records/verified.json)
+\begin{center}\small
+\begin{tabular}{@{}rll@{\hspace{2.5em}}rll@{}}
+\toprule
+$i$ & $x$ & $y$ & $i$ & $x$ & $y$ \\
+\midrule
+0 & 0.9704809514518044 & 0.0 & 11 & 0.7999392878361208 & 0.1379961007349342 \\
+1 & 0.0 & 0.9704809514518044 & 12 & 0.33021841282433545 & 0.11805897497263819 \\
+2 & 1.0 & 0.596235914027222 & 13 & 0.11805897497263819 & 0.33021841282433545 \\
+3 & 0.596235914027222 & 1.0 & 14 & 0.30192348108674555 & 0.9417215319918077 \\
+4 & 0.0547431789542171 & 0.0 & 15 & 0.9417215319918077 & 0.30192348108674555 \\
+5 & 0.0 & 0.0547431789542171 & 16 & 0.43951472890980964 & 0.27119389799717497 \\
+6 & 0.9661244767501747 & 0.7948225678986077 & 17 & 0.27119389799717497 & 0.43951472890980964 \\
+7 & 0.7948225678986077 & 0.9661244767501747 & 18 & 0.3834238307798845 & 0.7669334707610613 \\
+8 & 0.6099521980088319 & 0.8242479387131482 & 19 & 0.7669334707610613 & 0.3834238307798845 \\
+9 & 0.8242479387131482 & 0.6099521980088319 & 20 & 0.04819967397431575 & 0.5180213601479509 \\
+10 & 0.1379961007349342 & 0.7999392878361208 & 21 & 0.5182810455793437 & 0.048459359405708245 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Repaired rattlers of record 22}
+Rounded to 13 digits; the exact positions are the intersections of the two tie lines through each point, and all other points are as published. % SRC: experiments/112-rattler-repair/results/n22.json (points_after[20], [21])
+\begin{center}\small
+\begin{tabular}{@{}rll@{}}
+\toprule
+$i$ & published $(x,y)$ & repaired $(x,y)$ \\
+\midrule
+20 & $(0.04819967397431575,\ 0.5180213601479509)$ & $(0.0472440117744,\ 0.5264786055472)$ \\
+21 & $(0.5182810455793437,\ 0.048459359405708245)$ & $(0.5170398564197,\ 0.0499630625575)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Rattler nudges for records 21 and 35}
+All other points are as published. % SRC: notes_drafts/appendix.md A.3
+\begin{center}\small
+\begin{tabular}{@{}rrll@{}}
+\toprule
+$n$ & $i$ & published $(x,y)$ & nudged $(x,y)$ \\
+\midrule
+21 & 6 & $(0.4760892671465313,\ 0.8727567396452522)$ & $(0.47638926714653135,\ 0.8730567396452522)$ \\
+21 & 13 & $(0.1363647375218264,\ 0.06477885051491258)$ & $(0.1365107490570289,\ 0.06507885051491258)$ \\
+35 & 5 & $(0.36892860551621964,\ 0.4612793108346042)$ & $(0.36922860551621967,\ 0.46139703591607434)$ \\
+35 & 9 & $(0.9486323580430107,\ 0.9499164724402844)$ & $(0.9489323580430107,\ 0.9502164724402844)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Record coordinates ($n \le 36$) are published on the record site and are not redistributed; the data repository contains the moved rattlers of the nudges at records 21, 35 and 36 (for record 36, 8 rattlers moved by $10^{-5}$), the repaired configurations of Sections~\ref{sec:more} and~\ref{sec:ours}, all our configurations of Table~\ref{tab:appendix} with $n \ge 37$, and scripts that recompute every count from a record file downloaded from the site.
+
+% =====================================================================
+\begin{thebibliography}{9}
+\bibitem{CGSY} R.~Connelly, S.~J.~Gortler, E.~Solomonides and M.~Yampolskaya, The isostatic conjecture, \emph{Discrete Comput. Geom.} \textbf{64} (2020), 734--758, doi:10.1007/s00454-018-00051-0; arXiv:1702.08442.
+\bibitem{N9} E.~Hendren, A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal, companion paper, 2026.
+\bibitem{MMK} A.~Monji, A.~Modir and B.~Kocuk, Solving the Heilbronn triangle problem using global optimization methods, arXiv:2512.14505v1, 2025.
+\bibitem{Stead} T.~Stead (maintainer), The Heilbronn Problem (record tables, exact verification and attributions), \url{https://math.tejstead.com/heilbronn}, accessed 12 November 2026.
+\bibitem{SM} N.~Sudermann-Merx, From global optimization to exact coordinates: Heilbronn's triangle problem on the unit square using mixed-integer nonlinear optimization, arXiv:2603.11107v3, 27 October 2026 (v1: 11 March 2026).
+\bibitem{SMpc} N.~Sudermann-Merx, personal communication (email), 13 November 2026.
+\bibitem{Trela} D.~Trela, KKT stresses, affine moments, and separator flux in the Heilbronn triangle problem, arXiv:2609.25035, 24 August 2026 (unrefereed).
+\end{thebibliography}
+
+\end{document}

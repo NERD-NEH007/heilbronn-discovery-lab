@@ -1,0 +1,114 @@
+{
+ "source": "https://math.tejstead.com/heilbronn (record tables; T. Stead, maintainer, and contributors). Coordinates are not redistributed here; download them from the site.",
+ "fields": "min_area_exact_float: exact minimum triangle area of the published decimal coordinates (as float); exact_ties: triangles of exactly that area; table_rounded: value in the site table (8 decimals), as fetched 2026-11-04",
+ "records": {
+  "19": {
+   "min_area_exact_float": 0.013947862081484502,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.01394786
+  },
+  "20": {
+   "min_area_exact_float": 0.012938196714727018,
+   "exact_ties": 8,
+   "edge_points": 4,
+   "table_rounded": 0.01293819
+  },
+  "21": {
+   "min_area_exact_float": 0.01147376078570121,
+   "exact_ties": 1,
+   "edge_points": 6,
+   "table_rounded": 0.01147376
+  },
+  "22": {
+   "min_area_exact_float": 0.010771656809642633,
+   "exact_ties": 2,
+   "edge_points": 6,
+   "table_rounded": 0.01077165
+  },
+  "23": {
+   "min_area_exact_float": 0.009757289713314772,
+   "exact_ties": 1,
+   "edge_points": 6,
+   "table_rounded": 0.00975728
+  },
+  "24": {
+   "min_area_exact_float": 0.00912014302051357,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.00912014
+  },
+  "25": {
+   "min_area_exact_float": 0.008261594546724932,
+   "exact_ties": 1,
+   "edge_points": 6,
+   "table_rounded": 0.00826159
+  },
+  "26": {
+   "min_area_exact_float": 0.007872707361912054,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.0078727
+  },
+  "27": {
+   "min_area_exact_float": 0.0071067113064077325,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.00710671
+  },
+  "28": {
+   "min_area_exact_float": 0.0069710862125253676,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.00697108
+  },
+  "29": {
+   "min_area_exact_float": 0.006318902752005366,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.0063189
+  },
+  "30": {
+   "min_area_exact_float": 0.006072416303124596,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.00607241
+  },
+  "31": {
+   "min_area_exact_float": 0.005837068845813763,
+   "exact_ties": 1,
+   "edge_points": 7,
+   "table_rounded": 0.00583706
+  },
+  "32": {
+   "min_area_exact_float": 0.005810902207631995,
+   "exact_ties": 2,
+   "edge_points": 8,
+   "table_rounded": 0.0058109
+  },
+  "33": {
+   "min_area_exact_float": 0.005145488358988866,
+   "exact_ties": 1,
+   "edge_points": 7,
+   "table_rounded": 0.00514548
+  },
+  "34": {
+   "min_area_exact_float": 0.004914720004245172,
+   "exact_ties": 2,
+   "edge_points": 6,
+   "table_rounded": 0.00491472
+  },
+  "35": {
+   "min_area_exact_float": 0.004525331749286814,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.00452533
+  },
+  "36": {
+   "min_area_exact_float": 0.004425363190323735,
+   "exact_ties": 1,
+   "edge_points": 8,
+   "table_rounded": 0.00442536
+  }
+ }
+}

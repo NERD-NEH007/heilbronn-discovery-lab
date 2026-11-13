@@ -1,0 +1,3 @@
+start test5: open 10, closed_w 0, workers 2
+01:41:19 el 0.00h nodes 87 open 9 closed_w 0.100000 p1 31 p2 13 cover 0 fail 0 depth 8 naive_eta 0.00h
+DONE test5: {"n": 5, "mode": "eps", "eps": 0.001, "T": 0.19264253981960516, "T_exact": "3470339482189119/18014398509481984", "t_lower": "3849001794597505096727658536679/20000000000000000000000000000000", "elapsed": 2.863804817199707, "nodes": 1552, "p0": 0, "p1": 372, "p2": 409, "lp": 1180, "cover": 0, "fail": 0, "maxdepth": 28, "tight": 2113, "closed_w": 1.0000000000000002, "tasks": 10, "done": true}

@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+output/
+records/*
+!records/README.md
+*.aux
+*.log
+!certificates/**/*.log
+*.out
+!certificates/**/*.out
+*.toc
+*.synctex.gz
+*.pkl
+.ipynb_checkpoints/
+.DS_Store

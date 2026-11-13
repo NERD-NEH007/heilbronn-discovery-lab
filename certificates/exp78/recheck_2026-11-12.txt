@@ -1,0 +1,20 @@
+# exp 78 kkt_check.py re-run on the current library bests (2026-11-12, report revision after exp 101).
+# Command: python kkt_check.py --sizes 39,40,41,45,47,48,50,54,55,56,57,58,59,60,61,63,64 --out <scratch file>
+# (results/kkt_certs.jsonl was not touched). Loaded counts agree with the exp 44 certificates in 101-red-team/check_certs.txt.
+n=39 certified=True loaded_ties=63 loaded_walls=8 core=35 d=0 radius=6.5e-55 
+n=40 certified=True loaded_ties=64 loaded_walls=8 core=36 d=1 radius=5.7e-55 second_order_eigs=[-0.0013588492117916054]
+n=41 certified=True loaded_ties=71 loaded_walls=8 core=39 d=0 radius=6.4e-55 
+n=45 certified=True loaded_ties=81 loaded_walls=8 core=44 d=0 radius=6.5e-55 
+n=47 certified=True loaded_ties=80 loaded_walls=7 core=43 d=0 radius=6.5e-55 
+n=48 certified=True loaded_ties=87 loaded_walls=6 core=46 d=0 radius=6.5e-55 
+n=50 certified=True loaded_ties=91 loaded_walls=8 core=49 d=0 radius=6.5e-55 
+n=54 certified=True loaded_ties=100 loaded_walls=7 core=53 d=0 radius=6.5e-55 
+n=55 certified=True loaded_ties=101 loaded_walls=6 core=53 d=0 radius=6.4e-55 
+n=56 certified=True loaded_ties=102 loaded_walls=7 core=54 d=0 radius=6.5e-55 
+n=57 certified=True loaded_ties=106 loaded_walls=7 core=56 d=0 radius=6.5e-55 
+n=58 certified=True loaded_ties=103 loaded_walls=8 core=55 d=0 radius=6.5e-55 
+n=59 certified=True loaded_ties=108 loaded_walls=7 core=57 d=0 radius=6.5e-55 
+n=60 certified=True loaded_ties=109 loaded_walls=8 core=58 d=0 radius=6.5e-55 
+n=61 certified=True loaded_ties=114 loaded_walls=7 core=60 d=0 radius=6.5e-55 
+n=63 certified=True loaded_ties=115 loaded_walls=6 core=60 d=0 radius=6.5e-55 
+n=64 certified=True loaded_ties=118 loaded_walls=7 core=62 d=0 radius=6.5e-55 

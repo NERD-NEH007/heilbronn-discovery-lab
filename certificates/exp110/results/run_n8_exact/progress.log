@@ -1,0 +1,11 @@
+2026-11-12 20:20:28 start n8_exact pid 16712: open 28, nodes 0, closed_w 0, workers 14, skip 1.2, diag True
+2026-11-12 20:20:33 el 0.00h nodes 4000 open 46 closed_w 0.001876 rate 900/s p1 1436 p2 555 lpskip 284 cover 0 fail 0 depth 25 lp_fail 0 audited 0 eta_width 0.7h eta_nodes 1.2h
+2026-11-12 20:21:33 el 0.02h nodes 558091 open 347 closed_w 0.200132 rate 8649/s p1 106258 p2 169468 lpskip 8249 cover 4 fail 0 depth 141 lp_fail 0 audited 313 eta_width 0.1h eta_nodes 0.1h
+2026-11-12 20:22:33 el 0.03h nodes 1092022 open 282 closed_w 0.349866 rate 8761/s p1 202751 p2 337197 lpskip 13657 cover 13 fail 0 depth 143 lp_fail 0 audited 639 eta_width 0.1h eta_nodes 0.1h
+2026-11-12 20:23:33 el 0.05h nodes 1594360 open 286 closed_w 0.458429 rate 8634/s p1 289739 p2 499681 lpskip 17246 cover 24 fail 0 depth 143 lp_fail 0 audited 972 eta_width 0.1h eta_nodes 0.1h
+2026-11-12 20:24:33 el 0.07h nodes 2062988 open 268 closed_w 0.552957 rate 8420/s p1 367951 p2 654024 lpskip 20442 cover 28 fail 0 depth 144 lp_fail 0 audited 1264 eta_width 0.1h eta_nodes 0.1h
+2026-11-12 20:25:34 el 0.08h nodes 2501968 open 144 closed_w 0.615727 rate 8177/s p1 439225 p2 800704 lpskip 22635 cover 40 fail 0 depth 144 lp_fail 0 audited 1539 eta_width 0.1h eta_nodes 0.1h
+2026-11-12 20:26:34 el 0.10h nodes 2970663 open 195 closed_w 0.738895 rate 8112/s p1 523493 p2 949160 lpskip 25450 cover 48 fail 0 depth 144 lp_fail 0 audited 1846 eta_width 0.0h eta_nodes 0.0h
+2026-11-12 20:27:35 el 0.12h nodes 3401537 open 177 closed_w 0.805345 rate 7975/s p1 594718 p2 1092330 lpskip 27791 cover 52 fail 0 depth 144 lp_fail 0 audited 2144 eta_width 0.0h eta_nodes 0.0h
+2026-11-12 20:28:35 el 0.14h nodes 3874379 open 117 closed_w 0.952556 rate 7962/s p1 678070 p2 1242502 lpskip 33026 cover 56 fail 0 depth 144 lp_fail 0 audited 2454 eta_width 0.0h eta_nodes 0.0h
+2026-11-12 20:29:26 DONE n8_exact: {"n": 8, "mode": "exact", "eps": 0.001, "T": 0.0723764242460677, "T_exact": "5215270996239991/72057594037927936", "t_lower": "904705303980551837888618495649/12500000000000000000000000000000", "diag": true, "skip": 1.2, "elapsed": 538.144828081131, "closed_w": 1.000000000000003, "tasks": 10435, "done": true, "nodes": 4252598, "p0": 17865, "p1": 740009, "p2": 1368375, "lp": 3458235, "cover": 64, "fail": 0, "maxdepth": 144, "tight": 0, "lpskip": 36425, "lp_fail": 0, "audited": 2701}

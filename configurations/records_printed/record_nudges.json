@@ -1,0 +1,95 @@
+{
+ "attribution": "Rattler nudges of published records (record site https://math.tejstead.com/heilbronn). Only the moved points are given; all other points are as published (download them from the site). Point indices refer to the order of the published coordinate file. Published positions are given only where paper 2 prints them (21, 35).",
+ "nudges": {
+  "21": {
+   "eps": 0.0003,
+   "moved": {
+    "6": [
+     0.47638926714653135,
+     0.8730567396452522
+    ],
+    "13": [
+     0.1365107490570289,
+     0.06507885051491258
+    ]
+   },
+   "published_of_moved": {
+    "6": [
+     0.4760892671465313,
+     0.8727567396452522
+    ],
+    "13": [
+     0.1363647375218264,
+     0.06477885051491258
+    ]
+   },
+   "nudged_exact_count": 33,
+   "nudged_min_equal": true
+  },
+  "35": {
+   "eps": 0.0003,
+   "moved": {
+    "5": [
+     0.36922860551621967,
+     0.46139703591607434
+    ],
+    "9": [
+     0.9489323580430107,
+     0.9502164724402844
+    ]
+   },
+   "published_of_moved": {
+    "5": [
+     0.36892860551621964,
+     0.4612793108346042
+    ],
+    "9": [
+     0.9486323580430107,
+     0.9499164724402844
+    ]
+   },
+   "nudged_exact_count": 59,
+   "nudged_min_equal": true
+  },
+  "36": {
+   "eps": 1e-05,
+   "moved": {
+    "20": [
+     0.3474358899828191,
+     0.16460332158173685
+    ],
+    "21": [
+     0.8350905963405181,
+     0.3474463574098067
+    ],
+    "22": [
+     0.6517342745675995,
+     0.8351469584464007
+    ],
+    "23": [
+     0.1648483853759376,
+     0.6517342745677185
+    ],
+    "28": [
+     0.5377357186391208,
+     0.6705766758584827
+    ],
+    "29": [
+     0.3293840253408724,
+     0.5377303693601809
+    ],
+    "30": [
+     0.46227557578571277,
+     0.3293840253408725
+    ],
+    "31": [
+     0.6705766758584822,
+     0.46226428136087855
+    ]
+   },
+   "published_of_moved": null,
+   "nudged_exact_count": 60,
+   "nudged_min_equal": true
+  }
+ }
+}

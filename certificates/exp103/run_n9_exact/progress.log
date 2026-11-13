@@ -1,0 +1,26 @@
+start n9_exact: open 36, closed_w 0, workers 3
+04:16:58 el 0.00h nodes 4000 open 68 closed_w 0.000023 p1 1642 p2 342 cover 0 fail 0 depth 28 audited 2 naive_eta 67.76h
+04:18:01 el 0.02h nodes 72559 open 377 closed_w 0.000904 p1 24627 p2 11101 cover 0 fail 0 depth 32 audited 25 naive_eta 21.14h
+04:19:02 el 0.04h nodes 122773 open 373 closed_w 0.000951 p1 35277 p2 25373 cover 0 fail 0 depth 34 audited 59 naive_eta 38.02h
+04:20:03 el 0.05h nodes 173035 open 365 closed_w 0.000990 p1 44812 p2 40778 cover 0 fail 0 depth 35 audited 77 naive_eta 53.54h
+04:21:04 el 0.07h nodes 223666 open 424 closed_w 0.001038 p1 55559 p2 55187 cover 0 fail 0 depth 35 audited 99 naive_eta 67.34h
+04:22:04 el 0.09h nodes 271092 open 404 closed_w 0.001064 p1 63322 p2 70954 cover 0 fail 0 depth 37 audited 135 naive_eta 81.34h
+04:23:04 el 0.10h nodes 316836 open 406 closed_w 0.001103 p1 71393 p2 85611 cover 0 fail 0 depth 37 audited 161 naive_eta 93.53h
+04:24:04 el 0.12h nodes 363179 open 395 closed_w 0.001139 p1 79210 p2 100879 cover 0 fail 0 depth 37 audited 196 naive_eta 105.26h
+04:25:05 el 0.14h nodes 416376 open 430 closed_w 0.001209 p1 91238 p2 115288 cover 0 fail 0 depth 37 audited 222 naive_eta 112.98h
+04:26:08 el 0.15h nodes 467244 open 436 closed_w 0.001275 p1 101925 p2 129911 cover 0 fail 0 depth 37 audited 246 naive_eta 120.95h
+04:27:11 el 0.17h nodes 518676 open 402 closed_w 0.001321 p1 111262 p2 146180 cover 0 fail 0 depth 37 audited 281 naive_eta 130.02h
+04:28:11 el 0.19h nodes 568773 open 367 closed_w 0.001349 p1 120080 p2 162162 cover 0 fail 0 depth 37 audited 305 naive_eta 139.67h
+04:29:13 el 0.21h nodes 620708 open 376 closed_w 0.001387 p1 130462 p2 177589 cover 0 fail 0 depth 37 audited 342 naive_eta 148.24h
+04:30:14 el 0.22h nodes 667608 open 364 closed_w 0.001406 p1 136745 p2 194639 cover 0 fail 0 depth 37 audited 376 naive_eta 158.18h
+04:31:16 el 0.24h nodes 722433 open 381 closed_w 0.001458 p1 148710 p2 209942 cover 0 fail 0 depth 37 audited 409 naive_eta 164.44h
+04:32:16 el 0.26h nodes 772983 open 387 closed_w 0.001485 p1 157540 p2 226246 cover 0 fail 0 depth 37 audited 437 naive_eta 172.60h
+04:33:18 el 0.27h nodes 819538 open 350 closed_w 0.001505 p1 164360 p2 242566 cover 0 fail 0 depth 37 audited 469 naive_eta 181.67h
+04:34:18 el 0.29h nodes 873012 open 332 closed_w 0.001561 p1 175683 p2 257703 cover 0 fail 0 depth 37 audited 503 naive_eta 185.82h
+04:35:19 el 0.31h nodes 921940 open 374 closed_w 0.001594 p1 185275 p2 272494 cover 0 fail 0 depth 37 audited 536 naive_eta 192.50h
+04:36:19 el 0.32h nodes 973185 open 357 closed_w 0.001648 p1 195453 p2 287792 cover 0 fail 0 depth 37 audited 559 naive_eta 196.37h
+04:37:20 el 0.34h nodes 1025147 open 323 closed_w 0.001691 p1 205563 p2 303562 cover 0 fail 0 depth 37 audited 582 naive_eta 201.29h
+04:38:20 el 0.36h nodes 1084605 open 327 closed_w 0.003374 p1 219781 p2 316933 cover 0 fail 0 depth 37 audited 615 naive_eta 105.71h
+04:39:21 el 0.37h nodes 1152042 open 276 closed_w 0.013737 p1 231962 p2 329931 cover 0 fail 0 depth 37 audited 648 naive_eta 26.89h
+04:40:21 el 0.39h nodes 1209668 open 400 closed_w 0.014877 p1 245865 p2 342588 cover 0 fail 0 depth 37 audited 679 naive_eta 25.92h
+04:41:24 el 0.41h nodes 1265364 open 366 closed_w 0.015220 p1 256921 p2 357787 cover 0 fail 0 depth 37 audited 704 naive_eta 26.45h

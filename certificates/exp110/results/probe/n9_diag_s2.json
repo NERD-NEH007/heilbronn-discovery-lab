@@ -1,0 +1,3 @@
+Running HiGHS 1.16.0 (git hash: f3f113d): Copyright (c) 2026 under MIT licence terms
+Includes third-party software components, see THIRD_PARTY_NOTICES.md for full details
+{"n": 9, "mode": "exact", "diag": true, "skip": null, "probes": 4000, "seed": 2, "mean": 308722159.116, "se": 34946529.614541925, "median": 73692.0, "sec_per_node": 0.0010286672785706746, "est_core_hours": 88.2145509034218}

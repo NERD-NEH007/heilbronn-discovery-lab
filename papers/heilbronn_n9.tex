@@ -1,0 +1,309 @@
+% Paper 3: computer-assisted proof that the known 9-point Heilbronn configuration in the unit square is optimal.
+% Every numerical claim carries a hidden "% SRC:" comment naming the lab file it comes from.
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black]{hyperref}
+
+% Public repository accompanying the paper (single definition).
+\newcommand{\repourl}{\url{https://github.com/NERD-NEH007/heilbronn-discovery-lab}}
+
+\setlist{itemsep=1pt,topsep=3pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\sq}{[0,1]^2}
+\newcommand{\tstar}{t^{*}}
+
+\begin{document}
+
+\title[The 9-point Heilbronn configuration is optimal]{A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal}
+
+\author{Ethan Hendren}
+\email{eehendren007@gmail.com}
+
+\begin{abstract}
+For Heilbronn's problem in the unit square we give a computer-assisted proof that the largest possible minimum triangle area of nine points is $H(9) = (9\sqrt{65}-55)/320 = 0.0548759991\ldots$, and that it is attained only by the known configuration (listed on the record site under Comellas and Yebra) and its images under the symmetries of the square.
+Optimality for $n = 9$ was previously established by global optimization software within numerical tolerances, not rigorously.
+The proof is a branch and bound over boxes of point positions on a dyadic grid, after exact symmetry and normalisation reductions. Every discarded box is discarded by a test evaluated in exact integer or rational arithmetic; a floating-point LP solver only proposes dual multipliers, which are rounded and re-checked exactly. The boxes that survive are covered by a separately computed exact local certificate around the optimum. The run took $3.59\cdot10^{8}$ nodes and 16 hours on 14 worker processes, with no failures.
+\textbf{This is an AI-assisted, computer-assisted proof. It has not been independently checked}: the code was written with an AI system, it is not formally verified, and nobody other than the author has re-run or reviewed it. Section~\ref{sec:limits} states what an independent check would require.
+\end{abstract}
+
+\maketitle
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+
+Let $Q = \sq$ and, for $P = (p_1,\dots,p_n) \in Q^n$, let
+\[
+  f(P) = \min_{i<j<k} \lvert\Delta(p_i,p_j,p_k)\rvert, \qquad \Delta(a,b,c) = \tfrac12 \det(b-a,\, c-a),
+\]
+the smallest area of a triangle with vertices in $P$. Heilbronn's problem asks for $H(n) = \max_{P \in Q^n} f(P)$ and for the maximising configurations. The maximum exists because $f$ is continuous and $Q^n$ is compact.
+
+\subsection*{Prior work}
+Optimality is proved for $n \le 8$: $n = 5$ by Yang, Zhang and Zeng \cite{YZZ}, $n = 6$ by Dress, Yang and Zeng \cite{DYZ}, $n = 7$ by Zeng and Chen \cite{ZC}, $n = 8$ by Dehbi and Zeng \cite{DZ}; these are the sources listed by the record site \cite{Stead}. % SRC: paper1/heilbronn_structure.tex l.73; papers/citation_findings.md Sec. 1 (record site)
+The nine-point configuration studied here was found by Comellas and Yebra \cite{CY}; the record site lists it under their names \cite{Stead}. % SRC: papers/citation_findings.md Sec. 1 (record site holders: n = 7, 8, 9, 10, 12 Comellas & Yebra, Dec 2001)
+For $n = 9$, Chen, Xu and Zeng \cite{Chen17} confined all optimal configurations by a GPGPU search and obtained $0.054875999 < H(9) < 0.054878314$ (as quoted in \cite{MMK}); this bounds $H(9)$ but does not prove the optimality of the known configuration. % SRC: paper1 l.76; citation_findings.md Sec. 1 (MMK / Chen et al. 2017)
+Monji, Modir and Kocuk \cite{MMK} give MIQCP formulations with symmetry breaking and solve $n \le 9$. % SRC: paper1 l.75
+Sudermann-Merx \cite{SM} solves $n \le 10$ by mixed-integer nonlinear programming and states that $n = 9$ is solved to global optimality within the numerical tolerances of the solver, that proofs exist for $n \le 8$ but not for $n = 9$ and $10$, and gives the exact value $(9\sqrt{65}-55)/320$. % SRC: citation_findings.md Sec. 1 (SM, n = 9, 10; exact forms)
+Both optimization results certify the known configuration within solver tolerances. The record site lists $n = 9$ as ``numerically optimal''. % SRC: citation_findings.md Sec. 1 (record site, n = 9 and 10)
+
+\subsection*{Result}
+Put
+\[
+ a = 1 - \tfrac{\sqrt{65}}{10},\quad b = \tfrac58 + \tfrac{\sqrt{65}}{40},\quad c = \tfrac{9}{16} - \tfrac{3\sqrt{65}}{80},\quad d = \tfrac34 - \tfrac{\sqrt{65}}{20},
+\]
+so $a \approx 0.19377$, $b \approx 0.82656$, $c \approx 0.26017$, $d \approx 0.34689$, and let
+\[
+ C_9 = \bigl( (a,1),\ (1,a),\ (1,b),\ (b,1),\ (0,b),\ (b,0),\ (c,0),\ (0,c),\ (d,d) \bigr).
+\]
+% SRC: papers/paper3/check_closed_form.py (exact recognition of the exp 44 / exp 103 certified centre in Q(sqrt 65))
+$C_9$ is symmetric under the reflection in the diagonal $y = x$; exactly $11$ of its $84$ triangles have the minimum area, and every other triangle is larger by at least $1.5\cdot10^{-3}$ (Lemma~\ref{lem:ident}).
+
+\begin{theorem}\label{thm:main}
+Let $\tstar = (9\sqrt{65}-55)/320 = 0.054875999170896\ldots$. Every configuration of nine points in the unit square has a triangle of area at most $\tstar$, that is, $H(9) = \tstar$. A configuration $P \in Q^9$ has $f(P) = \tstar$ if and only if, after relabelling, $P = g(C_9)$ for one of the eight symmetries $g$ of the square; these are four distinct point sets.
+\end{theorem}
+% SRC: 110-n9-proof/NOTES.md "Result (2026-11-13 12:31)"; results/run_n9/stats.json
+
+The value $\tstar$ and the configuration are not new; what is new is a proof. The proof is computer-assisted (Sections~\ref{sec:outline}--\ref{sec:run}).
+
+\begin{remark}[Status of this proof]\label{rem:status}
+This is an \emph{AI-assisted, computer-assisted proof that has not been independently checked.} The branch-and-bound code, the local certificate and the reductions were developed with the help of an AI system (see ``Use of AI tools''). The code is not formally verified, the reductions of Section~\ref{sec:reductions} have been checked only by the author, and the 16-hour computation has been run once, on one machine. We have tested the implementation (Section~\ref{sec:validation}), but tests are not a check of the proof. Until an independent check of the kind described in Section~\ref{sec:limits} has been carried out, Theorem~\ref{thm:main} should be read as a claim supported by a computation, not as an established result.
+\end{remark}
+
+% =====================================================================
+\section{Outline of the proof}\label{sec:outline}
+
+The proof has three parts.
+\begin{enumerate}[label=(\Alph*)]
+\item \emph{A local certificate} (Theorem~\ref{thm:local}): an exact configuration $x^*$ with value $\tstar$, and a sup-norm ball around it in which every other configuration has minimum area $< \tstar$.
+\item \emph{A global exclusion} (Proposition~\ref{prop:bb}): after exact normalisations, every configuration with minimum area above a threshold $T$ slightly below $\tstar$ lies inside that ball, up to a symmetry of the square and a relabelling. This is the branch-and-bound computation.
+\item \emph{The identification} $x^* = C_9$ and $f(x^*) = (9\sqrt{65}-55)/320$ (Lemma~\ref{lem:ident}).
+\end{enumerate}
+
+\subsection{The local certificate}
+The local certifier is the one of our experiment~44, run unchanged on a numerical $n = 9$ optimum; we summarise what it proves. It works with the active system: the triangles whose area equals the minimum (``ties'') and the wall contacts. Using the diagonal symmetry of the configuration it parametrises symmetric, wall-respecting configurations affinely by parameters $u$, solves the tie equations by Newton's method on a grid of $2^{-110}$ with exact residuals, and proves by a Krawczyk (radii-polynomial) test in exact rational arithmetic that the tie system has exactly one zero $(u^*,\tstar)$ in the sup-ball of radius $r$ around the polished point $(\tilde u, \tilde t)$. % SRC: 44-interval-certificate/NOTES.md steps 1-4; 103-global-proof/get_certs.py
+For $n = 9$: no rattlers (all nine points are in the core), $11$ loaded ties and $8$ loaded wall contacts, $19 = 2\cdot 9+1$ constraints, first-order mode, $r = 4.65\cdot10^{-32}$, and every point moves by at most $\rho = r$ (the affine map $u \mapsto x$ has row sums of absolute values at most~$1$). The value is enclosed in $[t_{\rm lower}, t_{\rm upper}]$ with
+$t_{\rm lower} = 0.05487599917089670897281099710224$ and $t_{\rm upper} = t_{\rm lower} + 10^{-31}$. % SRC: 103-global-proof/results/local_certs.json, key "9": mode first-order, n_core 9, rattlers [], loaded_ties 11, loaded_walls 8, existence_radius = box_rho = 4.649e-32, t_lower, t_upper
+
+The certifier then proves that every triangle that is not exactly tied stays strictly above $\tstar$, and that the $19$ loaded constraints carry strictly positive multipliers (lower bound $0.0217$). It uses these as follows. % SRC: local_certs.json "9": y_min_lower 0.0217; 44/NOTES.md steps 6-7
+
+\begin{theorem}[local certificate; experiment 44]\label{thm:local}
+There is a configuration $x^* \in Q^9$, with $\|x^* - \tilde x\|_\infty \le 4.65\cdot 10^{-32}$ for an explicit rational configuration $\tilde x$, such that $f(x^*) = \tstar \in [t_{\rm lower}, t_{\rm upper}]$ and
+\[
+  f(x) < \tstar \quad\text{for every } x \in Q^9 \text{ with } 0 < \|x - x^*\|_\infty < \rho_b, \qquad \rho_b \ge 1.1786\cdot10^{-4}.
+\]
+\end{theorem}
+% SRC: local_certs.json "9": basin_radius 0.00011786328420762071; 44/NOTES.md step 7 "Theorem used"; certify_interval.py l.517-547
+
+\begin{proof}[Sketch of the argument implemented by the certifier]
+Let $M$ be the $19\times19$ matrix whose rows are $[\sigma_T\nabla\Delta_T,\,-1]$ for the $11$ ties ($\sigma_T$ the sign of the area) and $[n_w, 0]$ for the $8$ wall contacts ($n_w$ the inward normal), acting on $(\delta x, \tau)$. With an approximate inverse $C$, the quantity $\beta = \|I - CM(\tilde x)\|_\infty + 6\rho\|C\|_\infty$ is bounded exactly; $\beta < 1$ proves $M(x^*)$ nonsingular with $\|M^{-1}\|_\infty \le \|C\|_\infty/(1-\beta)$, and the entries of $y = -(M^{-1})_{\text{last},\cdot}$ are bounded below by $y_{\min} > 0$. For a displacement $\delta x$ that keeps the points in $Q$, with $\delta = \|\delta x\|_\infty$, put $\tau = \min_T \sigma_T\nabla\Delta_T\cdot\delta x$ and $s = M(\delta x,\tau) \ge 0$. Then $-\tau = y\cdot s \ge y_{\min}\|s\|_\infty \ge c\,\delta$ with $c = y_{\min}/\|M^{-1}\|_\infty$. The quadratic remainder of a triangle area is at most $4\delta^2$, so some tie has $\sigma_T\Delta_T(x^*+\delta x) \le \tstar - c\delta + 4\delta^2 < \tstar$ for $0 < \delta < c/4$; the radius is also capped at $\tstar/10$ so that the signs $\sigma_T$ do not change. All bounds are computed in exact rational arithmetic; floats only choose $C$ and the active set. (One exception, not used in the basin argument: in the check that non-tied triangles exceed $\tstar$, triangles whose double-precision area exceeds $\tilde t$ by more than $10^{-6}$ are not re-checked exactly; for $n = 9$ the smallest such margin is $1.5\cdot10^{-3}$, see Lemma~\ref{lem:ident}.) The certifier stores $\rho_b = \min(c/4, \tstar/10)$ rounded to a double. % SRC: 44/NOTES.md step 7; certify_interval.py l.535-545
+\end{proof}
+
+\subsection{The global exclusion}
+Let $T = 494279058340989 / 2^{53} = 0.0548759991160207\ldots$, the double immediately below the double nearest to $t_{\rm lower}(1-10^{-9})$; so $T < t_{\rm lower} \le \tstar$ (checked exactly). Let % SRC: results/run_n9/stats.json "T_exact"; bb2.py make_problem (mode exact)
+\[
+  R = \rho_b'(1 - 10^{-6}) - \rho - 2^{-60},
+\]
+where $\rho_b' = 1.1786328420762071\cdot10^{-4}$ is the stored (rounded) basin radius. Since $\rho_b'$ is a double rounded from the exact bound, $\rho_b'(1-10^{-6}) < \rho_b$, and so $R + \rho < \rho_b$. % SRC: 103-global-proof/bb.py load_covers; NOTES.md (103) Limitations "basin radius is read from a float ... reduced by a relative 1e-6"
+
+\begin{proposition}[computational]\label{prop:bb}
+Let $\Omega \subset Q^9$ be the normalised domain of Lemma~\ref{lem:norm}. For every $P \in \Omega$ with $f(P) > T$ there are a symmetry $g$ of the square and a permutation $\pi$ of the labels with $\|P - \pi(g(\tilde x))\|_\infty \le R$.
+\end{proposition}
+Proposition~\ref{prop:bb} is what the branch and bound of Sections~\ref{sec:reductions}--\ref{sec:sound} establishes, by the computation of Section~\ref{sec:run}.
+
+\subsection{The identification}
+\begin{lemma}\label{lem:ident}
+$x^* = C_9$ up to the labelling, and $\tstar = (9\sqrt{65}-55)/320$. Exactly $11$ triangles of $C_9$ have area $\tstar$, and all others have area $> \tstar + 1.5\cdot10^{-3}$.
+\end{lemma}
+\begin{proof}
+The script \texttt{check\_closed\_form.py} (in the repository) recognises each coordinate of the rational centre $\tilde x$ as an element of $\Q(\sqrt{65})$, which gives $C_9$, and checks in exact arithmetic in $\Q(\sqrt{65})$: $\|C_9 - \tilde x\|_\infty < 2.33\cdot10^{-32} < r$; exactly $11$ triangles of $C_9$ have area exactly $(9\sqrt{65}-55)/320$ (the other $73$ exceed it by at least $1.529\cdot10^{-3}$, evaluated to $30$ digits); $C_9$ is symmetric in the diagonal, and its coordinates equal to $0$ or $1$ are those of $\tilde x$ (the script copies them), so it has the same eight wall contacts; and $(9\sqrt{65}-55)/320$ lies in $[t_{\rm lower},t_{\rm upper}]$, within $2\cdot10^{-32} < r$ of the polished value $\tilde t$ (whose 32-decimal display is $0.05487599917089670897281099710229$). Since $\|C_9-\tilde x\|_\infty < 10^{-31}$ while every non-tied triangle of $\tilde x$ exceeds $\tilde t$ by far more, the $11$ tied triangles of $C_9$ are exactly the ties of $\tilde x$, with the same orientations, and the diagonal symmetry of $C_9$ induces the same permutation of labels as that of $\tilde x$. Hence $C_9$ lies in the parametrised family, is a zero of the tie system, and lies in the Krawczyk ball of radius $r$ around $(\tilde u,\tilde t)$ (the parameters $u$ are coordinates of points of the configuration, see Remark~\ref{rem:ident}). By uniqueness of the zero in that ball, $C_9 = x^*$ and $\tstar = (9\sqrt{65}-55)/320$.
+\end{proof}
+% SRC: papers/paper3/check_closed_form.py output (dist 2.3247e-32, r 4.649e-32, 11 tied, min margin 0.001529); re-run of certify_interval for n = 9: t_polished 5487599917089670897281099710229e-32, 6 tie orbits
+
+\begin{remark}\label{rem:ident}
+The step ``the parameters $u$ are coordinates'' uses an implementation detail of the certifier: for $n = 9$ the stored point-displacement bound $\rho$ equals $r$ exactly, so each point coordinate is $\pm$ one parameter plus a constant, and the sup distance of $C_9$ from $\tilde x$ bounds its distance from $\tilde u$. We checked this from the stored data, not by an independent proof. The identification is not needed for the optimality statement itself: without it, the proof gives $H(9) = f(x^*) \in [t_{\rm lower}, t_{\rm upper}]$ with $x^*$ unique up to symmetry, and $C_9$ agrees with $x^*$ to $10^{-31}$.
+\end{remark}
+
+\subsection{Proof of Theorem~\ref{thm:main} from (A)--(C)}
+Let $P \in Q^9$ with $f(P) > T$. By Lemma~\ref{lem:norm} there are stretch factors $\lambda_x,\lambda_y \ge 1$, a symmetry $h$ of the square and a relabelling such that the resulting $P' \in \Omega$ satisfies $f(P') = \lambda_x\lambda_y f(P) \ge f(P) > T$. By Proposition~\ref{prop:bb}, $\|P' - \pi(g(\tilde x))\|_\infty \le R$, hence $\|g^{-1}(\pi^{-1}P') - x^*\|_\infty \le R + \rho < \rho_b$ (symmetries of the square are isometries of the sup norm, and relabelling and symmetries preserve $f$). By Theorem~\ref{thm:local}, $f(P') \le \tstar$, with equality only if $\pi^{-1}P' = g(x^*)$. Hence $f(P) \le \tstar$ for every $P$ (if $f(P) \le T$ this holds trivially), and $f(x^*) = \tstar$, so $H(9) = \tstar$.
+
+If $f(P) = \tstar$, then $\tstar \le f(P') \le \tstar$, so $\lambda_x\lambda_y = 1$: $P$ already touches all four sides, $P'$ is $h(P)$ relabelled, and $P' = g(x^*)$ up to labels. So $P$ is a symmetry image of $x^* = C_9$. Conversely every such image has $f = \tstar$. Since the stabiliser of $C_9$ in the symmetry group of the square is $\{1, \text{diagonal reflection}\}$, the images form four distinct point sets. \qed
+% SRC: 103-global-proof/NOTES.md "Statement proved" (exact mode); the equality-case argument via the stretch factor is spelled out here (NOTES give it implicitly)
+
+% =====================================================================
+\section{Reductions}\label{sec:reductions}
+
+Coordinates are written $x_i, y_i$; a configuration is a point of $Q^9 \subset \R^{18}$.
+
+\begin{lemma}[normalisation]\label{lem:norm}
+Let $P \in Q^n$ with $f(P) > 0$. There is a configuration $P'$ with $f(P') = \lambda f(P)$ for some $\lambda \ge 1$, obtained from $P$ by axis-parallel stretches with factors $\lambda_x, \lambda_y \ge 1$ ($\lambda = \lambda_x\lambda_y$), a symmetry of the square and a relabelling, such that $P'$ lies in
+\[
+\Omega = \Bigl\{\, P \in Q^n :\ \begin{aligned}[t]
+ &x_0 \le x_1 \le \dots \le x_{n-1},\quad x_0 = 0,\quad x_{n-1} = 1,\quad y_b = 0,\ y_t = 1 \text{ for some } b < t,\\
+ &\tfrac1n\textstyle\sum_i x_i \le \tfrac12,\quad \sum_i (x_i - \tfrac12)^2 \ge \sum_i (y_i - \tfrac12)^2 \,\Bigr\}.
+\end{aligned}
+\]
+If $\lambda = 1$ then $P$ touches all four sides and $P'$ is the image of $P$ under a symmetry of the square, relabelled.
+\end{lemma}
+
+\begin{proof}
+\emph{Stretching.} If $x_{\max} - x_{\min} < 1$, the map $x \mapsto (x - x_{\min})/(x_{\max}-x_{\min})$ keeps $P$ in $Q$ and multiplies every triangle area by $\lambda_x = 1/(x_{\max}-x_{\min}) > 1$; the same in $y$. ($f(P) > 0$ excludes $x_{\max} = x_{\min}$.) Afterwards some point lies on each of the four sides. % SRC: 103/NOTES.md Search domain item 2
+\emph{Symmetries.} Every symmetry of the square preserves all triangle areas and the property of touching all four sides. Apply them in this order.
+(i) If $Q_x := \sum(x_i - \frac12)^2 < Q_y := \sum(y_i-\frac12)^2$, apply the diagonal reflection $(x,y) \mapsto (y,x)$; it exchanges $Q_x$ and $Q_y$.
+(ii) If $\frac1n\sum x_i > \frac12$, apply $x \mapsto 1-x$; it maps the mean to $1 - $ mean and preserves $Q_x$, $Q_y$ (each $(x_i - \frac12)^2$ is invariant) and all $y_i$.
+(iii) Now label the points so that $x_0 \le \dots \le x_{n-1}$ (any order among equal $x$), and let $b$, $t$ be the smallest labels of points on the bottom and the top side; $b \ne t$ since no point is on both. If $b > t$, apply $y \mapsto 1-y$: it exchanges the bottom and top sides and so the roles of $b$ and $t$, and it preserves all $x_i$ (so the labelling and the mean of $x$) and $Q_x$, $Q_y$.
+Each step preserves the conditions established before it, so $P'$ satisfies all of them; $x_0 = 0$ and $x_{n-1} = 1$ because the points touch the left and right sides and the labels are sorted by $x$. If $\lambda = 1$, no stretch was applied. % SRC: 110-n9-proof/NOTES.md (c) Lemma and proof; 103/NOTES.md Search domain items 1-3
+\end{proof}
+
+\begin{remark}\label{rem:normgap}
+The notes of the computation state the lemma with ``finally relabel by $x$''; the labelling must be fixed before the $y$-mirror (iii), since $b$ and $t$ are defined through it. This is only a matter of order: (iii) does not change any $x_i$. We also note that the root boxes (Section~\ref{sec:tests}) impose only $y_b = 0$, $y_t = 1$ for a pair $b < t$, not the minimality of $b$ and $t$; this enlarges the searched set and costs only time.
+\end{remark}
+
+% =====================================================================
+\section{The branch and bound}\label{sec:tests}
+
+\subsection{Boxes}
+Fix the grid $D = 2^{24}$. A \emph{box} is a product of closed intervals $[\ell_k/D, h_k/D]$, $k = 1,\dots,18$, with integer endpoints $0 \le \ell_k \le h_k \le D$; the points inside a box are arbitrary reals. There is one \emph{root box} for each pair $b < t$ ($36$ roots for $n = 9$): $x_0 = 0$, $x_8 = 1$, $y_b = 0$, $y_t = 1$, all other coordinates in $[0,1]$. The roots cover $\Omega$. % SRC: bb.py roots() domain 'basic'; progress.log start line "open 36"
+A box is processed by the tests below in order; a box that is not discarded is split. The aim is to show: \emph{no configuration $P$ in $\Omega$ with $f(P) > T$ lies in a discarded box, unless the box is covered} (Section~\ref{sec:cover}).
+
+\subsection{P0: propagation of the linear and diagonal constraints}
+In exact integers at grid units: the ordering $x_i \le x_{i+1}$ and the mean condition $\sum x_i \le nD/2$ shrink the bounds (for example $h_i \le nD/2 - \sum_{j\ne i}\ell_j$). For the diagonal condition, with $a_i = 2x_i - D$ and $b_i = 2y_i - D$ in grid units, the condition is $\sum a_i^2 \ge \sum b_i^2$. Let $A_{\max} = \sum_i \max_{\rm box} a_i^2$ and $B_{\min} = \sum_i \min_{\rm box} b_i^2$. If $A_{\max} < B_{\min}$ the box contains no point of $\Omega$. Otherwise each $|b_i| \le \sqrt{A_{\max} - B_{\min} + \min b_i^2}$, and each $|a_i| \ge \sqrt{B_{\min} - A_{\max} + \max a_i^2}$ when the right side is positive; this may exclude one side of $x_i = \frac12$ or the whole box. All square roots are integer square roots, and every new bound is rounded outward, so that the shrunken box still contains every point of $\Omega$ that the old box contained. If some interval becomes empty the box is discarded. Points removed by P0 are not in $\Omega$, so P0 never removes a configuration of interest. % SRC: bb2.py k_propagate; 110/NOTES.md (c) "Use (exact integers, P0)"
+
+\subsection{P1: exact corner ranges}
+For a triple $(i,j,k)$, $2\Delta = (x_j - x_i)(y_k - y_i) - (x_k - x_i)(y_j - y_i)$ is affine in each of the three points separately, so its maximum and minimum over a product of rectangles are attained at one of the $4^3 = 64$ corner tuples. At grid units $2\Delta D^2$ is an integer of absolute value $< 2^{51}$ at corners, computed exactly in 64-bit integers and compared with $T_2 = \lfloor 2TD^2 \rfloor$. % SRC: bb2.py k_ranges; 110/NOTES.md (b)
+If $\max |2\Delta D^2| \le T_2$ over the corners for some triple, every configuration in the box has $f \le T$, and the box is discarded. Otherwise, if $\min 2\Delta D^2 \ge -T_2$, every configuration in the box with $\lvert\Delta\rvert > T$ for this triple has $\Delta > T$; the orientation $\sigma = +1$ is then \emph{determined}. Symmetrically for $\sigma = -1$. (Since the corner values are integers, comparison with $\lfloor 2TD^2\rfloor$ is equivalent to comparison with $2TD^2$.)
+
+\subsection{P2: McCormick LP with exactly verified duals}
+Introduce $\tau$, the coordinates, and $w_{ab}$ for $a \ne b$ standing for $x_a y_b$. Every configuration in the box with $f > T$, together with $w_{ab} = x_a y_b$ and $\tau = \min_{\text{determined } T}\sigma_T\, 2\Delta_T$, satisfies:
+(a) $\tau - \sigma_T\,2\Delta_T(w) \le 0$ for every determined triple ($2\Delta$ is linear in $w$);
+(b) the four McCormick inequalities for each $w_{ab}$ on the box;
+(c) the ordering rows $x_i - x_{i+1} \le 0$ and the mean row $\sum x_i \le n/2$;
+and $\tau > 2T$. Write these rows, scaled by $D^2$ to integer coefficients, as $Gu \le H$. A floating-point LP solver (HiGHS) maximises $\tau$ and returns duals $\lambda \ge 0$. \emph{The proof does not use the LP value.} The duals of all rows of undetermined triples are set to zero; then $\mu = \lfloor \lambda 2^S\rfloor$ with $0 \le \mu < 2^{50}$, and $r = G^{\mathsf T}\mu$ is computed exactly (64-bit integer products of $G$ with the two 25-bit halves of $\mu$, recombined and summed in arbitrary-precision integers). Overflow is excluded statically: every entry of $G$ has absolute value at most $D = 2^{24}$ (the McCormick coefficients are box endpoints in $[0,D]$, the others are $\pm1$ or $\pm D$), each half of $\mu$ is below $2^{25}$, and no column of $G$ has more than $168$ nonzeros (the $\tau$ column, two rows per triple), so every 64-bit partial sum is below $168\cdot2^{49} < 2^{57}$; the code asserts the corresponding bound $<2^{62}$ when the model is built. This exact check is applied to \emph{every} box discarded by P2. With $s = r_\tau > 0$ the aggregated valid inequality $s\tau + \sum_{u\ne\tau} r_u u \le \mu^{\mathsf T}H$ gives
+\[
+\tau \le \frac{1}{s}\Bigl(\mu^{\mathsf T}H + \sum_{u\ne\tau}\max\bigl(-r_u \underline u,\, -r_u \overline u\bigr)\Bigr),
+\]
+where $[\underline u,\overline u]$ is the box interval of a coordinate or the exact range of $x_a y_b$ over the box. If the right side is $\le 2TD^2$ (checked as an integer inequality) the box is discarded. Rounding of the duals and solver inaccuracy can only make this test fail, never make it pass falsely. A box with $s \le 0$, or where the solver does not report an optimal solution, is simply split. % SRC: bb2.py lp_bound2; 103/NOTES.md P2; 110/NOTES.md (a)
+
+\subsection{Cover by the basin ball}\label{sec:cover}
+If all box widths are at most $D/1000$, a float search proposes a symmetry $g$ and a matching $\pi$ of the box points to the points of $g(\tilde x)$; the box is then discarded if, in exact rational arithmetic, every endpoint of every coordinate interval is within $R$ of the matched coordinate of $g(\tilde x)$. Such a box lies in the sup-ball of radius $R$ around $\pi(g(\tilde x))$, which is exactly the conclusion of Proposition~\ref{prop:bb} for the configurations in it. % SRC: bb.py covered(); bb2.py make_problem cover_width=D//1000
+
+\subsection{Splitting and failures}
+Otherwise the box is split at the integer midpoint of a coordinate of width $\ge 2$ grid units (chosen by a heuristic: width times one plus the number of undetermined triples containing the point). The two closed children cover the parent. A box that is not discarded and has no coordinate of width $\ge 2$ is a \emph{failure}. The proposition is proved if the search, started from all root boxes, terminates with no failures. % SRC: bb2.py k_choose, process; 103/NOTES.md Splitting
+An optional \emph{LP skip} omits P2 at a node whose parent's LP value exceeded $2T(1+1.2)$ (P0, P1 and the cover test are still applied); such a node is then split (or, at the grid floor, recorded as a failure), never discarded by P2, and its children always solve their LP. % SRC: 110/NOTES.md (d)
+
+% =====================================================================
+\section{Soundness}\label{sec:sound}
+
+We list what has to be true for Proposition~\ref{prop:bb} to follow from a run with zero failures.
+\begin{enumerate}[label=(S\arabic*)]
+\item \emph{Coverage.} The root boxes contain $\Omega$ (Lemma~\ref{lem:norm} and Remark~\ref{rem:normgap}); P0 removes only points outside $\Omega$; splitting replaces a box by two closed boxes whose union is the box. Hence at every stage the union of the open boxes and the discarded boxes contains $\Omega$.
+\item \emph{Discards.} Each discard is justified: P1 because some triple has $\lvert\Delta\rvert \le T$ on the whole box; P2 because the exact aggregated inequality bounds $\tau \le 2T$, contradicting $\tau > 2T$; the cover test by an exact containment in the $R$-ball. LP skips and solver failures never discard.
+\item \emph{Exactness.} Every inequality used to discard is evaluated in integer or rational arithmetic: P0 and P1 in 64-bit integers with magnitudes below $2^{55}$ (no overflow is possible for $D = 2^{24}$: coordinates are below $2^{25}$, products below $2^{51}$, sums of nine squares below $2^{54}$); P2, for every P2 discard, in 64-bit integer products with partial sums below $2^{57}$ (static bound above; asserted $<2^{62}$) and arbitrary-precision sums; the cover test in rationals. Floating point only chooses the split coordinate, the LP duals, and the symmetry and matching in the cover test. A bad choice costs time, not soundness. % SRC: 103/NOTES.md "Why it is rigorous"; bb2.py k_matvec assertion; 110/NOTES.md (a), (b)
+\item \emph{Termination.} The driver keeps a list of open boxes; a run is complete when this list and the set of boxes being processed are both empty. An exception in a worker (including an overflow assertion or an audit mismatch) propagates to the driver and stops the run without a completion record; the run completed in one session, with an empty error log. As an independent float tally, each root has weight $1/36$, a split divides a box's weight between its children in proportion to the two parts of the split interval, and the weights of closed boxes sum to $1$ up to rounding ($1 + 10^{-13}$). The exact check is the node count: the numbers of leaves and split nodes satisfy the identity of a forest of $36$ full binary trees (Section~\ref{sec:run}). Boxes at the grid floor that are neither discarded nor covered are counted as failures; there were none. % SRC: run_par2.py main loop; stats.json closed_w
+\item \emph{Local theorem.} The cover is turned into Theorem~\ref{thm:main} by Theorem~\ref{thm:local}, whose own proof is the exact computation of experiment~44, with the margins $10^{-6}$ (relative) and $2^{-60}$ (absolute) absorbing the double rounding of the stored basin radius and the distance between $\tilde x$ and $x^*$.
+\end{enumerate}
+
+\noindent\emph{Trust base.} The branch-and-bound code (\texttt{bb.py} of experiment~103, about 500 lines, imported unchanged, and \texttt{bb2.py} of experiment~110, about 400 lines including numba-compiled kernels), the local certifier (about 600 lines), the Python integer and \texttt{Fraction} arithmetic, numba's 64-bit integer arithmetic (which wraps silently on overflow; overflow is excluded by the magnitude bounds above, not checked at run time), and the parallel driver's bookkeeping. HiGHS is outside the trust base. None of this is formally verified. % SRC: 103/NOTES.md Limitations; 44/NOTES.md Trust base; 110/NOTES.md Files
+
+% =====================================================================
+\section{Validation}\label{sec:validation}
+
+These checks test the implementation; they are not part of the proof.
+\begin{itemize}
+\item \emph{Re-proofs for $n = 5$--$8$.} With the same code (experiment~110): $n = 5$ and $n = 6$ in the weaker form $H(n) \le \tstar_n(1+10^{-3})$, with node counts identical to those of experiment~103 ($1\,120$ and $9\,973$ without the diagonal reduction); $n = 7$ in exact mode (optimum unique up to symmetry) in $0.85$--$0.86$ million nodes, with and without the diagonal reduction and with LP skips; $n = 8$ in exact mode in $4\,252\,598$ nodes and $538$\,s on $14$ workers (experiment~103: $4\,256\,822$ nodes). All with zero failures. For $n = 5, 6$ only the weaker form is possible, since $n = 5$ is certified locally only at second order (no basin radius) and $n = 6$ has a one-parameter family of optima. The known optima for $n = 7, 8$ \cite{ZC,DZ} are reproduced. % SRC: 110/NOTES.md Validation table; 103/NOTES.md Results and "n = 5 and 6 are only eps-mode"
+\item \emph{Random soundness test} (\texttt{test\_sound2.py}, $n = 7, 8, 9$, $600$ random boxes each near the optimum and its mirror images, with $T = 0.8\,\tstar_n$ so that the tests fire): no sampled configuration with all $\lvert\Delta\rvert > T$ lies in a box discarded by P1 or violates a determined orientation; no sampled point of the domain is removed by P0; no sample beats a certified P2 bound; the rational re-derivation agrees with the integer certificate on every tested box ($210$, $270$, $310$ LP boxes certified). A separate test of P0 on $20\,000$ random boxes at $n = 9$ ($5.6$ million domain samples) removed none. % SRC: 110/NOTES.md Validation bullets
+\item \emph{Audit.} During the runs a random sample of P2 certificates (each already checked exactly by the integer code) is re-derived from the row definitions with rational arithmetic, independently of the integer code; a mismatch aborts. At $n = 5$ all $314$ were audited, at $n = 8$ $2\,701$; none disagreed. % SRC: 110/NOTES.md Validation table
+\item \emph{Negative control.} With $n = 5$, $T = \tstar_5(1-10^{-3})$ and no cover, the claim is false, so the search must fail. It does: $5$ failures after $509$ nodes (with the diagonal reduction) and failures after $438$ nodes (without), at grid-floor boxes next to the optimum. % SRC: 110/NOTES.md "Negative control"; results/val/n5_negative_control*.txt
+\end{itemize}
+
+% =====================================================================
+\section{The run}\label{sec:run}
+
+The $n = 9$ run (exact mode, diagonal reduction on, LP skip threshold $1.2$, audit rate $0.02\%$) was started on 12 November 2026 and finished on 13 November 2026 without interruption, on a machine with 8 cores (16 threads) using 14 worker processes (HiGHS 1.16.0, numba 0.68.1). Table~\ref{tab:run} gives its statistics. % SRC: 110/RESUME.md command line; progress.log start and DONE lines; stdout (HiGHS version); 110/NOTES.md (numba version, machine)
+
+\begin{table}[htbp]
+\centering\small
+\caption{Statistics of the $n = 9$ run.}\label{tab:run}
+% SRC: 110-n9-proof/results/run_n9/stats.json
+\begin{tabular}{@{}lr@{}}
+\toprule
+threshold $T$ & $494279058340989/2^{53}$ \\
+cover radius $R$ & $\approx 1.1786\cdot10^{-4}$ \\
+root boxes & $36$ \\
+nodes & $358\,594\,738$ \\
+\quad discarded by P0 & $2\,520\,863$ \\
+\quad discarded by P1 & $70\,994\,112$ \\
+\quad discarded by P2 & $105\,782\,380$ \\
+\quad covered by the basin ball & $32$ \\
+\quad failures & $0$ \\
+LPs solved / LP skips & $278\,798\,572$ / $6\,281\,159$ \\
+LP solver not optimal & $0$ \\
+P2 certificates audited in rational arithmetic & $21\,286$ (all agreed) \\
+maximum depth & $184$ \\
+closed fraction of root volume & $1.0000000000000977$ \\
+wall time & $57\,636$\,s ($16.0$\,h) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Consistency: the discarded and covered boxes number $179\,297\,387$; the remaining $179\,297\,351$ nodes were split; a forest of binary trees with $36$ roots and $179\,297\,351$ internal nodes has $179\,297\,387$ leaves, as observed. Nodes reaching the LP stage ($358\,594\,738$ minus the P0, P1 and cover discards, $285\,079\,731$) equal LPs solved plus LP skips. The failure log is empty. The $32$ covered boxes lie around the symmetry images of the optimum that are compatible with the diagonal reduction. % SRC: arithmetic on stats.json; 110/NOTES.md Result (fails.jsonl empty, stderr empty, covers)
+
+% =====================================================================
+\section{Limitations and what an independent check needs}\label{sec:limits}
+
+\begin{itemize}
+\item \emph{Not independently checked.} As stated in Remark~\ref{rem:status}, this is an AI-assisted computer proof that only its author has examined. % SRC: 110/NOTES.md "Not yet independently reviewed"
+\item \emph{No stored certificates.} The leaves of the tree are not stored (there are about $1.8\cdot10^8$); the proof can be re-checked only by re-running the search, about $16$ hours on $14$ workers. Every P2 discard was decided by the exact integer certificate; the independent rational re-derivation (audit) was additionally run on a random $0.02\%$ of them (about $1$ in $5\,000$). % SRC: 103/NOTES.md Limitations; stats.json audited / p2
+\item \emph{Trust base} as in Section~\ref{sec:sound}; none of it formally verified. P1 at $n = 9$ uses the 64-bit integer kernel of experiment~110, whose agreement with a rational computation was tested only on samples.
+\item \emph{Identification.} The equality $x^* = C_9$ uses the Krawczyk ball of the local certificate and the observation in Remark~\ref{rem:ident}; the optimality and uniqueness statements do not depend on it.
+\end{itemize}
+
+An independent check would need at least the following.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Re-running the verifier}: running the published code from the repository on other hardware and obtaining zero failures. Node counts need not match exactly: the hot-started LP depends on the order in which a worker processes boxes, so the duals, and hence which boxes P2 discards, can vary between runs.
+\item \emph{An independent implementation} of the box tests P0--P2 and of the cover test, ideally emitting per-leaf certificates that a small, separately written checker (or a proof assistant) verifies; and an independent check of the local certificate of Theorem~\ref{thm:local} at $n = 9$.
+\item \emph{Review of the reductions}: Lemma~\ref{lem:norm} (stretching, the diagonal, $x$- and $y$-mirrors, labelling), the correctness of the outward rounding in P0, the corner argument in P1, the validity of the McCormick and area rows on a box in P2, and the deduction of Theorem~\ref{thm:main} in Section~\ref{sec:outline}.
+\end{enumerate}
+
+% =====================================================================
+\section*{Data and code availability}
+The code (branch and bound, drivers, tests, local certifier, the identification script) and the run logs and statistics will be available in the public repository accompanying this paper, \repourl. % SRC: task instructions (repository placeholder)
+
+\section*{Use of AI tools}
+The author used Claude, an AI system developed by Anthropic, for computation (writing and running search, certification and analysis code) and for drafting text. All claims were checked against the computational records; the author takes responsibility for the content. AI systems are not authors of this work.
+
+% =====================================================================
+\begin{thebibliography}{99}
+
+\bibitem{Chen17} L.~Chen, Y.~Xu and Z.~Zeng, Searching approximate global optimal Heilbronn configurations of nine points in the unit square via GPGPU computing, \emph{J. Global Optim.} \textbf{68} (2017), 147--167, doi:10.1007/s10898-016-0453-1.
+\bibitem{CY} F.~Comellas and J.~L.~A.~Yebra, New lower bounds for Heilbronn numbers, \emph{Electron. J. Combin.} \textbf{9} (2002), \#R6, doi:10.37236/1623.
+\bibitem{DZ} L.~Dehbi and Z.~Zeng, Heilbronn's problem of eight points in the square, \emph{J. Syst. Sci. Complex.} \textbf{35} (2022), 2452--2480, doi:10.1007/s11424-022-1220-7.
+\bibitem{DYZ} A.~W.~M.~Dress, L.~Yang and Z.~Zeng, Heilbronn problem for six points in a planar convex body, in: D.-Z.~Du and P.~M.~Pardalos (eds.), \emph{Minimax and Applications}, Kluwer, 1995, 173--190, doi:10.1007/978-1-4613-3557-3\_13.
+\bibitem{MMK} A.~Monji, A.~Modir and B.~Kocuk, Solving the Heilbronn triangle problem using global optimization methods, arXiv:2512.14505v1, 2025.
+\bibitem{Stead} T.~Stead (maintainer), The Heilbronn Problem (record tables, exact verification and attributions), \url{https://math.tejstead.com/heilbronn}, accessed 12 November 2026.
+\bibitem{SM} N.~Sudermann-Merx, From global optimization to exact coordinates: Heilbronn's triangle problem on the unit square using mixed-integer nonlinear optimization, arXiv:2603.11107v3, 27 October 2026 (v1: 11 March 2026).
+\bibitem{YZZ} L.~Yang, J.~Zhang and Z.~Zeng, Heilbronn problem for five points, Technical Report IC/91/252, International Centre for Theoretical Physics, Trieste, 1991.
+\bibitem{ZC} Z.~Zeng and L.~Chen, On the Heilbronn optimal configuration of seven points in the square, in: \emph{Automated Deduction in Geometry} (ADG 2008), Lecture Notes in Comput. Sci. \textbf{6301}, Springer, 2011, 196--224, doi:10.1007/978-3-642-21046-4\_11.
+
+\end{thebibliography}
+
+\end{document}

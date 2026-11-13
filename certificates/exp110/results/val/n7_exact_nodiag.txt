@@ -1,0 +1,3 @@
+Running HiGHS 1.16.0 (git hash: f3f113d): Copyright (c) 2026 under MIT licence terms
+Includes third-party software components, see THIRD_PARTY_NOTICES.md for full details
+{"n": 7, "mode": "exact", "eps": 0.001, "diag": false, "skip": null, "rho": 0.0, "T": 0.08385900892365439, "sec": 598.8, "audited": 0, "lp_fail": 0, "nodes": 857707, "p0": 4308, "p1": 130022, "p2": 294510, "lp": 723353, "cover": 24, "fail": 0, "maxdepth": 126, "tight": 0, "lpskip": 0, "closed_w": 20.999999999999996}

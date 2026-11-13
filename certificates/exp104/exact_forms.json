@@ -1,0 +1,1826 @@
+[
+ {
+  "label": "5",
+  "n": 5,
+  "value": "0.19245008972987525483",
+  "status": "proved exact",
+  "mode": "kkt",
+  "degree": 2,
+  "minpoly": "27*x^2 + (-1)",
+  "radical": "sqrt(3)/9",
+  "discriminant": "108",
+  "galois": "S2TransitiveSubgroups.S2",
+  "field_degree": 2,
+  "digits": 300,
+  "ties": 4,
+  "walls": 6,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": "27x^2 - 1 (sqrt3/9)",
+  "t_full": "0.192450089729875254836382926833985818549200583756708958672867442161325890767644448564571798528583175075069571268378522558885549454999883608756850612454930405392010359100256175785330535566787186102585001701371474100369209627852472740991315330136338570184485317954224338887393042206598829738927500730672",
+  "coords_radical": {
+   "0.x": "0",
+   "0.y": "sqrt(3)/3",
+   "1.x": "1 - sqrt(3)/3",
+   "1.y": "1",
+   "2.x": "1",
+   "2.y": "0",
+   "3.x": "1/3",
+   "3.y": "0",
+   "4.x": "1",
+   "4.y": "2/3"
+  },
+  "exact_values": {
+   "0.x": [],
+   "0.y": [
+    "0",
+    "3"
+   ],
+   "1.x": [
+    "1",
+    "-3"
+   ],
+   "1.y": [
+    "1"
+   ],
+   "2.x": [
+    "1"
+   ],
+   "2.y": [],
+   "3.x": [
+    "1/3"
+   ],
+   "3.y": [],
+   "4.x": [
+    "1"
+   ],
+   "4.y": [
+    "2/3"
+   ],
+   "t": [
+    "0",
+    "1"
+   ],
+   "mult0": [
+    "0",
+    "3/2"
+   ],
+   "mult1": [
+    "0",
+    "3/2"
+   ],
+   "mult2": [
+    "1/2",
+    "-3/2"
+   ],
+   "mult3": [
+    "1/2",
+    "-3/2"
+   ],
+   "mult4": [
+    "0",
+    "1"
+   ],
+   "mult5": [
+    "0",
+    "1"
+   ],
+   "mult6": [
+    "-1/6",
+    "1"
+   ],
+   "mult7": [
+    "-1/6",
+    "1"
+   ],
+   "mult8": [
+    "1/6"
+   ],
+   "mult9": [
+    "1/6"
+   ]
+  },
+  "coords": null,
+  "gap_rel": 0.15470053837925152,
+  "shift": 0.0,
+  "source": "results/small/n5.json",
+  "lll_digits": 180,
+  "note": null
+ },
+ {
+  "label": "6 family",
+  "n": 6,
+  "value": "1/8",
+  "status": "proved exact",
+  "mode": "rational",
+  "degree": 1,
+  "minpoly": "8*x - 1",
+  "radical": "1/8",
+  "discriminant": null,
+  "galois": null,
+  "field_degree": 1,
+  "digits": "exact",
+  "ties": 6,
+  "walls": 6,
+  "rattlers": 0,
+  "krawczyk": null,
+  "exact_all_active": null,
+  "known": "1/8",
+  "t_full": "1/8",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": [
+   [
+    "1/5",
+    "1"
+   ],
+   [
+    "4/5",
+    "0"
+   ],
+   [
+    "3/10",
+    "0"
+   ],
+   [
+    "7/10",
+    "1"
+   ],
+   [
+    "0",
+    "1/2"
+   ],
+   [
+    "1",
+    "1/2"
+   ]
+  ],
+  "gap_rel": null,
+  "shift": null,
+  "source": "results/n6.json",
+  "lll_digits": null,
+  "note": "coordinates are rationals (denominators <= 1000); min area computed exactly with Fractions"
+ },
+ {
+  "label": "6 primary",
+  "n": 6,
+  "value": "1/8",
+  "status": "proved exact",
+  "mode": "rational",
+  "degree": 1,
+  "minpoly": "8*x - 1",
+  "radical": "1/8",
+  "discriminant": null,
+  "galois": null,
+  "field_degree": 1,
+  "digits": "exact",
+  "ties": 10,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": null,
+  "exact_all_active": null,
+  "known": "1/8",
+  "t_full": "1/8",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": [
+   [
+    "1",
+    "1"
+   ],
+   [
+    "0",
+    "0"
+   ],
+   [
+    "1/2",
+    "1/4"
+   ],
+   [
+    "1/2",
+    "3/4"
+   ],
+   [
+    "1",
+    "0"
+   ],
+   [
+    "0",
+    "1"
+   ]
+  ],
+  "gap_rel": null,
+  "shift": null,
+  "source": "results/n6.json",
+  "lll_digits": null,
+  "note": "coordinates are rationals (denominators <= 1000); min area computed exactly with Fractions"
+ },
+ {
+  "label": "7",
+  "n": 7,
+  "value": "0.08385900900751340663",
+  "status": "proved exact",
+  "mode": "primal",
+  "degree": 3,
+  "minpoly": "152*x^3 + 12*x^2 + (-14)*x + 1",
+  "radical": "trig: -1/38 - 2*sqrt(102)*sin(-acos(-93*sqrt(102)/1156)/3 + pi/6)/57",
+  "discriminant": "606208",
+  "galois": "S3TransitiveSubgroups.S3",
+  "field_degree": 3,
+  "digits": 301,
+  "ties": 8,
+  "walls": 7,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": "152x^3+12x^2-14x+1",
+  "t_full": "0.083859009007513406637966743544760556844324768191614985261230088566243509535752448397655860398960853712564416092202358725965611212483933354576342762072300849334051693770031791773634104792834715471508640169941746695529734418819433866107638881545730917568054955687169839900467048486181135354053084829328",
+  "coords_radical": null,
+  "exact_values": {
+   "0.x": [
+    "-1/4",
+    "3",
+    "19"
+   ],
+   "0.y": [
+    "1"
+   ],
+   "1.x": [
+    "5/8",
+    "-9/2",
+    "-19/2"
+   ],
+   "1.y": [],
+   "2.x": [],
+   "2.y": [
+    "-1/4",
+    "8",
+    "-19"
+   ],
+   "3.x": [
+    "1"
+   ],
+   "3.y": [],
+   "4.x": [
+    "1/2",
+    "1"
+   ],
+   "4.y": [
+    "-1/4",
+    "8",
+    "-19"
+   ],
+   "5.x": [
+    "1"
+   ],
+   "5.y": [
+    "1"
+   ],
+   "6.x": [
+    "-5/4",
+    "16",
+    "57"
+   ],
+   "6.y": [
+    "-1/4",
+    "11",
+    "19"
+   ],
+   "t": [
+    "0",
+    "1"
+   ]
+  },
+  "coords": null,
+  "gap_rel": 0.1309325629587235,
+  "shift": 5.551115123125783e-17,
+  "source": "results/small/n7.json",
+  "lll_digits": 180,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "8",
+  "n": 8,
+  "value": "0.07237642431844414703",
+  "status": "proved exact",
+  "mode": "primal",
+  "degree": 2,
+  "minpoly": "108*x^2 + 6*x + (-1)",
+  "radical": "-1/36 + sqrt(13)/36",
+  "discriminant": "468",
+  "galois": "S2TransitiveSubgroups.S2",
+  "field_degree": 2,
+  "digits": 301,
+  "ties": 12,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": "(sqrt13-1)/36",
+  "t_full": "0.072376424318444147031089479651958220729202682606812394797512584895199081897028067922350530056069186602042060611779542788223074396241605769587861587969241937715074737896504239812050844304509637355452034166563555646357122978140892020365807561258263938487745512355962607470029872094235626758617907856573",
+  "coords_radical": {
+   "0.x": "1",
+   "0.y": "1",
+   "1.x": "0",
+   "1.y": "0",
+   "2.x": "5/6 - sqrt(13)/6",
+   "2.y": "1",
+   "3.x": "1/6 + sqrt(13)/6",
+   "3.y": "0",
+   "4.x": "1/6 + sqrt(13)/6",
+   "4.y": "2/9 + sqrt(13)/9",
+   "5.x": "5/6 - sqrt(13)/6",
+   "5.y": "7/9 - sqrt(13)/9",
+   "6.x": "0",
+   "6.y": "sqrt(13)/18 + 11/18",
+   "7.x": "1",
+   "7.y": "7/18 - sqrt(13)/18"
+  },
+  "exact_values": {
+   "0.x": [
+    "1"
+   ],
+   "0.y": [
+    "1"
+   ],
+   "1.x": [],
+   "1.y": [],
+   "2.x": [
+    "2/3",
+    "-6"
+   ],
+   "2.y": [
+    "1"
+   ],
+   "3.x": [
+    "1/3",
+    "6"
+   ],
+   "3.y": [],
+   "4.x": [
+    "1/3",
+    "6"
+   ],
+   "4.y": [
+    "1/3",
+    "4"
+   ],
+   "5.x": [
+    "2/3",
+    "-6"
+   ],
+   "5.y": [
+    "2/3",
+    "-4"
+   ],
+   "6.x": [],
+   "6.y": [
+    "2/3",
+    "2"
+   ],
+   "7.x": [
+    "1"
+   ],
+   "7.y": [
+    "1/3",
+    "-2"
+   ],
+   "t": [
+    "0",
+    "1"
+   ]
+  },
+  "coords": null,
+  "gap_rel": 0.3027756377319947,
+  "shift": 1.1102230246251565e-16,
+  "source": "results/small/n8.json",
+  "lll_digits": 180,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "9",
+  "n": 9,
+  "value": "0.05487599917089670897",
+  "status": "proved exact",
+  "mode": "primal",
+  "degree": 2,
+  "minpoly": "320*x^2 + 110*x + (-7)",
+  "radical": "-11/64 + 9*sqrt(65)/320",
+  "discriminant": "21060",
+  "galois": "S2TransitiveSubgroups.S2",
+  "field_degree": 2,
+  "digits": 301,
+  "ties": 11,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": "(9sqrt65-55)/320",
+  "t_full": "0.054875999170896708972810997102293563063154896095241126535716660948046482997597480708254338751422111852303069360185978781011680840885444548708676870308673639725039560089146462959376057273017077002415898139192903110803196214476204664234303541141904911584729465525935147024295035316845608920534593942269",
+  "coords_radical": {
+   "0.x": "1 - sqrt(65)/10",
+   "0.y": "1",
+   "1.x": "1",
+   "1.y": "1 - sqrt(65)/10",
+   "2.x": "1",
+   "2.y": "sqrt(65)/40 + 5/8",
+   "3.x": "sqrt(65)/40 + 5/8",
+   "3.y": "1",
+   "4.x": "0",
+   "4.y": "sqrt(65)/40 + 5/8",
+   "5.x": "sqrt(65)/40 + 5/8",
+   "5.y": "0",
+   "6.x": "9/16 - 3*sqrt(65)/80",
+   "6.y": "0",
+   "7.x": "0",
+   "7.y": "9/16 - 3*sqrt(65)/80",
+   "8.x": "3/4 - sqrt(65)/20",
+   "8.y": "3/4 - sqrt(65)/20"
+  },
+  "exact_values": {
+   "0.x": [
+    "7/18",
+    "-32/9"
+   ],
+   "0.y": [
+    "1"
+   ],
+   "1.x": [
+    "1"
+   ],
+   "1.y": [
+    "7/18",
+    "-32/9"
+   ],
+   "2.x": [
+    "1"
+   ],
+   "2.y": [
+    "7/9",
+    "8/9"
+   ],
+   "3.x": [
+    "7/9",
+    "8/9"
+   ],
+   "3.y": [
+    "1"
+   ],
+   "4.x": [],
+   "4.y": [
+    "7/9",
+    "8/9"
+   ],
+   "5.x": [
+    "7/9",
+    "8/9"
+   ],
+   "5.y": [],
+   "6.x": [
+    "1/3",
+    "-4/3"
+   ],
+   "6.y": [],
+   "7.x": [],
+   "7.y": [
+    "1/3",
+    "-4/3"
+   ],
+   "8.x": [
+    "4/9",
+    "-16/9"
+   ],
+   "8.y": [
+    "4/9",
+    "-16/9"
+   ],
+   "t": [
+    "0",
+    "1"
+   ]
+  },
+  "coords": null,
+  "gap_rel": 0.027862852405124053,
+  "shift": 5.551115123125783e-17,
+  "source": "results/small/n9.json",
+  "lll_digits": 180,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "10",
+  "n": 10,
+  "value": "0.04653741958254177256",
+  "status": "proved exact",
+  "mode": "kkt",
+  "degree": 3,
+  "minpoly": "3456*x^3 + (-1764)*x^2 + 268*x + (-9)",
+  "radical": "-(992*sqrt(62) + 8831)**(1/3)/288 - 257/(288*(992*sqrt(62) + 8831)**(1/3)) + 49/288",
+  "discriminant": "-1647323136",
+  "galois": "S3TransitiveSubgroups.S3",
+  "field_degree": 3,
+  "digits": 301,
+  "ties": 16,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": "3456A^3-1764A^2+268A-9",
+  "t_full": "0.046537419582541772561611768100145513288712845548738882179642610316799537817507810756627853214653542870462946048272876404330334346482438698242273051109848895407988553851533136445902488060060179265507550777327829692670779436449963857974952290599933280361563682042879762236859080356955870985023917776797",
+  "coords_radical": null,
+  "exact_values": {
+   "0.x": [],
+   "0.y": [
+    "25/31",
+    "-66/31",
+    "576/31"
+   ],
+   "1.x": [
+    "25/31",
+    "-66/31",
+    "576/31"
+   ],
+   "1.y": [],
+   "2.x": [
+    "6/31",
+    "66/31",
+    "-576/31"
+   ],
+   "2.y": [
+    "1"
+   ],
+   "3.x": [
+    "1"
+   ],
+   "3.y": [
+    "6/31",
+    "66/31",
+    "-576/31"
+   ],
+   "4.x": [
+    "-13/62",
+    "285/31",
+    "-864/31"
+   ],
+   "4.y": [],
+   "5.x": [],
+   "5.y": [
+    "-13/62",
+    "285/31",
+    "-864/31"
+   ],
+   "6.x": [
+    "1"
+   ],
+   "6.y": [
+    "75/62",
+    "-285/31",
+    "864/31"
+   ],
+   "7.x": [
+    "75/62",
+    "-285/31",
+    "864/31"
+   ],
+   "7.y": [
+    "1"
+   ],
+   "8.x": [
+    "44/31",
+    "-570/31",
+    "1728/31"
+   ],
+   "8.y": [
+    "-13/31",
+    "570/31",
+    "-1728/31"
+   ],
+   "9.x": [
+    "-13/31",
+    "570/31",
+    "-1728/31"
+   ],
+   "9.y": [
+    "44/31",
+    "-570/31",
+    "1728/31"
+   ],
+   "t": [
+    "0",
+    "1"
+   ],
+   "mult0": [
+    "19813/157728",
+    "2601/26288",
+    "-6390/1643"
+   ],
+   "mult1": [
+    "1237/5088",
+    "-3135/848",
+    "378/53"
+   ],
+   "mult2": [
+    "-13457/78864",
+    "10797/1643",
+    "-32544/1643"
+   ],
+   "mult3": [
+    "565/4929",
+    "-9879/3286",
+    "26064/1643"
+   ],
+   "mult4": [
+    "9685/52576",
+    "-51621/26288",
+    "6750/1643"
+   ],
+   "mult5": [
+    "55957/157728",
+    "-115647/26288",
+    "19962/1643"
+   ],
+   "mult6": [
+    "-6553/78864",
+    "14673/3286",
+    "-27504/1643"
+   ],
+   "mult7": [
+    "127/372",
+    "-351/62",
+    "720/31"
+   ],
+   "mult8": [
+    "-7815/26288",
+    "49677/6572",
+    "-37368/1643"
+   ],
+   "mult9": [
+    "4471/19716",
+    "-4362/1643",
+    "12096/1643"
+   ],
+   "mult10": [
+    "-16541/78864",
+    "35835/6572",
+    "-32328/1643"
+   ],
+   "mult11": [
+    "6713/39432",
+    "-18171/6572",
+    "21384/1643"
+   ],
+   "mult12": [
+    "3497/52576",
+    "-39837/26288",
+    "9318/1643"
+   ],
+   "mult13": [
+    "-83/52576",
+    "7619/26288",
+    "-1890/1643"
+   ],
+   "mult14": [
+    "8139/52576",
+    "-75035/26288",
+    "17154/1643"
+   ],
+   "mult15": [
+    "4559/52576",
+    "-27579/26288",
+    "5946/1643"
+   ],
+   "mult16": [
+    "83/52576",
+    "18669/26288",
+    "1890/1643"
+   ],
+   "mult17": [
+    "-3497/52576",
+    "66125/26288",
+    "-9318/1643"
+   ],
+   "mult18": [
+    "-4559/52576",
+    "53867/26288",
+    "-5946/1643"
+   ],
+   "mult19": [
+    "-8139/52576",
+    "101323/26288",
+    "-17154/1643"
+   ]
+  },
+  "coords": null,
+  "gap_rel": 0.027271665882202017,
+  "shift": 1.4163178285730993e-07,
+  "source": "results/small/n10.json",
+  "lll_digits": 180,
+  "note": null,
+  "radical_simplified": "(49 - cbrt(8831+992*sqrt(62)) - cbrt(8831-992*sqrt(62)))/288",
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "11",
+  "n": 11,
+  "value": "1/27",
+  "status": "proved exact",
+  "mode": "rational",
+  "degree": 1,
+  "minpoly": "27*x - 1",
+  "radical": "1/27",
+  "discriminant": null,
+  "galois": null,
+  "field_degree": 1,
+  "digits": "exact",
+  "ties": 28,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": null,
+  "exact_all_active": null,
+  "known": "1/27",
+  "t_full": "1/27",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": [
+   [
+    "0",
+    "7/9"
+   ],
+   [
+    "1",
+    "7/9"
+   ],
+   [
+    "1",
+    "1/3"
+   ],
+   [
+    "0",
+    "1/3"
+   ],
+   [
+    "5/6",
+    "0"
+   ],
+   [
+    "1/6",
+    "0"
+   ],
+   [
+    "1/3",
+    "5/9"
+   ],
+   [
+    "2/3",
+    "5/9"
+   ],
+   [
+    "2/3",
+    "1"
+   ],
+   [
+    "1/3",
+    "1"
+   ],
+   [
+    "1/2",
+    "2/9"
+   ]
+  ],
+  "gap_rel": null,
+  "shift": null,
+  "source": "results/n11.json",
+  "lll_digits": null,
+  "note": "coordinates are rationals (denominators <= 1000); min area computed exactly with Fractions"
+ },
+ {
+  "label": "12",
+  "n": 12,
+  "value": "0.03259885869181969821",
+  "status": "proved exact",
+  "mode": "primal",
+  "degree": 3,
+  "minpoly": "64*x^3 + 80*x^2 + 28*x + (-1)",
+  "radical": "-5/12 + 2**(2/3)/(6*(3*sqrt(57) + 23)**(1/3)) + (6*sqrt(57) + 46)**(1/3)/12",
+  "discriminant": "-1245184",
+  "galois": "S3TransitiveSubgroups.S3",
+  "field_degree": 3,
+  "digits": 301,
+  "ties": 20,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": null,
+  "t_full": "0.032598858691819698218764006623515408049241988379776913777741905474205601650786197356667938869850561920595017455844820016196205326153473360388396411266590037681912429359166414633569732299762963185102179594749467901043145737700964274406811273377773533291591790974634639206862189829491622177493783654045",
+  "coords_radical": null,
+  "exact_values": {
+   "0.x": [
+    "1"
+   ],
+   "0.y": [
+    "3/4",
+    "4",
+    "4"
+   ],
+   "1.x": [
+    "1/4",
+    "-4",
+    "-4"
+   ],
+   "1.y": [
+    "1"
+   ],
+   "2.x": [],
+   "2.y": [
+    "1/4",
+    "-4",
+    "-4"
+   ],
+   "3.x": [
+    "3/4",
+    "4",
+    "4"
+   ],
+   "3.y": [],
+   "4.x": [],
+   "4.y": [
+    "3/4",
+    "4",
+    "4"
+   ],
+   "5.x": [
+    "1"
+   ],
+   "5.y": [
+    "1/4",
+    "-4",
+    "-4"
+   ],
+   "6.x": [
+    "3/4",
+    "4",
+    "4"
+   ],
+   "6.y": [
+    "1"
+   ],
+   "7.x": [
+    "1/4",
+    "-4",
+    "-4"
+   ],
+   "7.y": [],
+   "8.x": [
+    "1/2"
+   ],
+   "8.y": [
+    "3/4",
+    "2",
+    "4"
+   ],
+   "9.x": [
+    "1/4",
+    "-2",
+    "-4"
+   ],
+   "9.y": [
+    "1/2"
+   ],
+   "10.x": [
+    "1/2"
+   ],
+   "10.y": [
+    "1/4",
+    "-2",
+    "-4"
+   ],
+   "11.x": [
+    "3/4",
+    "2",
+    "4"
+   ],
+   "11.y": [
+    "1/2"
+   ],
+   "t": [
+    "0",
+    "1"
+   ]
+  },
+  "coords": null,
+  "gap_rel": 0.36110308052864737,
+  "shift": 5.551115123125783e-17,
+  "source": "results/small/n12.json",
+  "lll_digits": 180,
+  "note": null,
+  "radical_simplified": "(cbrt(46+6*sqrt(57)) + cbrt(46-6*sqrt(57)) - 5)/12",
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "13",
+  "n": 13,
+  "value": "0.02701991666911136174",
+  "status": "not found up to degree 200",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1501,
+  "ties": 20,
+  "walls": 7,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.027019916669111361743931476842577048482427122293460577841748496070977003506234057446247431028457332207515723004962076202604672287488124940084686445799518532352516592670440974522869756373872752035099938463170610662325085264937481660297493881048591519370590083792198941725097362773690440642565877768293",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.002880150116758467,
+  "shift": 2.220446049250313e-16,
+  "source": "results/deep2/n13.json",
+  "lll_digits": 4800,
+  "note": "deep2 run (logs/deep2_*.log): Newton at 8000 digits, Krawczyk 1e-2666 OK, LLL at degrees 100,150,200 with 4800 digits found no relation; degree 250 interrupted after 85 min. t_digits kept from the 1500-digit run.",
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "14",
+  "n": 14,
+  "value": "0.02430397962099248674",
+  "status": "proved exact",
+  "mode": "primal",
+  "degree": 3,
+  "minpoly": "320*x^3 + 768*x^2 + (-60)*x + 1",
+  "radical": "trig: -4/5 - sqrt(281)*sin(-acos(-9417*sqrt(281)/157922)/3 + pi/6)/10",
+  "discriminant": "319721472",
+  "galois": "S3TransitiveSubgroups.S3",
+  "field_degree": 3,
+  "digits": 301,
+  "ties": 26,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": null,
+  "t_full": "0.024303979620992486748201957810015583958538990380065609053856805455487666740377659428729677780697242484432555821178896579032905434706426177469212964801191567087710579251254021855825393615531549501711138410904344081426677954131417546921413590163250473864978264256772183247854328354136478488075974603941",
+  "coords_radical": null,
+  "exact_values": {
+   "0.x": [
+    "33/98",
+    "-32/49",
+    "40/49"
+   ],
+   "0.y": [
+    "71/49",
+    "-1480/49",
+    "-600/49"
+   ],
+   "1.x": [
+    "65/98",
+    "32/49",
+    "-40/49"
+   ],
+   "1.y": [
+    "-22/49",
+    "1480/49",
+    "600/49"
+   ],
+   "2.x": [
+    "1"
+   ],
+   "2.y": [
+    "3/14",
+    "202/7",
+    "80/7"
+   ],
+   "3.x": [],
+   "3.y": [
+    "11/14",
+    "-202/7",
+    "-80/7"
+   ],
+   "4.x": [
+    "8/7",
+    "-94/7",
+    "-40/7"
+   ],
+   "4.y": [
+    "1"
+   ],
+   "5.x": [
+    "-1/7",
+    "94/7",
+    "40/7"
+   ],
+   "5.y": [],
+   "6.x": [
+    "65/98",
+    "32/49",
+    "-40/49"
+   ],
+   "6.y": [
+    "71/49",
+    "-1480/49",
+    "-600/49"
+   ],
+   "7.x": [
+    "33/98",
+    "-32/49",
+    "40/49"
+   ],
+   "7.y": [
+    "-22/49",
+    "1480/49",
+    "600/49"
+   ],
+   "8.x": [
+    "8/7",
+    "-80/7",
+    "-40/7"
+   ],
+   "8.y": [
+    "1/2"
+   ],
+   "9.x": [
+    "-1/7",
+    "80/7",
+    "40/7"
+   ],
+   "9.y": [
+    "1/2"
+   ],
+   "10.x": [],
+   "10.y": [
+    "3/14",
+    "202/7",
+    "80/7"
+   ],
+   "11.x": [
+    "1"
+   ],
+   "11.y": [
+    "11/14",
+    "-202/7",
+    "-80/7"
+   ],
+   "12.x": [
+    "8/7",
+    "-94/7",
+    "-40/7"
+   ],
+   "12.y": [],
+   "13.x": [
+    "-1/7",
+    "94/7",
+    "40/7"
+   ],
+   "13.y": [
+    "1"
+   ],
+   "t": [
+    "0",
+    "1"
+   ]
+  },
+  "coords": null,
+  "gap_rel": 0.01409019146759775,
+  "shift": 1.6653345369377348e-16,
+  "source": "results/small/n14.json",
+  "lll_digits": 180,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "15",
+  "n": 15,
+  "value": "0.02121054100549062829",
+  "status": "not found up to degree 200",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1501,
+  "ties": 25,
+  "walls": 6,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.021210541005490628299864819190512217207317239130240973954431634071312095508793284963822643982090419053168556743340963941680040943404132375910111739963294871542838825766490230632421061360454032010429918202977990336492829257111829884683998956771706834845956945840442649004360797142892877737713956471771",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.0005622083943521183,
+  "shift": 2.6020852139652106e-16,
+  "source": "results/deep2/n15.json",
+  "lll_digits": 4800,
+  "note": "deep2 run (logs/deep2_*.log): Newton at 8000 digits, Krawczyk 1e-2666 OK, LLL at degrees 100,150,200 with 4800 digits found no relation; degree 250 interrupted after 85 min. t_digits kept from the 1500-digit run.",
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "16",
+  "n": 16,
+  "value": "7/341",
+  "status": "proved exact",
+  "mode": "rational",
+  "degree": 1,
+  "minpoly": "341*x - 7",
+  "radical": "7/341",
+  "discriminant": null,
+  "galois": null,
+  "field_degree": 1,
+  "digits": "exact",
+  "ties": 64,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": null,
+  "exact_all_active": null,
+  "known": "7/341",
+  "t_full": "7/341",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": [
+   [
+    "23/31",
+    "1"
+   ],
+   [
+    "8/31",
+    "0"
+   ],
+   [
+    "21/31",
+    "2/33"
+   ],
+   [
+    "10/31",
+    "31/33"
+   ],
+   [
+    "8/31",
+    "7/11"
+   ],
+   [
+    "23/31",
+    "4/11"
+   ],
+   [
+    "29/31",
+    "0"
+   ],
+   [
+    "2/31",
+    "1"
+   ],
+   [
+    "29/31",
+    "7/11"
+   ],
+   [
+    "2/31",
+    "4/11"
+   ],
+   [
+    "0",
+    "23/33"
+   ],
+   [
+    "1",
+    "10/33"
+   ],
+   [
+    "10/31",
+    "10/33"
+   ],
+   [
+    "21/31",
+    "23/33"
+   ],
+   [
+    "1",
+    "31/33"
+   ],
+   [
+    "0",
+    "2/33"
+   ]
+  ],
+  "gap_rel": null,
+  "shift": null,
+  "source": "results/n16.json",
+  "lll_digits": null,
+  "note": "coordinates are rationals (denominators <= 1000); min area computed exactly with Fractions"
+ },
+ {
+  "label": "17",
+  "n": 17,
+  "value": "0.01726167707252392588",
+  "status": "not found up to degree 200",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1501,
+  "ties": 27,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.017261677072523925880181909342038200643597157284963656127418796859701777152231949821780701407526185042575700742608031697888494497081586233086178662992243454578100995522153038176600206523579953689938332281753344960585541728490189156175908117899805491769560014629804212448407355497646655272139429231015",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.008738322354482256,
+  "shift": 2.220446049250313e-16,
+  "source": "results/deep2/n17.json",
+  "lll_digits": 4800,
+  "note": "deep2 run (logs/deep2_*.log): Newton at 8000 digits, Krawczyk 1e-2666 OK, LLL at degrees 100,150,200 with 4800 digits found no relation; degree 250 interrupted after 85 min. t_digits kept from the 1500-digit run.",
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "18",
+  "n": 18,
+  "value": "0.01552605994070249294",
+  "status": "not found up to degree 200",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1501,
+  "ties": 30,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.015526059940702492942803430126081609370533426034544310371749511985040726508168113400838206068755375610652923216330733768891199731324729099752771397591365414430060686527872555551040344971830900369965072217797975558698114239095696203275230085524518484210179311303664523091043082530604267275807639544221",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.01057271193738823,
+  "shift": 1.1102230246251565e-16,
+  "source": "results/deep2/n18.json",
+  "lll_digits": 4800,
+  "note": "deep2 run (logs/deep2_*.log): Newton at 8000 digits, Krawczyk 1e-2666 OK, LLL at degrees 100,150,200 with 4800 digits found no relation; degree 250 interrupted after 85 min. t_digits kept from the 1500-digit run.",
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "19",
+  "n": 19,
+  "value": "0.01394786208148450128",
+  "status": "not found up to degree 150",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8001,
+  "ties": 31,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.013947862081484501285699980568028956691880250168706076248818204926003993561450256831871453406039540009872107539852741221101875565240829411529731632501335679908500118002780986836893182150392704963804656763978959367405347408638400323109766067912796111829803228746252198956369115868750284409858294179806",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.010282134107348273,
+  "shift": 0.0,
+  "source": "results/deep3/n19.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "20",
+  "n": 20,
+  "value": "0.01293819671472701761",
+  "status": "proved exact",
+  "mode": "primal",
+  "degree": 19,
+  "minpoly": "13194139533312*x^19 + (-66795331387392)*x^18 + 83906481094656*x^17 + 151616640516096*x^16 + (-588551179730944)*x^15 + 735727495151616*x^14 + (-379150988738560)*x^13 + (-52007960313856)*x^12 + 184412823093248*x^11 + (-112538665877504)*x^10 + 36639640453120*x^9 + (-7316050804736)*x^8 + 936902328320*x^7 + (-77944031232)*x^6 + 4181109760*x^5 + (-140924160)*x^4 + 2882608*x^3 + (-36684)*x^2 + 359*x + (-2)",
+  "radical": null,
+  "discriminant": "2863179429134963409748124455972135369137009978600055830882984222440972026087117929640369711991863386313689248727420932022203900306885999813231379779476054606716258726562239131390731590135228788450397193535003992377170156985792758885073628871878696972643336445244298700469647313993728000000000000000000000000000000000000000000000000000000000000",
+  "galois": "S19 (Dedekind: factor patterns mod primes; mod 349 pattern (2,17) gives a transposition; prime degree => S19); not solvable by radicals",
+  "field_degree": 19,
+  "digits": 1501,
+  "ties": 42,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": true,
+  "known": null,
+  "t_full": "0.012938196714727017612114627820768824411396561110291534189143747717090779609001382090972374499071767726262881349143308310760827824389116636951692254097195339935922912579661781777325192705102693615029575012884731750545628243682657103576489680838617603969806224390847077511979090713800003081637271506258",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.020920230940154303,
+  "shift": 0.0,
+  "source": "results/small/n20.json",
+  "lll_digits": 900,
+  "note": null,
+  "minpoly_in_y": "192y^19-3888y^18+19536y^17+141204y^16-2192524y^15+10963194y^14-22599160y^13-12399664y^12+175869773y^11-429300941y^10+559076545y^9-446536304y^8+228735920y^7-76117218y^6+16332460y^5-2201940y^4+180163y^3-9171y^2+359y-8, y = 4A",
+  "t_full_note": "truncated to 300 digits for the repository",
+  "coords_note": "exact coordinates of the published record omitted"
+ },
+ {
+  "label": "21",
+  "n": 21,
+  "value": "0.01147376078570121026",
+  "status": "not found up to degree 150",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8001,
+  "ties": 37,
+  "walls": 6,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.011473760785701210268349183177929365112402428650916894060196029768456159293506829097129482845445392850434057994405674540347819858787050864205816074161248316306377072791918679358696327513027685049276291715964185321917251196044622098928768412694449239024391707789105252419674187396488179240255936994589",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.002586600415787783,
+  "shift": 0.0,
+  "source": "results/deep3/n21.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "22",
+  "n": 22,
+  "value": "0.01077165680964309420",
+  "status": "not found up to degree 150",
+  "mode": "kkt",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8001,
+  "ties": 34,
+  "walls": 6,
+  "rattlers": 2,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.010771656809643094205772536807084647592594722403177927066012186184934945245787712100143285123157548898261544313221131158439034057285539691892882873278006789322621765370422791082028781874686405503066833222430484666698316998078740480892897510761219955749471303638782211892222258593294090312284982192755",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.016141837156035736,
+  "shift": 1.112025901361946e-07,
+  "source": "results/deep3/n22.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "23",
+  "n": 23,
+  "value": "0.00975728971331477225",
+  "status": "not found up to degree 150",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8002,
+  "ties": 40,
+  "walls": 7,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.009757289713314772257160702006874378110398917297460341886106188227767495785364304618756374306063704980951817261002241761491247442184313160165790014836889172086047422665096446997407382697171338258806397958256323417512381910322645573633562876117498772300569165846358928221561010140050642063066139326124",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.0029771593693862382,
+  "shift": 0.0,
+  "source": "results/deep3/n23.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "24",
+  "n": 24,
+  "value": "0.00912014302053691266",
+  "status": "not found up to degree 150",
+  "mode": "kkt",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8002,
+  "ties": 42,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.009120143020536912660110247287567643366955839828839250158279238421210114963310739863569547116072262035764153873116085654438374383909002780524936544440772760084835232919706044465050898912169748935280051268184249549624026318010477297104233290221090730622049272422059247345460930126203848199728349771228",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.001680662841881647,
+  "shift": 7.54550414816535e-07,
+  "source": "results/deep3/n24.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "25",
+  "n": 25,
+  "value": "0.00826159454672493211",
+  "status": "not found up to degree 150",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8002,
+  "ties": 44,
+  "walls": 7,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.008261594546724932118886396472937554013128209445427685093272110649659074135950483206720741891251591619640354798818715986512740940374959788196789549325494066957221134857537693186017809187348781132947092328611176568894579805375368343332588149021944922729004371253316197035051860273986188305624131066332",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.01276924378655265,
+  "shift": 0.0,
+  "source": "results/deep3/n25.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "26",
+  "n": 26,
+  "value": "0.00787270736191304968",
+  "status": "not found up to degree 150",
+  "mode": "primal+gauge",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8002,
+  "ties": 48,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.007872707361913049682007612118868748421065239104978240825660355388966102154418439804348622262854474342137203680381223323877992214767418236202753361527293469062818717235727342672856254429433121955804398532676729758998049020766911750985958473594281556546152576245350840414380107609311671684354701768540",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.0003562362405425877,
+  "shift": 4.772046050538492e-07,
+  "source": "results/deep3/n26.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "27",
+  "n": 27,
+  "value": "0.00710671130640773226",
+  "status": "not found up to degree 150",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 8002,
+  "ties": 47,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.007106711306407732263488985291208139992219103955308629447882570625579675138054947078028527712419778739746297351000723414654382207956492159732922804323555183999784622659830915254717581572194348555672063761076718718654513307643998877017880801965805757777019901847105984836908229983644649475362784591349",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.00011427130231464812,
+  "shift": 0.0,
+  "source": "results/deep3/n27.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "28",
+  "n": 28,
+  "value": "0.00697108621252536783",
+  "status": "not found up to degree 70",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 52,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.006971086212525367834425975670914576164083784246450657957704749453388426198393909256782545089876124883904828308319818750650833715349550544889514376276721273518401548296018692913082752607387977039194603068462384009511080066118805113279070212618022342135056590777425579960692873951638063349948535466924",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.00023165797710640235,
+  "shift": 0.0,
+  "source": "results/deep/n28.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "29",
+  "n": 29,
+  "value": "0.00631890275200536665",
+  "status": "not found up to degree 70",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 49,
+  "walls": 8,
+  "rattlers": 1,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.006318902752005366656091370303826801721637717538211612831861785508556168024026571593187337040171574368621754271092685306481675287980889533421337292893396244848000688531546806592181740687707355691033149695531806056596144674537911444338399461392857304746867907427219975093610310028588032085880449823151",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 3.695830895057223e-08,
+  "shift": 0.0,
+  "source": "results/deep/n29.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "30",
+  "n": 30,
+  "value": "0.00607241630312459621",
+  "status": "not found up to degree 70",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 54,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.006072416303124596213241414919685764446591553111734687945366287812192416359286060569238351958583182359373007921490462240978583837821852912435492859678492514573429071963564192208925745422627188906158454755495630601816052215790306935506595305986747007223732600728511605435737650526841014785969428147558",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.03981324745715522,
+  "shift": 0.0,
+  "source": "results/deep/n30.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "31",
+  "n": 31,
+  "value": "0.00583706884581844380",
+  "status": "not found up to degree 70",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 56,
+  "walls": 7,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.005837068845818443802215540112362647481910592120540666427770412876814156352916752714447894999362511647656082381389240864590015249271353385472229028723739716093920616938243436476555414169479602296228817039504793081416064845268216811240659241267578725775674528676704732072745437843496269303431979678766",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.002250452365388453,
+  "shift": 1.4854784069484595e-13,
+  "source": "results/deep/n31.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "32",
+  "n": 32,
+  "value": "0.00581090220763199441",
+  "status": "not found up to degree 70",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 64,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.005810902207631994418779433429656684943695841358509817426467424718881424000678304931658975352683476561304734582334477348379370125805532887953568379380298076678731946418222089197640235219127739157966353130271787338158834755731470562565294606413631091688503937186912011039221711336129308724407450100510",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.0030337506424124123,
+  "shift": 0.0,
+  "source": "results/deep/n32.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "33",
+  "n": 33,
+  "value": "0.00514548835898886541",
+  "status": "not found up to degree 70",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 60,
+  "walls": 7,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.005145488358988865419546686233353125607549291375065392882978728602850728971399495971965672266247565625601073832206812631162635466179665537086712456101172085318887658581920389042593493171384889523309946316849885060972409812743717751449429033021593957414514365362486991332180127044163225640512153761044",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.0005692531988514393,
+  "shift": 0.0,
+  "source": "results/deep/n33.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "34",
+  "n": 34,
+  "value": "0.00491472000424517204",
+  "status": "not found up to degree 70",
+  "mode": "primal",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 63,
+  "walls": 6,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.004914720004245172044862617586386186197080749997928660463899446994393414856887515918673447531148408312128300487162848727860066067311905784589533086949809292235129306995084358715712455145414899270057031941240537489426541252806978158824866368350264390796120689013521960721984726441958713199596088475897",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.01566012383182712,
+  "shift": 0.0,
+  "source": "results/deep/n34.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "35",
+  "n": 35,
+  "value": "0.00452533174928917804",
+  "status": "not found up to degree 70",
+  "mode": "primal+gauge",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 62,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.004525331749289178042827442241980029649236992206526410397030830881255390669469912409661792935036991567231429667784733292028667969992738021985559404240322708565484976057193872637912706232131122636097659947316570988442411815688966843349841181152238131192721379708580234277871691950599014650774159431870",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 1.484108819172005e-06,
+  "shift": 5.5105625396123514e-08,
+  "source": "results/deep/n35.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ },
+ {
+  "label": "36",
+  "n": 36,
+  "value": "0.00442536319032457180",
+  "status": "not found up to degree 70",
+  "mode": "primal+gauge",
+  "degree": null,
+  "minpoly": null,
+  "radical": null,
+  "discriminant": null,
+  "galois": null,
+  "field_degree": null,
+  "digits": 1502,
+  "ties": 72,
+  "walls": 8,
+  "rattlers": 0,
+  "krawczyk": true,
+  "exact_all_active": null,
+  "known": null,
+  "t_full": "0.004425363190324571806236138955406012146466861422916483573473569973564070205721042577566500553367859121508849766829705281661574044768102938511848191837192657743759430886460502688695867702133332829239389524096652112302347646347255517546158995015384042437073646940675358374557268569447498155180928090219",
+  "coords_radical": null,
+  "exact_values": null,
+  "coords": null,
+  "gap_rel": 0.0008320560772099169,
+  "shift": 1.8624300965885965e-06,
+  "source": "results/deep/n36.json",
+  "lll_digits": null,
+  "note": null,
+  "t_full_note": "truncated to 300 digits for the repository"
+ }
+]

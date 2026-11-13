@@ -1,0 +1,20 @@
+Data licence: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Copyright (c) 2026 Ethan Hendren
+
+Applies to: configurations/, certificates/ and code/figure_data/, as far as they
+are the author's own work.
+
+You may share and adapt the data for any purpose, provided you give appropriate
+credit (cite the papers listed in README.md / CITATION.cff), provide a link to
+the licence, and indicate if changes were made.
+
+Third-party material is NOT covered by this licence:
+- configurations/records_printed/ contains coordinates and point positions of
+  published records from the Heilbronn record site
+  (https://math.tejstead.com/heilbronn, T. Stead, maintainer, and the
+  contributors credited there; the n = 22 record is due to N. Sudermann-Merx).
+  They are reproduced as printed in paper 2, with attribution; the record site
+  is the authoritative source and its terms apply.
+- configurations/record_values.json lists values of those published records.
