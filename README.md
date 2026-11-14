@@ -5,11 +5,13 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
 
 1. **A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal.**
    (`papers/heilbronn_n9.pdf`; code `code/exp110/`, run logs `certificates/exp110/`.)
+   Zenodo: https://doi.org/10.5281/zenodo.24234317
    Result: H(9) = (9√65 − 55)/320, attained only by the known configuration up to the symmetries of the square.
    **The code was written with AI assistance (Claude, Anthropic), and the proof has not yet been independently
    checked. Independent verification is welcome.**
 2. **A computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle.**
    (`papers/heilbronn_tri8.pdf`; code `code/exp113/`, run logs `certificates/exp113/`.)
+   Zenodo: https://doi.org/10.5281/zenodo.24235152
    Result: in the triangle {x, y ≥ 0, x + y ≤ 1}, 8 points have a triangle of area at most θ, the unique real root of
    the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892), attained only by the known
    configuration up to the 6 symmetries. **AI-assisted, not yet independently checked; verification welcome.**
