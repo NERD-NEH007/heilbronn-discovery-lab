@@ -45,7 +45,7 @@ Sudermann-Merx conjectured that an optimal configuration of $n \ge 5$ points in 
 % =====================================================================
 \section{Introduction}
 
-For $P = (p_1,\dots,p_n)$ in the unit square $Q = [0,1]^2$ let $f(P)$ be the smallest area of a triangle with vertices in $P$, and $H(n) = \max f$. Optimal configurations are proved for $n \le 8$; $n = 9$ has been proved optimal by a computer-assisted proof \cite{N9} (AI-assisted and not yet independently checked), and $n = 10$ is computed to global optimality within solver tolerance (no rigorous proof) \cite{SM}; best-known configurations for $n \le 36$ are collected, with exact verification, on the record site \cite{Stead}. % SRC: experiments/LITERATURE.md Sec. 1; report_tex/heilbronn_report.tex Sec. 2; STATUS.md row 110 (n = 9 proved, not yet independently reviewed)
+For $P = (p_1,\dots,p_n)$ in the unit square $Q = [0,1]^2$ let $f(P)$ be the smallest area of a triangle with vertices in $P$, and $H(n) = \max f$. Optimal configurations are proved for $n \le 8$; $n = 9$ has been proved optimal by a computer-assisted proof \cite{N9} (AI-assisted and not yet independently checked), and $n = 10$ is computed to global optimality within solver tolerance \cite{SM}, and an exact computer-assisted proof of its value has been claimed \cite{Pan10} (13 November 2026, AI-assisted, not yet independently checked); best-known configurations for $n \le 36$ are collected, with exact verification, on the record site \cite{Stead}. % SRC: experiments/LITERATURE.md Sec. 1; report_tex/heilbronn_report.tex Sec. 2; STATUS.md row 110 (n = 9 proved, not yet independently reviewed)
 Sudermann-Merx derives from a counting argument \cite[Sec.~7.1]{SM} the following conjecture. A triangle is \emph{critical} if its area equals the minimum up to the solver tolerance \cite[Sec.~5.1]{SM}; for the best-known configurations with $n \ge 11$ two areas are treated as equal if they differ by less than $10^{-12}$ \cite[Sec.~7]{SM}.
 
 \begin{conjecture}[{Sudermann-Merx \cite[Conjecture~1]{SM}}]\label{conj:SM}
@@ -365,6 +365,7 @@ Record coordinates ($n \le 36$) are published on the record site and are not red
 \bibitem{SM} N.~Sudermann-Merx, From global optimization to exact coordinates: Heilbronn's triangle problem on the unit square using mixed-integer nonlinear optimization, arXiv:2603.11107v3, 27 October 2026 (v1: 11 March 2026).
 \bibitem{SMpc} N.~Sudermann-Merx, personal communication (email), 13 November 2026.
 \bibitem{Trela} D.~Trela, KKT stresses, affine moments, and separator flux in the Heilbronn triangle problem, arXiv:2609.25035, 24 August 2026 (unrefereed).
+\bibitem{Pan10} C.~Panorias, An exact computer-assisted proof for ten points in Heilbronn's triangle problem, preprint, version~1.1, Zenodo, 13 November 2026, \url{https://zenodo.org/records/24186293}.
 \end{thebibliography}
 
 \end{document}

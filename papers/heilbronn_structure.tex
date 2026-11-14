@@ -71,7 +71,7 @@ Nothing in the present paper bears on the asymptotics; the range $n \le 100$ is 
 
 \subsection*{Small \texorpdfstring{$n$}{n}}
 Optimality was proved for $n \le 8$ by classical methods: $n = 5$ and $n = 6$ by Yang, Zhang and Zeng \cite{YZZ,YZZ92} ($n = 6$ in \cite[Theorem~3]{YZZ92}; first solved by Yang and Zhang \cite{YZ80}; see also Dress, Yang and Zeng \cite{DYZ}), $n = 7$ by Zeng and Chen \cite{ZC}, $n = 8$ by Dehbi and Zeng \cite{DZ}; these are the sources listed by the record site \cite{Stead}. % SRC: experiments/102-laws-small-n (via report_tex/heilbronn_report.tex Sec. 2) % bibliographic data verified 2026-11-12 (record site DOIs, Trela/MMK bibliographies); papers not read
-Sudermann-Merx \cite{SM} solves $n \le 10$ by mixed-integer nonlinear programming to global optimality within solver tolerance and gives exact values for $n = 5$--$10$. % SRC: experiments/LITERATURE.md Sec. 1
+Sudermann-Merx \cite{SM} solves $n \le 10$ by mixed-integer nonlinear programming to global optimality within solver tolerance and gives exact values for $n = 5$--$10$. Panorias \cite{Pan10} has since deposited an exact computer-assisted proof of the value for $n = 10$ (13 November 2026; AI-assisted and not yet independently checked; it does not classify the maximizers). % SRC: experiments/LITERATURE.md Sec. 1
 Monji, Modir and Kocuk \cite{MMK} give MIQCP formulations with symmetry breaking and solve $n \le 9$. % SRC: experiments/LITERATURE.md Sec. 1
 For $n = 9$, Chen, Xu and Zeng \cite{Chen17} confined all optimal configurations by a GPGPU search and obtained $0.054875999 < H(9) < 0.054878314$ (as quoted in \cite{MMK}). % SRC: arXiv 2512.14505v1 Introduction; J. Global Optim. 68 (2017) abstract
 We give a computer-assisted proof that $H(9) = (9\sqrt{65}-55)/320$, attained uniquely up to the symmetries of the square, by an exact computer-assisted branch and bound in which every discard is decided in exact arithmetic (Section~\ref{sec:smalln}; details in the companion paper \cite{N9}). This proof is AI-assisted and has not yet been independently checked. % SRC: experiments/110-n9-proof/NOTES.md (Result); STATUS.md row 110
@@ -634,7 +634,7 @@ The configurations studied here are best known, not optimal; every structural st
 \item \emph{Why $43$?} Derive the location of the switch from first principles. The closed-band picture gives the slopes but needs one measured anchor; the half-turn explanation is refuted (Section~\ref{sec:halfturn}).
 \item \emph{Does the crossover at $43$ reflect the optima?} A stronger empty-centre search at $44$--$50$, or a proof that empty-centre configurations are bounded away from the filled ones, would turn the change of best-known architecture into a statement about optima.
 \item \emph{Is $d \le 1$ at isolated square optima a theorem?} It holds at every certified best but fails in other regions (at possibly non-isolated optima).
-\item \emph{Can $n = 10$ be proved optimal} with a sound branch and bound? The $n = 9$ proof \cite{N9} does not extend directly: it needs a stronger local certificate.
+\item \emph{Is $n = 10$ settled?} Panorias \cite{Pan10} claims an exact proof of the value; independent verification, and uniqueness of the maximizer, remain open. For our method: The $n = 9$ proof \cite{N9} does not extend directly: it needs a stronger local certificate.
 \item \emph{Exact forms:} are the values for $13, 15, 17$--$19$ and $21$--$36$ of very high degree? Do symmetric sizes in $37$--$64$ have low degree?
 \item \emph{Large $n$:} is the decline of $n^2t$ beyond $42$ a property of the problem or of the search?
 \item \emph{Critical triangles:} under the existential reading no record ($5 \le n \le 36$) contradicts the $2n-7$ conjecture, while the universal reading fails at record $22$ if that record is optimal; does it hold for optima, and is $2n+1-w-d$ after rattler repair the right general count \cite{Note2}?
@@ -752,6 +752,7 @@ The author used Claude, an AI system developed by Anthropic, for computation (wr
 \bibitem{YZZ} L.~Yang, J.~Zhang and Z.~Zeng, Heilbronn problem for five points, Technical Report IC/91/252, International Centre for Theoretical Physics, Trieste, 1991.
 \bibitem{ZC} Z.~Zeng and L.~Chen, On the Heilbronn optimal configuration of seven points in the square, in: \emph{Automated Deduction in Geometry} (ADG 2008), Lecture Notes in Comput. Sci. \textbf{6301}, Springer, 2011, 196--224, doi:10.1007/978-3-642-21046-4\_11.
 
+\bibitem{Pan10} C.~Panorias, An exact computer-assisted proof for ten points in Heilbronn's triangle problem, preprint, version~1.1, Zenodo, 13 November 2026, \url{https://zenodo.org/records/24186293}.
 \end{thebibliography}
 
 \end{document}
