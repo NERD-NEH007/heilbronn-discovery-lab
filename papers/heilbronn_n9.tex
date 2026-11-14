@@ -59,7 +59,7 @@ Let $Q = \sq$ and, for $P = (p_1,\dots,p_n) \in Q^n$, let
 the smallest area of a triangle with vertices in $P$. Heilbronn's problem asks for $H(n) = \max_{P \in Q^n} f(P)$ and for the maximising configurations. The maximum exists because $f$ is continuous and $Q^n$ is compact.
 
 \subsection*{Prior work}
-Optimality is proved for $n \le 8$: $n = 5$ by Yang, Zhang and Zeng \cite{YZZ}, $n = 6$ by Dress, Yang and Zeng \cite{DYZ}, $n = 7$ by Zeng and Chen \cite{ZC}, $n = 8$ by Dehbi and Zeng \cite{DZ}; these are the sources listed by the record site \cite{Stead}. % SRC: paper1/heilbronn_structure.tex l.73; papers/citation_findings.md Sec. 1 (record site)
+Optimality is proved for $n \le 8$: $n = 5$ and $n = 6$ by Yang, Zhang and Zeng \cite{YZZ,YZZ92} ($n = 6$ in \cite[Theorem~3]{YZZ92}; first solved by Yang and Zhang \cite{YZ80}; see also Dress, Yang and Zeng \cite{DYZ}), $n = 7$ by Zeng and Chen \cite{ZC}, $n = 8$ by Dehbi and Zeng \cite{DZ}; these are the sources listed by the record site \cite{Stead}. % SRC: paper1/heilbronn_structure.tex l.73; papers/citation_findings.md Sec. 1 (record site)
 The nine-point configuration studied here was found by Comellas and Yebra \cite{CY}; the record site lists it under their names \cite{Stead}. % SRC: papers/citation_findings.md Sec. 1 (record site holders: n = 7, 8, 9, 10, 12 Comellas & Yebra, Dec 2001)
 For $n = 9$, Chen, Xu and Zeng \cite{Chen17} confined all optimal configurations by a GPGPU search and obtained $0.054875999 < H(9) < 0.054878314$ (as quoted in \cite{MMK}); this bounds $H(9)$ but does not prove the optimality of the known configuration. % SRC: paper1 l.76; citation_findings.md Sec. 1 (MMK / Chen et al. 2017)
 Monji, Modir and Kocuk \cite{MMK} give MIQCP formulations with symmetry breaking and solve $n \le 9$. % SRC: paper1 l.75
@@ -479,6 +479,8 @@ The cover test (\texttt{covered}) is applied to a box $B$ (after P0) of width at
 \bibitem{MMK} A.~Monji, A.~Modir and B.~Kocuk, Solving the Heilbronn triangle problem using global optimization methods, arXiv:2512.14505v1, 2025.
 \bibitem{Stead} T.~Stead (maintainer), The Heilbronn Problem (record tables, exact verification and attributions), \url{https://math.tejstead.com/heilbronn}, accessed 12 November 2026.
 \bibitem{SM} N.~Sudermann-Merx, From global optimization to exact coordinates: Heilbronn's triangle problem on the unit square using mixed-integer nonlinear optimization, arXiv:2603.11107v3, 27 October 2026 (v1: 11 March 2026).
+\bibitem{YZZ92} L.~Yang, J.~Z.~Zhang and Z.~B.~Zeng, A conjecture on the first several Heilbronn numbers and a computation, \emph{Chinese Ann. Math. Ser. A} \textbf{13} (1992), 503--515.
+\bibitem{YZ80} L.~Yang and J.~Zhang, The six-point problem in the square, in: \emph{Mathematics Lectures (Part II)}, Sichuan People's Publishing House, 1980, 159--175 (in Chinese).
 \bibitem{YZZ} L.~Yang, J.~Zhang and Z.~Zeng, Heilbronn problem for five points, Technical Report IC/91/252, International Centre for Theoretical Physics, Trieste, 1991.
 \bibitem{ZC} Z.~Zeng and L.~Chen, On the Heilbronn optimal configuration of seven points in the square, in: \emph{Automated Deduction in Geometry} (ADG 2008), Lecture Notes in Comput. Sci. \textbf{6301}, Springer, 2011, 196--224, doi:10.1007/978-3-642-21046-4\_11.
 
