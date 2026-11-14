@@ -1,20 +1,25 @@
 # Heilbronn discovery lab
 
-Papers, data and verification code on the Heilbronn triangle problem in the unit square
-(place n points in [0,1]^2 to maximise the minimum triangle area t). Author of all three papers: Ethan Hendren.
+Papers, data and verification code on the Heilbronn triangle problem in the unit square and the triangle
+(place n points in the region to maximise the minimum triangle area t). Author of all four papers: Ethan Hendren.
 
 1. **A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal.**
    (`papers/heilbronn_n9.pdf`; code `code/exp110/`, run logs `certificates/exp110/`.)
    Result: H(9) = (9√65 − 55)/320, attained only by the known configuration up to the symmetries of the square.
    **The code was written with AI assistance (Claude, Anthropic), and the proof has not yet been independently
    checked. Independent verification is welcome.**
-2. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
+2. **A computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle.**
+   (`papers/heilbronn_tri8.pdf`; code `code/exp113/`, run logs `certificates/exp113/`.)
+   Result: in the triangle {x, y ≥ 0, x + y ≤ 1}, 8 points have a triangle of area at most θ, the unique real root of
+   the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892), attained only by the known
+   configuration up to the 6 symmetries. **AI-assisted, not yet independently checked; verification welcome.**
+3. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. arXiv: TBD. (`papers/heilbronn_structure.pdf`)
-3. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
+4. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
    arXiv: TBD. (`papers/critical_triangles_note.pdf`)
 
-In the table below, P1 and P2 are papers 2 and 3 of this list (the structure paper and the critical-triangles note)
-and P3 is the n = 9 proof.
+In the table below, P1 and P2 are papers 3 and 4 of this list (the structure paper and the critical-triangles note)
+and P3 is the n = 9 proof. The triangle proof (exp 113) is checked by `code/smoke_test.py` (run accounting and the exact septic identification).
 
 Quick check (about 10 seconds; must print `ALL PASSED`):
 

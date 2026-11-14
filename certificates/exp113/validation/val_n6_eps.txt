@@ -1,0 +1,2 @@
+Includes third-party software components, see THIRD_PARTY_NOTICES.md for full details
+{"n": 6, "mode": "eps", "eps": 0.001, "skip": null, "T": 0.06256250000000001, "T_exact": "4508103226997867/72057594037927936", "f_upper": 0.0625, "roots": 36, "covers": 0, "sec": 89.0, "audited": 2576, "lp_fail": 0, "infeas": 43, "farkas": 43, "colsum_max_over_D": 26.0, "colcount_max": 40, "nodes": 164550, "p0": 148, "p1": 29218, "p2": 52927, "lp": 135184, "cover": 0, "fail": 0, "maxdepth": 48, "lpskip": 0, "closed_w": 1.0000000000000224}

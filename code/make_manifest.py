@@ -11,3 +11,14 @@ with open('MANIFEST-n9.sha256', 'w', newline='\n') as f:
         h = hashlib.sha256(open(p, 'rb').read()).hexdigest()
         f.write(f'{h}  {p.replace(os.sep, "/")}\n')
 print(f'{len(FILES)} files hashed -> MANIFEST-n9.sha256')
+
+# triangle n = 8 (exp 113)
+import glob as _g
+TRI = (sorted(_g.glob('code/exp113/cert/*')) + sorted(_g.glob('code/exp113/bb/*.py')) + sorted(_g.glob('certificates/exp113/run_n8/*'))
+       + sorted(_g.glob('configurations/triangle/*')) + ['papers/heilbronn_tri8.tex', 'papers/heilbronn_tri8.pdf', 'requirements.txt'])
+with open('MANIFEST-tri8.sha256', 'w', newline='
+') as f:
+    for p in TRI:
+        f.write(f'{hashlib.sha256(open(p, "rb").read()).hexdigest()}  {p.replace(os.sep, "/")}
+')
+print(f'{len(TRI)} files hashed -> MANIFEST-tri8.sha256')

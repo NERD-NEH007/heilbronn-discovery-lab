@@ -80,6 +80,16 @@ check('clean-room P2 checker: negative tests', r.returncode == 0)
 r = subprocess.run([sys.executable, os.path.join(HERE, 'exp110', 'clean_room', 'check_p2.py'),
                     os.path.join(ROOT, 'certificates', 'exp110', 'p2dump', 'n9_r0.jsonl.gz')], capture_output=True, text=True, timeout=120)
 check('clean-room P2 checker on n = 9 sample (root 0)', r.returncode == 0 and 'rejected 0' in r.stdout, '(' + r.stdout.strip()[-60:] + ')')
+# 7. triangle n = 8 (exp 113): run accounting and exact septic identification
+S8 = json.load(open(os.path.join(ROOT, 'certificates', 'exp113', 'run_n8', 'stats.json')))
+C8 = json.load(open(os.path.join(HERE, 'exp113', 'cert', 'local_certs_tri.json')))['8'][0]
+tl8 = Fr(int(C8['t_lower'].split('e')[0]), 10 ** 32); T8 = Fr(S8['T_exact'])
+leaves8 = S8['p0'] + S8['p1'] + S8['p2'] + S8['cover'] + S8['fail']
+check('triangle n = 8 run: done, 0 failures, leaves - internal = 64 roots, T <= t_lower(1 - 1e-9)',
+      S8['done'] and S8['fail'] == 0 and 2 * leaves8 - S8['nodes'] == 64 and T8 <= tl8 * (1 - Fr(1, 10 ** 9))
+      and open(os.path.join(ROOT, 'certificates', 'exp113', 'run_n8', 'fails.jsonl')).read().strip() == '')
+r = subprocess.run([sys.executable, os.path.join(HERE, 'exp113', 'cert', 'identify_n8.py')], capture_output=True, text=True, timeout=300)
+check('triangle n = 8 value = root of the septic (exact, identify_n8.py)', r.returncode == 0 and "'proved_t_equals_septic_root': True" in r.stdout)
 try:
     sys.path.insert(0, os.path.join(HERE, 'exp110')); import bb2
     check('exp 110 bb2 imports', hasattr(bb2, 'Problem2'))

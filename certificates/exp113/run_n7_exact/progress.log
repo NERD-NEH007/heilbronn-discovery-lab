@@ -1,0 +1,8 @@
+2026-11-13 15:33:47 start n7_exact pid 23032: open 49, nodes 0, closed_w 0, workers 12, skip 1.2, diag True
+2026-11-13 15:33:50 el 0.00h nodes 1 open 48 closed_w 0.020408 rate 0/s p1 0 p2 0 lpskip 0 cover 0 fail 0 depth 0 lp_fail 0 audited 0 eta_width 0.0h eta_nodes nanh
+2026-11-13 15:34:50 el 0.02h nodes 572011 open 346 closed_w 0.284195 rate 9207/s p1 126552 p2 157710 lpskip 28761 cover 16 fail 0 depth 123 lp_fail 0 audited 301 eta_width 0.0h eta_nodes nanh
+2026-11-13 15:35:50 el 0.03h nodes 1136980 open 213 closed_w 0.474300 rate 9305/s p1 241687 p2 324589 lpskip 48909 cover 58 fail 0 depth 130 lp_fail 0 audited 624 eta_width 0.0h eta_nodes nanh
+2026-11-13 15:36:50 el 0.05h nodes 1693320 open 89 closed_w 0.730714 rate 9289/s p1 352946 p2 490600 lpskip 74073 cover 80 fail 0 depth 130 lp_fail 0 audited 967 eta_width 0.0h eta_nodes nanh
+2026-11-13 15:37:50 el 0.07h nodes 2265513 open 158 closed_w 0.894292 rate 9347/s p1 467699 p2 660777 lpskip 104521 cover 120 fail 0 depth 131 lp_fail 0 audited 1279 eta_width 0.0h eta_nodes nanh
+2026-11-13 15:38:50 el 0.08h nodes 2886568 open 95 closed_w 0.995203 rate 9545/s p1 593108 p2 845399 lpskip 133519 cover 120 fail 0 depth 131 lp_fail 0 audited 1667 eta_width 0.0h eta_nodes nanh
+2026-11-13 15:39:12 DONE n7_exact: {"n": 7, "mode": "exact", "eps": 0.001, "T": 0.04861111106249999, "T_exact": "875699926668563/18014398509481984", "t_lower": "(Fraction(7, 144), Fraction(7, 144))", "diag": true, "covers": 1, "skip": 1.2, "elapsed": 324.6253204345703, "closed_w": 1.0000000000000073, "tasks": 8188, "done": true, "nodes": 3100671, "p0": 4868, "p1": 628342, "p2": 916990, "lp": 2326850, "cover": 160, "fail": 0, "maxdepth": 131, "lpskip": 140451, "lp_fail": 0, "audited": 1824, "farkas": 6797}

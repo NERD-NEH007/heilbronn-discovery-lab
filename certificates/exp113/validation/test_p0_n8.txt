@@ -1,0 +1,1 @@
+{'n': 8, 'boxes': 20000, 'alive': 17871, 'domain_samples_kept': 190688, 'removed': 0, 'empty_but_samples': 0}

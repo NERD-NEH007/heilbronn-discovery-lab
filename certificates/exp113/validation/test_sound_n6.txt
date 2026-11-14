@@ -1,0 +1,1 @@
+n=6: tested {'p0': 600, 'p1': 249, 'p2': 247, 'p2_farkas': 0, 'cover': 0}; violations {'p0': 0, 'p1': 0, 'sign': 0, 'p2': 0, 'audit': 0, 'cover': 0}; P2 bound - best sample (2A units): median 0.00846, min 2.38e-05

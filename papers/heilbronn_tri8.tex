@@ -1,0 +1,375 @@
+% Paper 4: computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle.
+% Every numerical claim carries a hidden "% SRC:" comment naming the lab file it comes from.
+% Paths are relative to experiments/; E113 = experiments/113-triangle-n8.
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black]{hyperref}
+
+% Public repository accompanying the paper (single definition).
+\newcommand{\repourl}{\url{https://github.com/NERD-NEH007/heilbronn-discovery-lab}}
+
+\setlist{itemsep=1pt,topsep=3pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\tstar}{t^{*}}
+\newcommand{\Om}{\Omega}
+
+\begin{document}
+
+\title[Heilbronn's problem for eight points in a triangle]{A computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle}
+
+\author{Ethan Hendren}
+\email{eehendren007@gmail.com}
+
+\begin{abstract}
+For Heilbronn's problem in a triangle we give a computer-assisted proof that the largest possible minimum triangle area of eight points, divided by the area of the triangle, is $2\theta = 0.0677892132\ldots$, where $\theta$ is the unique real root of the septic $1216512 t^7 + 1022976 t^6 - 2745456 t^5 + 2218730 t^4 + 32206304 t^3 - 19148615 t^2 + 3156103 t - 86233$. The record site attributes the conjecture that this is the optimal value to Chen, Zeng and Zhou. The value is attained only by the known configuration and its images under the six affine symmetries of the triangle.
+Optimality for $n = 8$ had previously been established by global optimization within solver tolerances, not rigorously.
+The proof is the branch and bound of our nine-point square paper, ported to the triangle with new normalisation reductions, new constraint rows for the slanted side, a Farkas-type prune for infeasible boxes, and a cover test that copes with symmetries that are not isometries. Every discarded box is discarded by a test evaluated in exact integer or rational arithmetic. The run took $2.44\cdot10^{8}$ nodes and $9.6$ hours on 14 worker processes, with no failures. The optimal value is identified exactly with the root of the septic.
+\textbf{This is an AI-assisted, computer-assisted proof. It has not been independently checked}: the code was written with an AI system, it is not formally verified, and nobody other than the author has re-run it. Section~\ref{sec:limits} states what an independent check would require.
+\end{abstract}
+
+\maketitle
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+
+Let $\Om = \{(x,y) : x \ge 0,\ y \ge 0,\ x + y \le 1\}$, a triangle of area $\frac12$. For $P = (p_1,\dots,p_n) \in \Om^n$ let
+\[
+  f(P) = \min_{i<j<k} \lvert\Delta(p_i,p_j,p_k)\rvert, \qquad \Delta(a,b,c) = \tfrac12 \det(b-a,\, c-a).
+\]
+Heilbronn's problem in a triangle asks for $\max_{P \in \Om^n} f(P)$ and for the maximising configurations. An affine map of the plane multiplies all areas by the same factor. So for any triangle $K$, the maximum of $f(P)/\mathrm{area}(K)$ over $P \in K^n$ does not depend on $K$. It equals $2\max_{\Om^n} f$, and the maximisers in $K$ are the affine images of those in $\Om$. The record site \cite{Stead} lists this normalised value. % SRC: Stead triangle/8/points.txt header "value = min 2*area (normalized to unit-area domain)"; E113/cert/NOTES.md "Frame"
+
+\subsection*{Prior work}
+According to the record site \cite{Stead}, $n = 5$ in the triangle was proved optimal by Peng (1989) and $n = 6$ by Yang, Zhang and Zeng (1994). Zeng and Chen \cite{ZC19} proved $n = 7$ (value $7/72$, normalised) by symbolic computation. % SRC: Stead triangle/ (status column) and methods/ bibliography (ZC19 entry with DOI), read 14 November 2026
+For $n = 8$, Chen, Zeng and Zhou \cite{CZZ} gave an upper bound. The record site states that the exact optimum, the root of the septic of Theorem~\ref{thm:main}, ``remains a conjecture of Chen, Zeng and Zhou'' \cite{Stead}. % SRC: Stead triangle/8/ page text and methods/ bibliography (CZZ entry)
+Sudermann-Merx \cite{SMtri} certifies $n \le 8$ as optimal by global optimization, within solver tolerances. The record site lists $n = 8$ as ``numerically optimal'' and credits the configuration to David Cantrell (July 2006) \cite{Stead}. % SRC: Stead triangle/8/points.txt header; paper1 bib SMtri
+We are not aware of a rigorous proof for $n = 8$.
+
+\subsection*{Result}
+Let
+\[
+ \begin{aligned} p(t) = {}&1216512 t^7 + 1022976 t^6 - 2745456 t^5 + 2218730 t^4\\ &{}+ 32206304 t^3 - 19148615 t^2 + 3156103 t - 86233, \end{aligned}
+\]
+the polynomial given on the record site's page for $n = 8$ \cite{Stead}. % SRC: Stead triangle/8/ (read 14 Nov 2026); E113/cert/NOTES.md "n = 8 septic"
+It is irreducible over $\Q$ and has exactly one real root $\theta = 0.0338946066270986061794\ldots$ (Lemma~\ref{lem:ident}). The site's page says the polynomial is ``for the unit right triangle, A twice its root''. In our notation, $\theta$ is the maximum of $f$ on $\Om^8$ and $2\theta$ is the normalised value. Equivalently, $A = 2\theta = 0.0677892132541972123588\ldots$ is the unique real root of the primitive integer polynomial $2^3 p(A/2)$,
+\[
+ \begin{aligned} q(A) = {}&76032A^7 + 127872A^6 - 686364A^5 + 1109365A^4\\ &{}+ 32206304A^3 - 38297230A^2 + 12624412A - 689864 . \end{aligned}
+\]
+% SRC: papers/paper4/check_paper4.py (q primitive, one real root, root in 2[t_lower, t_upper])
+Let $x^* \in \Om^8$ be the configuration certified in Section~\ref{sec:local}. Table~\ref{tab:config} lists its points to $12$ digits; exact coordinates in $\Q(\theta)$ are in the repository. The configuration has $11$ triangles of minimum area and $6$ wall contacts. Point $6$ is the vertex $(0,0)$; points $0,1$ lie on the hypotenuse, point $2$ on the bottom side and point $3$ on the left side. % SRC: E113/cert/local_certs_tri.json "8": points_exact, extra.exact_ties (11), extra.exact_wall_contacts [[0,H],[1,H],[2,B],[3,L],[6,L],[6,B]]
+\begin{table}[htbp]
+\centering\small
+\caption{The certified centre $\tilde x$ (within $7\cdot10^{-32}$ of $x^*$), rounded to $12$ digits.}\label{tab:config}
+% SRC: E113/cert/local_certs_tri.json "8" points_exact (printed as floats)
+\begin{tabular}{@{}c@{\quad}l@{\qquad}c@{\quad}l@{}}
+\toprule
+$0$ & $(0.720562726019,\ 0.279437273981)$ & $4$ & $(0.439307097839,\ 0.076286994347)$\\
+$1$ & $(0.111999705654,\ 0.888000294346)$ & $5$ & $(0.111999705654,\ 0.282737871036)$\\
+$2$ & $(0.888607734966,\ 0)$ & $6$ & $(0,\ 0)$\\
+$3$ & $(0,\ 0.844566334602)$ & $7$ & $(0.395276367904,\ 0.392593759251)$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The record site's coordinates for $n = 8$ (30-digit literals, in the same triangle) agree with the image of $\tilde x$ under the affine symmetry $(x,y)\mapsto(x,\,1-x-y)$ to within $7.7\cdot10^{-31}$. So $x^*$ is, up to symmetry, the known configuration. % SRC: comparison of Stead triangle/8/points.txt (read 14 Nov 2026) with the 6 S3 images of points_exact (scratch computation, exact rationals); this is a numerical match, not part of the proof
+
+\begin{theorem}\label{thm:main}
+Every configuration of eight points in $\Om$ has a triangle of area at most $\theta$, so $\max_{\Om^8} f = \theta$. A configuration $P \in \Om^8$ has $f(P) = \theta$ if and only if, after relabelling, $P = g(x^*)$ for one of the six affine symmetries $g$ of $\Om$. These are six distinct point sets. Equivalently, for any triangle $K$, eight points in $K$ have a triangle of area at most $2\theta\cdot\mathrm{area}(K)$, with equality exactly for the affine images of $x^*$.
+\end{theorem}
+% SRC: E113/bb/NOTES.md "Result (2026-11-14 01:32)"; bb/results/run_n8/stats.json; cert/identify_n8.json
+
+Neither the value nor the configuration is new; what this paper adds is a proof, computer-assisted and not yet independently checked. It reuses the method of the companion paper on nine points in the square \cite{N9}. We state briefly what is unchanged, and we state and justify in full what is different.
+
+\begin{remark}[Status of this proof]\label{rem:status}
+This is an \emph{AI-assisted, computer-assisted proof that has not been independently checked.} The branch-and-bound code, the local certificate and the reductions were developed with the help of an AI system (see ``Use of AI tools''). The code is not formally verified. The new reductions of Section~\ref{sec:reductions} have been checked only by the author. The $9.6$-hour computation has been run once, on one machine. Before the run, a separate code review of the port, carried out with an AI system and not by a person, found no critical issue; its minor findings (for example a missing length assertion on the dual ray) were fixed before the run. We have also tested the implementation (Section~\ref{sec:validation}). Neither the review nor the tests is a check of the proof. Until an independent check of the kind described in Section~\ref{sec:limits} has been carried out, Theorem~\ref{thm:main} should be read as a claim supported by a computation, not as an established result.
+\end{remark}
+
+% =====================================================================
+\section{Outline of the proof}\label{sec:outline}
+
+The proof has the same three parts as in \cite{N9}.
+\begin{enumerate}[label=(\Alph*)]
+\item \emph{A local certificate} (Theorem~\ref{thm:local}): an exact configuration $x^*$ with value $\tstar$, and a sup-norm ball around $x^*$ in which every other configuration has minimum area $< \tstar$.
+\item \emph{A global exclusion} (Proposition~\ref{prop:bb}): after exact normalisations, every configuration with minimum area above a threshold $T$ slightly below $\tstar$ lies inside that ball, up to a symmetry of $\Om$ and a relabelling. This is the branch-and-bound computation.
+\item \emph{The identification} $\tstar = \theta$ (Lemma~\ref{lem:ident}).
+\end{enumerate}
+
+\subsection{The threshold and the cover radius}\label{sec:thresholds}
+The local certificate encloses $\tstar$ in $[t_{\rm lower}, t_{\rm upper}]$ with $t_{\rm lower} = 0.03389460662709860617940540248694$ and $t_{\rm upper} = t_{\rm lower} + 1.5\cdot10^{-31}$. It gives the point-displacement bound $\rho = 6.99\cdot10^{-32}$ and the basin radius $\rho_b \ge \rho_b' = 2.77542779402078\cdot10^{-4}$, where $\rho_b'$ is a double rounded down from the exact value (Section~\ref{sec:local}). % SRC: E113/cert/local_certs_tri.json "8": t_lower, t_upper, box_rho, basin_radius; cert/NOTES.md item 9 (rounding directions)
+We set
+\[
+ T = 2442363801968369/2^{56} = 0.033894606593203994\ldots,\]
+\[ R = \rho_b'(1 - 10^{-6}) - \rho' - 2^{-60} \approx 2.77542502\cdot10^{-4},
+\]
+where $\rho'$ is the stored double of $\rho$ (rounded up). $T$ is the double immediately below the double nearest to $t_{\rm lower}(1-10^{-9})$, so $T \le t_{\rm lower}(1 - 10^{-9}) < t_{\rm lower} \le \tstar$; this is checked in exact rationals. Since $\rho' \ge \rho$ and $\rho_b'(1-10^{-6}) < \rho_b$, we get $R + \rho < \rho_b$. % SRC: stats.json T_exact; bbt.py make_problem (exact) and load_covers; papers/paper4/check_paper4.py
+(The field \texttt{t\_lower} of the run's \texttt{stats.json} holds a looser pair of rational bounds, $f^*_8(1 \pm 10^{-13})$ around the float value. It is not the certificate's $t_{\rm lower}$, and it is not used for $T$.) % SRC: bbt.py fstar_bounds(8); stats.json "t_lower"; bb/NOTES.md Result
+
+\begin{proposition}[computational]\label{prop:bb}
+Let $\Om_N \subset \Om^8$ be the normalised domain of Lemma~\ref{lem:norm}. For every $P \in \Om_N$ with $f(P) > T$ there are a symmetry $g$ of $\Om$ and a permutation $\pi$ of the labels with $\|g^{-1}(P) - \pi(\tilde x)\|_\infty \le R$.
+\end{proposition}
+Note that the distance is measured \emph{after} mapping back by $g^{-1}$, in the frame of the certificate. This is the first difference from \cite{N9}, where the symmetries are sup-norm isometries (Section~\ref{sec:cover}).
+
+\subsection{Proof of Theorem~\ref{thm:main} from (A)--(C)}
+Let $P \in \Om^8$ with $f(P) > T$. By Lemma~\ref{lem:norm} there are $\lambda \ge 1$, an affine symmetry $h$ of $\Om$ and a relabelling such that the resulting $P' \in \Om_N$ satisfies $f(P') = \lambda f(P) \ge f(P) > T$. By Proposition~\ref{prop:bb}, $\|g^{-1}(P') - \pi(\tilde x)\|_\infty \le R$. Hence $\|\pi^{-1}(g^{-1}(P')) - x^*\|_\infty \le R + \rho < \rho_b$. Symmetries of $\Om$ and relabellings preserve $f$ and map $\Om^8$ to itself. So by Theorem~\ref{thm:local}, $f(P') \le \tstar$, with equality only if $g^{-1}(P') = \pi(x^*)$. Hence $f(P) \le \tstar$ for every $P$ (trivially if $f(P) \le T$). Also $f(x^*) = \tstar$, so $\max f = \tstar = \theta$ by Lemma~\ref{lem:ident}.
+
+If $f(P) = \tstar$, then $\tstar \le \lambda\tstar = f(P') \le \tstar$, so $\lambda = 1$. By Lemma~\ref{lem:norm}, $P$ then already touches all three sides, and $P'$ is $h(P)$ relabelled. So $P = h^{-1}g(x^*)$ up to labels. Conversely every image has $f = \tstar$. The six images are distinct point sets: in exact rationals, for each $g \ne \mathrm{id}$ some point of $g(\tilde x)$ is at sup-distance at least $0.115$ from every point of $\tilde x$ (the minimum over the five maps), far more than $3\rho$. Since $g(x^*)$ is within $2\rho$ of $g(\tilde x)$ (the linear parts have $\|\cdot\|_\infty \le 2$), $g(x^*) \ne x^*$ as point sets. The affine statement for a general triangle $K$ follows by mapping $K$ onto $\Om$. \qed
+% SRC: papers/paper4/check_paper4.py (image distances 0.115-0.239); stretch-factor argument as in paper3 Sec. 2.4
+
+% =====================================================================
+\section{The local certificate in the triangle}\label{sec:local}
+
+The certifier is that of \cite[Sec.~2.1 and App.~B]{N9} (our experiment~44), copied and modified for the triangle. Its input is the best $n = 8$ configuration of our triangle search. % SRC: E113/cert/NOTES.md Files, Inputs (105-shape-universality/results/pool_tri_n8.json[0])
+For $n = 8$ the certifier finds no rattlers, $11$ loaded ties and $6$ loaded wall contacts, so $17 = 2\cdot 8 + 1$ constraints. It finds the trivial symmetry group, so no reduction is used (all $11$ tie orbits are single ties, $11$ unknowns, rank $11$). It works in first-order mode. Krawczyk test: $Y = 3.49\cdot10^{-32}$, $Z_0 = 1.74\cdot10^{-14}$, $Z_2 = 60.25$, existence radius $r = 6.99\cdot10^{-32}$, $\rho = r$. It also passes at radius $10^{-6}$, which gives uniqueness of the zero in that larger ball. Lower bound on the multipliers $y_{\min} = 0.02457$, $\|M(x^*)^{-1}\|_\infty \le \bar m = 22.1308$, so $c = y_{\min}/\bar m$ and $\rho_b = \min(c/4, \tilde t/10) = c/4 \approx 2.7754\cdot10^{-4}$. % SRC: E113/cert/local_certs_tri.json "8" (n_core, rattlers, loaded_ties, loaded_walls, symmetry, extra.Y/Z0/Z2/reduced_rank/uniqueness_radius_1e6/Minv_norm_upper/basin_radius_exact, y_min_lower); identify_n8.log line 1
+The arguments of \cite[App.~B]{N9} (Krawczyk lemma, stress-matrix lemma, uniform decrease, basin theorem) carry over with the following changes. Each is justified here.
+\begin{enumerate}[label=(L\arabic*)]
+\item \emph{Walls.} A wall is an affine function $g_w(p) = a_w\cdot p + b_w \ge 0$, with $(a,b) = ((1,0),0)$ for the left side, $((0,1),0)$ for the bottom side and $((-1,-1),1)$ for the hypotenuse. A contact $(j,w)$ means $g_w(p_j) = 0$, and its row in the stress matrix $M$ is $[a_w \text{ at the columns of } p_j,\ 0]$. In the uniform-decrease lemma \cite[Lemma~B.3]{N9} the only property used is $s_w \ge 0$ for a feasible displacement $d$. This holds because $s_w = a_w\cdot d_j = g_w(x^*_j + d_j) \ge 0$, since $g_w$ is affine and vanishes at $x^*_j$. % SRC: cert/NOTES.md change 1
+\item \emph{Unchanged bounds.} The quadratic remainder of a triangle area is still at most $4\delta^2$. The cap $\tilde t/10$ still works, because $\|\nabla A_T\|_1 \le 3$ needs only coordinates in $[0,1]$, and $\Om \subset [0,1]^2$. The bound $\|M(x^*) - M(\tilde x)\|_\infty \le 6\rho$ still holds, because wall rows are constant.
+\item \emph{Inside $\Om$.} For every point $j$ and wall $w$, $g_w(p_j(u))$ is affine in the parameters $u$. Either it is identically $0$ (an exact contact), or $g_w(\tilde p_j) > \|a_w\|_1\rho$ is checked exactly. So $x^* \in \Om^8$, with exactly the listed contacts. (In \cite{N9} the check was that free coordinates lie in $(\rho, 1-\rho)$.)
+\item \emph{All other triangles exact.} Each of the $56 - 11 = 45$ triangles that are not ties is checked in exact arithmetic: $\lvert A_T(\tilde x)\rvert - 4\rho - 4\rho^2 > \tilde t + r$. This removes the double-precision shortcut of the original certifier \cite[App.~B.7(ii)]{N9}, so $f(x^*) = \tstar$ follows from the certificate alone.
+\item \emph{Symmetries.} The symmetries of $\Om$ are the six affine maps $g(p) = Mp + c$ that permute the vertices, with integer $M$, $c$ and $\lvert\det M\rvert = 1$. They are not isometries. The certifier uses them only through $\lvert A_{g(T)}(gx)\rvert = \lvert A_T(x)\rvert$ and through the exact mapping of walls to walls. At $n = 8$ the group found is trivial, so this change is not exercised.
+\end{enumerate}
+% SRC: cert/NOTES.md changes 1-5, 9
+In the JSON record, $\rho_b'$ and $y_{\min}$ are rounded down from the exact rationals, and $r$, $\rho'$ and $\bar m$ are rounded up. The exact values are stored as well. % SRC: cert/NOTES.md change 9; local_certs_tri.json extra.*_exact
+
+\begin{theorem}[local certificate]\label{thm:local}
+There is $x^* \in \Om^8$ with $\|x^* - \tilde x\|_\infty \le \rho$ such that $f(x^*) = \tstar \in [t_{\rm lower}, t_{\rm upper}]$ and
+\[
+  f(x) < \tstar \quad\text{for every } x \in \Om^8 \text{ with } 0 < \|x - x^*\|_\infty < \rho_b .
+\]
+Moreover, $(x^*, \tstar)$ is the unique zero of the tie system with contacts within sup-distance $10^{-6}$ of the centre.
+\end{theorem}
+\begin{proof}
+This is \cite[Theorem~2.1 and Theorem~B.4]{N9}, run with the changes (L1)--(L5), each of which keeps the argument valid as explained above.
+\end{proof}
+
+\begin{lemma}[identification]\label{lem:ident}
+$p$ is irreducible over $\Q$ and has exactly one real root $\theta$, and $\tstar = \theta$.
+\end{lemma}
+\begin{proof}
+The script \texttt{identify\_n8.py} does the following in exact arithmetic (Python fractions and \texttt{sympy} polynomials over $\Q$). It shows that $p$ is irreducible and has exactly one real root. It shows that $p$ changes sign on $[t_{\rm lower}, t_{\rm upper}]$, and a Sturm count gives exactly one root in that interval. Each of the $10$ parameters of the certifier's parametrisation is then written as a polynomial $c_l(\theta)$ of degree $\le 6$ with rational coefficients. These polynomials were \emph{proposed} by PSLQ on a $10^{-400}$ Newton polish; a first attempt at $210$ digits gave spurious relations, which the exact check rejected. Every tie equation $\sigma_k A_{T_k}(p(c(\theta))) - \theta$ is $0$ modulo $p$, by exact polynomial remainder. So $(c(\theta), \theta)$ is an exact zero of the tie system, and it satisfies the contacts because the parametrisation does. A rigorous bound over the enclosure of $\theta$ puts this zero within $6.4\cdot10^{-30}$ of the certificate centre, inside the $10^{-6}$ ball of Theorem~\ref{thm:local}. By uniqueness it is $(x^*, \tstar)$, so $\tstar = \theta$.
+\end{proof}
+% SRC: E113/cert/NOTES.md "identify_n8.py proves" items 1-3, Caution; identify_n8.json (irreducible, real_roots_total 1, roots_in_enclosure 1, tie_equations_vanish_mod_p, dist_alg_to_centre_upper 6.37e-30, within_uniqueness_ball_1e6, proved_t_equals_septic_root); identify_n8.log
+
+% =====================================================================
+\section{Reductions}\label{sec:reductions}
+
+None of the square's reductions carries over. The square used axis-parallel stretches, the mean condition $\frac1n\sum x_i \le \frac12$, the $y$-mirror and the diagonal condition $Q_x \ge Q_y$ \cite[Lemma~3.1]{N9}. All are replaced by the following. Write $A = \sum_i x_i$, $B = \sum_i y_i$ and $C = \sum_i (1 - x_i - y_i)$. These are the sums of the barycentric coordinates of the points with respect to the vertices $(1,0)$, $(0,1)$ and $(0,0)$. % SRC: E113/bb/NOTES.md "Reductions"
+
+\begin{lemma}[walls]\label{lem:wall}
+Let $P \in \Om^n$ with $f(P) > 0$. There is $P' \in \Om^n$ with $f(P') = \lambda f(P)$ for some $\lambda \ge 1$, such that $P'$ has a point on each of the three sides. Moreover $\lambda = 1$ if and only if $P$ already touches all three sides, and then $P' = P$.
+\end{lemma}
+\begin{proof}
+(i) \emph{Left side.} Let $\delta = \min_i x_i$ and suppose $\delta > 0$. Then $\delta < 1$, since otherwise every point is $(1,0)$ and $f = 0$. The affine map $a(x,y) = ((x-\delta)/(1-\delta),\ y/(1-\delta))$ sends $\{x \ge \delta\}\cap\Om$ into $\Om$: $x' \ge 0$, $y' \ge 0$ and $x' + y' = (x + y - \delta)/(1-\delta) \le 1$. Its determinant is $(1-\delta)^{-2} > 1$, so it multiplies every area by that factor. The points with $x = \delta$ land on $x = 0$. Points with $y = 0$ keep $y' = 0$, and points with $x + y = 1$ keep $x' + y' = 1$, so contacts with the other two sides are preserved.
+(ii) \emph{Bottom side.} The same with $x$ and $y$ exchanged: $\delta = \min_i y_i$ and $(x,y)\mapsto(x/(1-\delta),\ (y-\delta)/(1-\delta))$. This preserves contacts with $x = 0$ and $x + y = 1$.
+(iii) \emph{Hypotenuse.} Let $s = \max_i(x_i + y_i)$. Then $s > 0$, since otherwise every point is at the origin. If $s < 1$, the homothety $p \mapsto p/s$ maps $P$ into $\Om$, multiplies areas by $s^{-2} > 1$, puts a point on $x + y = 1$ and keeps the contacts with $x = 0$ and $y = 0$.
+Apply (i), (ii) and (iii) in this order. Each step keeps the contacts made before it, and $\lambda$ is the product of the factors, each $> 1$ when the step is applied. So $\lambda = 1$ exactly when no step is applied, that is, when $P$ already touches all three sides.
+\end{proof}
+% SRC: bb/NOTES.md Lemma W and proof
+
+The difference from the square is that a stretch toward one side must not lose the contacts with the others. In the square, axis-parallel stretches do this automatically. In the triangle, the map in (i) fixes the bottom side and the hypotenuse as sets of lines, which is why it is the correct analogue.
+
+\begin{lemma}[symmetries]\label{lem:s3}
+The six affine maps of $\Om$ onto itself are the permutations of the barycentric coordinates $(x, y, 1-x-y)$. They permute $(A, B, C)$. They have $\lvert\det\rvert = 1$, so they preserve all areas and $f$. They also permute the three sides, so they preserve the property of touching all three sides. Hence we may assume $A \ge B \ge C$.
+\end{lemma}
+\begin{proof}
+An affine self-map of a triangle permutes its vertices, and so permutes the barycentric coordinates of every point. Summing over the points gives a permutation of $(A,B,C)$. Choose the permutation that sorts them.
+\end{proof}
+
+\begin{lemma}[normalisation]\label{lem:norm}
+For every $P \in \Om^8$ with $f(P) > 0$ there is $P' = \mathrm{relabel}(g(P''))$, with $P''$ from Lemma~\ref{lem:wall} and $g$ a symmetry of $\Om$, such that $f(P') = \lambda f(P)$ with $\lambda \ge 1$ and $P'$ lies in
+\[
+\begin{aligned} \Om_N = \bigl\{ P \in \Om^8 :{} &x_0 \le x_1 \le \dots \le x_7,\ x_0 = 0,\ A \ge B \ge C,\\ &y_b = 0 \text{ for some } b,\ x_c + y_c = 1 \text{ for some } c \bigr\}. \end{aligned}
+\]
+If $\lambda = 1$, then $P'$ is the image of $P$ under a symmetry of $\Om$, relabelled.
+\end{lemma}
+\begin{proof}
+Apply Lemma~\ref{lem:wall}, then Lemma~\ref{lem:s3}, then label the points in order of increasing $x$. Relabelling preserves every condition. The point on the side $x = 0$ has the smallest $x$, so $x_0 = 0$.
+\end{proof}
+
+\emph{Root boxes.} There is one root box for each pair $(b,c) \in \{0,\dots,7\}^2$, giving $64$ roots. Each root has $x_0 = 0$ and $y_b = 0$ fixed by the box, and the equality $x_c + y_c = 1$ is imposed in P0 and by an LP row. The cases $b = c$, $b = 0$ and $c = 0$ are included. They cover a point at a vertex, and overlaps between roots cost only time. The roots cover $\Om_N$. % SRC: bbt.py roots(); progress.log "open 64"
+The square method of \cite{N9} has $\binom n2$ roots ($36$ at $n = 9$, $28$ at $n = 8$). In the triangle there is no analogue of the conditions $x_{n-1} = 1$, mean $\le \frac12$, the $y$-mirror or the diagonal reduction. Together with $n^2$ instead of $\binom n2$ roots, this is why the triangle tree is far larger than the square tree for the same $n$. % SRC: bb/NOTES.md "Dropped from the square"; "n = 8 estimate"
+
+% =====================================================================
+\section{The branch and bound}\label{sec:tests}
+
+Boxes, the grid $D = 2^{24}$, the order of the tests, splitting, failures and the LP skip are as in \cite[Sec.~4]{N9}. The test P1 (exact corner ranges of $2\Delta D^2$ in 64-bit integers, and the orientation pattern $\sigma$) is unchanged. It remains valid because the corner range over the box bounds $2\Delta$ on the box, hence on its intersection with $\Om_N$. What changes is P0, the rows of P2, the infeasible case of P2, and the cover test. The code is \texttt{bbt.py}, a self-contained copy of the code of \cite{N9}; the square code was not modified. % SRC: bb/NOTES.md "Tests ... (changes vs bb2)"; bbt.py docstring
+
+\subsection{P0: propagation of the triangle constraints}
+In exact integers at grid units, P0 propagates the constraints of $\Om_N$:
+\begin{itemize}
+\item sorted $x$;
+\item $x_i + y_i \le D$;
+\item $x_c + y_c \ge D$;
+\item $\sum y \le \sum x$ (this is $A \ge B$);
+\item $\sum x + 2\sum y \ge nD$ (this is $B \ge C$, since $C = n - A - B$).
+\end{itemize}
+The new bounds are
+\begin{gather*}
+h(x_i) \le D - \ell(y_i),\quad h(y_i) \le D - \ell(x_i),\quad \ell(x_c) \ge D - h(y_c),\quad \ell(y_c) \ge D - h(x_c),\\
+h(y_i) \le \textstyle\sum_j h(x_j) - \sum_{j\ne i}\ell(y_j),\qquad \ell(x_i) \ge \sum_j \ell(y_j) - \sum_{j \ne i} h(x_j),\\
+\ell(x_i) \ge nD - 2\textstyle\sum_j h(y_j) - \sum_{j\ne i}h(x_j),\qquad \ell(y_i) \ge \bigl\lfloor (nD - \sum_j h(x_j) - 2\sum_{j\ne i}h(y_j))/2 \bigr\rfloor .
+\end{gather*}
+Here $\ell$ and $h$ are the current lower and upper endpoints. Each bound is implied, for every real point of the box that satisfies the constraints, because the sums are bounded by box endpoints. All bounds are integers. The one halving is rounded down, and it gives a lower bound, so the rounding is outward. Hence no point of $\Om_N$ is removed. A box is declared empty only when some $\ell > h$, or when a sum test fails at the box extremes ($\sum\ell(y) > \sum h(x)$, or $\sum h(x) + 2\sum h(y) < nD$). All magnitudes are at most $3nD < 2^{30}$. As in \cite[App.~A.1]{N9}, P0 only raises $\ell$ and lowers $h$. % SRC: bbt.py k_propagate; bb/NOTES.md P0
+
+\subsection{P2: rows for the slanted side and the ordering}
+The LP has the area rows (R1), the McCormick rows (R2) and the ordering rows (R3) of \cite[App.~A]{N9}. The square's mean row is removed. The new rows, written as $D^2$ times natural rows, are:
+\begin{enumerate}[label=(R\arabic*),start=4]
+\item $DX_i + DY_i \le D^2$ for every $i$ ($8$ rows, always valid on $\Om$);
+\item $-DX_i - DY_i \le -D^2$ for every $i$ ($8$ rows); the row with $i = c$ is switched on, and the others are switched off;
+\item $-D\sum X + D\sum Y \le 0$ (this is $A \ge B$);
+\item $-D\sum X - 2D\sum Y \le -nD^2$ (this is $B \ge C$).
+\end{enumerate}
+For $n = 8$ the model has $361$ rows and $73$ columns. Before the exact test, the certificate zeroes the multiplier of every row that is not valid on the box. These are the switched-off area rows and the rows (R5) with $i \ne c$; the code asserts that no such multiplier is nonzero. Another difference from the square code: in the float LP, $\tau$ has no lower bound. The certificate never uses $\tau$'s bounds, and with $\tau \ge 0$ HiGHS reported ``infeasible'' on boxes where every determined $\sigma\,2\Delta$ is forced negative. Without the bound, such boxes are pruned by the ordinary test. % SRC: bbt.py _build_lp, active_rows, _exact, lp_bound2 (flo_[0] = -INF); bb/NOTES.md P2; printed nr = 361, nv = 73
+
+\emph{The infeasible case.} Sometimes the LP is infeasible: the linear rows (R3)--(R7) and the box are inconsistent, but interval propagation in P0 did not detect it. In that case HiGHS returns a dual ray. Both signs of the ray (clipped at $0$) are tried as multipliers in the same exact test of Lemma~\ref{lem:p2}. A Farkas ray typically gives $s = 0$, but the test does not assume this: whichever case of the lemma applies decides. In the run, $242\,117$ boxes ($0.11\%$ of the LPs solved) were pruned through the dual ray of an infeasible LP. % SRC: bb/NOTES.md P2 ("about 0.3 % of LPs are infeasible"); bbt.py lp_bound2 kInfeasible branch
+The exact test (put $r = G^{\mathsf T}\mu$, $s = r_\tau$ and $N = \mu^{\mathsf T}H + \sum_{u\ne\tau}\max(-r_u\underline u, -r_u\overline u)$, all in integers, exactly as in \cite[App.~A.4]{N9}) is extended as follows.
+
+\begin{lemma}[P2 certificate, triangle]\label{lem:p2}
+Let $B$ be a box with integer endpoints in $[0,D]$, with orientation pattern $\sigma$ and root index $c$. Let $\mu \ge 0$ be an integer vector that vanishes on every row not valid on $B$. If either $s > 0$ and $N \le 2TD^2 s$, or $s = 0$ and $N < 0$, then no $P \in B \cap \Om_N$ with $x_c + y_c = 1$ has $f(P) > T$.
+\end{lemma}
+\begin{proof}
+Suppose such a $P$ exists, and let $u$ be its intended values as in \cite[App.~A.2]{N9}. Every row with $\mu_\iota > 0$ holds at $u$. Area rows hold by the orientation lemma \cite[Lemma~A.1]{N9}. McCormick rows hold since $P \in B$. Rows (R3), (R4), (R6) and (R7) hold since $P \in \Om_N$, and (R5) for $i = c$ holds since $x_c + y_c = 1$. Summing with weights $\mu$ and bounding each $u_c$ by its column interval gives $s\hat\tau \le N$, as in \cite[Lemma~A.2]{N9}. If $s > 0$, this gives $\hat\tau \le 2TD^2$; but $f(P) > T$ gives $\hat\tau > 2TD^2$, a contradiction. If $s = 0$, it gives $0 \le N$, which contradicts $N < 0$, so $B \cap \Om_N$ contains no such $P$ at all. (When $s = 0$ no area row is used, so $\hat\tau$ need not be defined.)
+\end{proof}
+% SRC: bb/NOTES.md Lemma P2' and proof; bbt.py _exact ("ok = ... if s > 0 else (N < 0)")
+If $s < 0$ the certificate is rejected and the box is not discarded (it goes on to splitting); the lemma makes no claim in that case. The case $s = 0$ is new: it is a Farkas certificate that the box is infeasible. The rational audit \texttt{audit2} rebuilds the rows (R1)--(R7) from their definitions in fractions, applies the same two cases, and rejects any nonzero multiplier on an invalid row. % SRC: bbt.py audit2
+
+\emph{Overflow.} Entries of $G$ have absolute value at most $2D$ (row (R7) has $2D$ on the $Y$ columns), and McCormick entries are box endpoints in $[0,D]$. The square paper bounded partial sums by the largest column count times $D$. Here the code instead computes, for each column, the sum of the coefficient bounds, and asserts $\mathrm{colsum}_{\max}\cdot2^{25} < 2^{62}$. For $n = 8$, $\mathrm{colsum}_{\max} = 34D$. This comes from an $X_i$ column: $4\cdot7$ McCormick entries, $2$ ordering entries, and one entry each from (R4), (R5), (R6) and (R7). So every int64 partial sum of $r = G^{\mathsf T}\mu$ (with $\mu$ split into two halves below $2^{25}$, as in \cite[App.~A.5]{N9}) is below $34\cdot2^{24}\cdot2^{25} < 2^{55}$. The $\tau$ column has $112$ entries of size $1$. Also $\lvert H\rvert \le nD^2 = 2^{51}$. % SRC: bb/NOTES.md Overflow (A.5); bbt.py _build_lp asserts; printed colsum_max = 570425344 = 34 D, colcount_max = 112
+
+\subsection{Cover by the basin ball with non-isometric symmetries}\label{sec:cover}
+In \cite{N9} a box is covered if it lies in the sup-ball of radius $R$ around a symmetry image of $\tilde x$. That suffices there, because the symmetries of the square are sup-norm isometries. In $\Om$ they are not. Write $g^{-1}(p) = Mp + v$. Then $\|M\|_\infty$ (the largest row sum) is $1$ for the identity and for $(x,y)\mapsto(y,x)$. It is $2$ for the four maps that move the hypotenuse; for example $(x,y)\mapsto(1-x-y,\,y)$ has $M = \bigl(\begin{smallmatrix}-1&-1\\0&1\end{smallmatrix}\bigr)$. These norms are computed exactly and asserted when the code is loaded. A ball of radius $R$ around $g(\tilde x)$ would therefore only give distance $2R$ after mapping back, which may exceed $\rho_b - \rho$. % SRC: bb/NOTES.md Cover; bbt.py OPNORM assertion; cert/NOTES.md GAPs (first item)
+The test therefore works in the frame of the certificate. If every box width is at most $D/1000$, floating point proposes a symmetry $g$ and a matching $j$ of box points to points of $\tilde x$, and the matching is checked to be injective. Then, in exact rationals, each of the $4$ corners $q$ of the rectangle of every point $i$ is mapped back, and the code requires
+\[
+ \|g^{-1}(q) - \tilde x_{j(i)}\|_\infty \le R .
+\]
+\begin{lemma}\label{lem:cover}
+If the test passes for a box $B$, then $\|g^{-1}(P) - \pi(\tilde x)\|_\infty \le R$ for every $P \in B$, where $\pi$ is the relabelling given by $j$.
+\end{lemma}
+\begin{proof}
+For each coordinate $k$, the function $p \mapsto \lvert(g^{-1}p - \tilde x_{j(i)})_k\rvert$ is the absolute value of an affine function, hence convex. On a rectangle its maximum is attained at a corner. So the bound at the four corners holds for every point of the rectangle of point $i$, and so for every $P \in B$.
+\end{proof}
+% SRC: bb/NOTES.md Cover; bbt.py covered()
+This is exactly the conclusion of Proposition~\ref{prop:bb}, with no factor $2$ lost and none missing. It assumes that the certificate's basin radius is a sup-norm radius around $x^*$ in the same frame, which is how Theorem~\ref{thm:local} is stated.
+
+% =====================================================================
+\section{Soundness}\label{sec:sound}
+
+The list (S1)--(S5) of \cite[Sec.~5]{N9} applies, with these changes.
+\begin{enumerate}[label=(S\arabic*)]
+\item \emph{Coverage.} The $64$ root boxes contain $\Om_N$ (Lemma~\ref{lem:norm}). P0 removes only points outside $\Om_N$ (with the root's $c$). Splitting replaces a box by two closed boxes whose union is the box.
+\item \emph{Discards.} P1 discards when some triple has $\lvert\Delta\rvert \le T$ on the whole box. P2 discards through Lemma~\ref{lem:p2}, in both of its cases. The cover discards through Lemma~\ref{lem:cover}. LP skips and solver failures never discard.
+\item \emph{Exactness.} P0 and P1 use 64-bit integers with magnitudes below $2^{51}$. P2 uses int64 partial sums below $2^{55}$ (asserted $< 2^{62}$) and arbitrary-precision sums. The cover uses rationals. Floating point only chooses the split coordinate, the LP multipliers (or the dual ray), and the symmetry and matching in the cover.
+\item \emph{Termination.} The run ends when no box is open or in process. Leaves and internal nodes satisfy the identity of a forest of $64$ full binary trees (Section~\ref{sec:run}).
+\item \emph{Local theorem.} Theorem~\ref{thm:local}, with the margins of Section~\ref{sec:thresholds}.
+\end{enumerate}
+\noindent\emph{Trust base.} \texttt{bbt.py} (about $550$ lines, including numba-compiled kernels), the parallel driver \texttt{run\_\allowbreak par\_\allowbreak t.py}, the certifier \texttt{certify\_\allowbreak tri.py} (about $550$ lines), the identification script \texttt{identify\_\allowbreak n8.py} with \texttt{sympy}'s exact routines over $\Q$, Python integers and fractions, and numba's int64 arithmetic. Overflow in the int64 code is excluded by the bounds above; it is not checked at run time. HiGHS is outside the trust base. None of this is formally verified. % SRC: bb/NOTES.md Files; cert/NOTES.md Trust base; wc -l bbt.py = 545
+
+% =====================================================================
+\section{Validation}\label{sec:validation}
+
+These checks test the implementation. They are not part of the proof. % SRC: bb/NOTES.md "Validation" table and bullets
+\begin{itemize}
+\item \emph{Smaller $n$.} With the same code: $n = 5$ in the weaker form $f \le f^*(1+10^{-3})$, with all $10\,809$ P2 certificates audited ($96$ of them Farkas), in $32\,587$ nodes. $n = 6$ in the same weaker form, in $164\,550$ nodes. $n = 7$ in exact mode in $3\,100\,671$ nodes and $325$\,s on $12$ workers, with $160$ covered boxes and $1\,824$ audits. The exact $n = 7$ run re-proves the Zeng--Chen value \cite{ZC19}: every $7$ points in $\Om$ have $f \le 7/144$ (normalised $7/72$), with equality only at the symmetry images of the certified configuration. All three runs had zero failures and no LP failures. Exact mode is not available at $n = 5$ and $n = 6$ (at $n = 6$ the certificate is second order and has no basin radius), so there only the weaker form is proved. (No local certificate was computed at $n = 5$.) (The $n = 7$ run started a few minutes before the \texttt{OPNORM} assertion was added; the cover test itself was identical.)
+\item \emph{Negative control.} With $n = 5$, $T = f^*_5(1-10^{-3})$ and no cover, the claim is false, so the search must fail. It does: $5$ failures after $6\,638$ nodes, at grid-floor boxes next to the optimum.
+\item \emph{Random soundness test} (\texttt{test\_sound\_t.py}, $n = 6, 7, 8$, $600$ boxes each, near the optimum and all six images). There were zero violations of P0, P1, the orientation pattern, the P2 bound, the audit and the cover. For $n = 8$ this covered $150$ LP boxes and $31$ covered boxes.
+\item \emph{P0 test} (\texttt{test\_p0\_t.py}, $n = 8$). $20\,000$ random boxes around exact integer domain points were tested, with $190\,688$ domain samples kept. None was removed, and no box containing a sample was declared empty.
+\item \emph{Audit.} During the $n = 8$ run, a random $0.2\%$ of P2 certificates were re-derived in rational arithmetic by \texttt{audit2}. All $183\,861$ agreed.
+\item \emph{Review.} Before the $n = 8$ run, a separate AI-assisted code review of the port (not a review by a person) found no critical issue; its minor findings were fixed before the run.
+\end{itemize}
+
+% =====================================================================
+\section{The run}\label{sec:run}
+
+The $n = 8$ run used exact mode, LP skip threshold $1.2$ and audit rate $0.2\%$. It started on 13 November 2026 at 15:54 and finished on 14 November 2026 at 01:32 without interruption, using 14 worker processes (HiGHS 1.16.0). Table~\ref{tab:run} gives its statistics. % SRC: bb/launch_n8.ps1 (arguments); results/run_n8/progress.log first and DONE lines; stdout (HiGHS version)
+
+\begin{table}[htbp]
+\centering\small
+\caption{Statistics of the $n = 8$ run.}\label{tab:run}
+% SRC: E113/bb/results/run_n8/stats.json; cert/local_certs_tri.json
+\begin{tabular}{@{}lr@{}}
+\toprule
+threshold $T$ & $2442363801968369/2^{56}$ \\
+certificate $t_{\rm lower}$ ($T < t_{\rm lower}$, gap $3.39\cdot10^{-11}$) & $0.03389460662709860617940540248694$ \\
+cover radius $R$ & $\approx 2.7754\cdot10^{-4}$ \\
+root boxes & $64$ \\
+nodes & $243\,871\,662$ \\
+\quad discarded by P0 & $84\,264$ \\
+\quad discarded by P1 & $30\,139\,572$ \\
+\quad discarded by P2 & $91\,712\,019$ \\
+\quad\quad of which via the dual ray of an infeasible LP & $242\,117$ \\
+\quad covered by the basin ball & $8$ \\
+\quad failures & $0$ \\
+LPs solved / LP skips & $212\,067\,283$ / $1\,580\,535$ \\
+LP solver not optimal and no certificate (box split) & $1$ \\
+P2 certificates audited in rational arithmetic & $183\,861$ (all agreed) \\
+maximum depth & $146$ \\
+closed fraction of root volume (float tally) & $0.999999999999999$ \\
+wall time & $34\,646$\,s ($9.6$\,h) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Farkas prunes are counted inside the P2 discards: the code returns the same outcome for both cases of Lemma~\ref{lem:p2}. % SRC: bbt.py lp_bound2 (returns True on Farkas), process ('p2'); run_par_t.py work (farkas counter)
+
+\emph{Consistency.} The discarded and covered boxes number $84\,264 + 30\,139\,572 + 91\,712\,019 + 8 + 0 = 121\,935\,863$. The remaining $121\,935\,799$ nodes were split. Leaves minus internal nodes is $64$, the number of root boxes, as a forest of $64$ full binary trees requires. Nodes reaching the LP stage number $243\,871\,662 - 84\,264 - 30\,139\,572 - 8 = 213\,647\,818$, which equals LPs solved plus LP skips. The failure log and the error log are empty. The one LP failure is a box that was split, not discarded, so it costs time only. The script \texttt{check\_paper4.py} (in the repository) re-checks these facts from \texttt{stats.json} and \texttt{fails.jsonl}. It also checks, in exact rationals, $T \le t_{\rm lower}(1-10^{-9}) < t_{\rm lower}$ with the certificate's $t_{\rm lower}$, the polynomial $q$, and the distinctness of the six images. It passes. This is a consistency check of the counters the run recorded. It does not re-derive any box, so it is not an independent check of the computation. % SRC: arithmetic on stats.json; papers/paper4/check_paper4.py output (ALL CHECKS PASSED); fails.jsonl and stderr_*.txt sizes 0
+The pre-run estimate from random probes was about $2\cdot10^8$ nodes and $8$ hours, with a heavy tail. % SRC: bb/NOTES.md n = 8 estimate
+
+% =====================================================================
+\section{Limitations and what an independent check needs}\label{sec:limits}
+
+\begin{itemize}
+\item \emph{Not independently checked.} As stated in Remark~\ref{rem:status}, this is an AI-assisted computer proof that only its author has examined, apart from the code review mentioned there.
+\item \emph{No stored certificates.} The $1.2\cdot10^8$ leaves of the tree are not stored. The proof can be re-checked only by re-running the search, about $10$ hours on $14$ workers. Every P2 discard was decided by the exact integer certificate. The rational audit was additionally run on a random $0.2\%$ of them. Unlike \cite{N9}, no clean-room checker of P2 certificates has been run for the triangle rows.
+\item \emph{New proof steps.} The P0 triangle rules, the rows (R4)--(R7), the conditional (R5) rows, the Farkas case and the cover with non-isometric symmetries are new compared with the code of \cite{N9}. They are justified in Sections~\ref{sec:reductions}--\ref{sec:tests} and tested in Section~\ref{sec:validation}, but they have not been reviewed by a person other than the author.
+\item \emph{Local certificate.} The certifier was modified for the triangle ((L1)--(L5)). The modified version has not been checked by separately written code.
+\item \emph{Trust base} as in Section~\ref{sec:sound}; none of it is formally verified.
+\item \emph{Resume.} The driver can resume from a checkpoint, but the checkpoint does not store a hash of the problem definition beyond $T$ and a flag. The run did not resume, so this does not affect the result.
+\end{itemize}
+% SRC: bb/NOTES.md Soundness doubts; launch_n8.ps1; run_par_t.py l.72 (state check: T_exact, diag)
+
+An independent check would need at least the following.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Re-running the verifier}: running the published code on other hardware and obtaining zero failures. Node counts need not match exactly, because the hot-started LP depends on the order in which boxes are processed.
+\item \emph{An independent implementation} of P0, P1, P2 (including the rows (R4)--(R7) and the Farkas case) and of the cover test, ideally emitting per-leaf certificates that a small, separately written checker verifies. Also needed is an independent check of the local certificate at $n = 8$, including the changes (L1)--(L5), and of the identification Lemma~\ref{lem:ident}.
+\item \emph{Review of the reductions}: Lemmas~\ref{lem:wall}--\ref{lem:norm}, the outward rounding in P0, Lemma~\ref{lem:p2}, Lemma~\ref{lem:cover}, and the deduction of Theorem~\ref{thm:main} in Section~\ref{sec:outline}.
+\end{enumerate}
+
+% =====================================================================
+\section*{Data and code availability}
+The following are available in the public repository accompanying this paper, \repourl:
+the branch-and-bound code \texttt{bbt.py} and its drivers and tests (experiment~113, \texttt{bb/}); the triangle certifier \texttt{certify\_tri.py} and its output \texttt{local\_certs\_tri.json}; the identification script \texttt{identify\_n8.py} with its log and the exact coordinates in $\Q(\theta)$ (\texttt{identify\_n8.json}) (all in \texttt{cert/}); the run logs and statistics; and the consistency check \texttt{check\_paper4.py}.
+
+\section*{Use of AI tools}
+The author used Claude, an AI system developed by Anthropic, for computation (writing and running search, certification and analysis code) and for drafting text. All claims were checked against the computational records; the author takes responsibility for the content. AI systems are not authors of this work.
+
+% =====================================================================
+\begin{thebibliography}{99}
+
+\bibitem{CZZ} L.~Chen, Z.~Zeng and W.~Zhou, An upper bound of Heilbronn number for eight points in triangles, \emph{J. Comb. Optim.} \textbf{28} (2014), no.~4, 854--874, doi:10.1007/s10878-012-9585-5.
+\bibitem{N9} E.~Hendren, A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal, companion paper, 2026.
+\bibitem{Stead} T.~Stead (maintainer), The Heilbronn Problem (record tables, exact verification and attributions), \url{https://math.tejstead.com/heilbronn}, triangle pages and methods page accessed 14 November 2026.
+\bibitem{SMtri} N.~Sudermann-Merx, Heilbronn's problem in the unit triangle: computational optimality certificates for $n \le 8$, arXiv:2607.15021v3, 30 October 2026; to appear in \emph{Operations Research Proceedings 2026}.
+\bibitem{ZC19} Z.~Zeng and L.~Chen, Determining the Heilbronn configuration of seven points in triangles via symbolic computation, in: \emph{Computer Algebra in Scientific Computing} (CASC 2019), Lecture Notes in Comput. Sci. \textbf{11661}, Springer, 2019, 458--477, doi:10.1007/978-3-030-26831-2\_30.
+
+\end{thebibliography}
+
+\end{document}
