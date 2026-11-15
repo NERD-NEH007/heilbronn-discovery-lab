@@ -10,7 +10,7 @@
 5. record n = 22 (paper 2, Theorem 3.1(a)): from the coordinates printed in paper 2, exactly 34 triangles lie within
    relative 1e-12 of the minimum, the same for every tolerance up to 1e-2, and the next triangle is 1.614 % above t.
 """
-import os, sys, json, time, subprocess, tempfile
+import glob, os, sys, json, time, subprocess, tempfile
 from fractions import Fraction as Fr
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import hlib
@@ -90,6 +90,9 @@ check('triangle n = 8 run: done, 0 failures, leaves - internal = 64 roots, T <= 
       and open(os.path.join(ROOT, 'certificates', 'exp113', 'run_n8', 'fails.jsonl')).read().strip() == '')
 r = subprocess.run([sys.executable, os.path.join(HERE, 'exp113', 'cert', 'identify_n8.py')], capture_output=True, text=True, timeout=300)
 check('triangle n = 8 value = root of the septic (exact, identify_n8.py)', r.returncode == 0 and "'proved_t_equals_septic_root': True" in r.stdout)
+# 8. triangle n = 9 (exp 127): all eight exact family runs closed
+_fam = glob.glob(os.path.join(ROOT, 'certificates', 'exp127', 'results', 'n9_*_exact_1e-09_G37.json'))
+check('triangle n = 9: 8 exact family runs, 0 unresolved', len(_fam) == 8 and all(len(json.load(open(f))['unresolved']) == 0 for f in _fam))
 try:
     sys.path.insert(0, os.path.join(HERE, 'exp110')); import bb2
     check('exp 110 bb2 imports', hasattr(bb2, 'Problem2'))

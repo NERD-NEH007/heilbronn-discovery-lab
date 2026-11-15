@@ -1,0 +1,13 @@
+n=8 SSS0 mode=eps val=0.001 T=0.033928501233726 T/t-1=1.000e-03 G=30 Q=491520 l0=0.2574 params=6 free=2 cover_R=2.7754e-04
+  76/769 roots 9s leaves=160 cliques=35036 local=188098 P2=11509 cover=0 unres=0
+  152/769 roots 17s leaves=305 cliques=82076 local=452844 P2=32321 cover=0 unres=0
+  228/769 roots 21s leaves=428 cliques=108608 local=603398 P2=44414 cover=0 unres=0
+  304/769 roots 29s leaves=574 cliques=160909 local=898323 P2=68595 cover=0 unres=0
+  380/769 roots 39s leaves=724 cliques=204786 local=1147854 P2=91127 cover=0 unres=0
+  456/769 roots 46s leaves=846 cliques=245456 local=1386566 P2=113014 cover=0 unres=0
+  532/769 roots 50s leaves=939 cliques=263615 local=1492333 P2=122867 cover=0 unres=0
+  608/769 roots 50s leaves=1015 cliques=263616 local=1492336 P2=122867 cover=0 unres=0
+  684/769 roots 50s leaves=1091 cliques=263618 local=1492342 P2=122867 cover=0 unres=0
+  760/769 roots 50s leaves=1171 cliques=266228 local=1508298 P2=123666 cover=0 unres=0
+{"outer_leaves": 1199, "outer_splits": 430, "outer_E": 0, "outer_T": 202, "outer_deficit": 152, "cells_excl": 407301, "cliques": 283694, "local_nodes": 1614504, "T": 980478, "E": 0, "P2": 368520, "lp_calls": 770936, "cover": 0, "splits": 1065506, "fail_nodes": 800004, "local_fail": 4, "unresolved": 0, "tri3": 0, "unresolved_cliques": 0, "secs": 2150.1069910526276, "wall": 1505.8367836475372, "roots": 769}
+VERDICT: PROVED: no config in family with Phi > T

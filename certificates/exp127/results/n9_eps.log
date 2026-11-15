@@ -1,0 +1,113 @@
+n=9 MMM mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=0 free=6 cover_R=7.5691e-05
+  fixed supports: 396 cells kept, 38372 edges
+  round 1: 79/396 roots 5s leaves=79 cliques=2560 local=9654 P2=104 cover=0 unres=0 requeued=0
+  round 1: 158/396 roots 6s leaves=158 cliques=2982 local=11228 P2=121 cover=0 unres=0 requeued=0
+  round 1: 237/396 roots 6s leaves=237 cliques=2982 local=11228 P2=121 cover=0 unres=0 requeued=0
+  round 1: 316/396 roots 6s leaves=316 cliques=2982 local=11228 P2=121 cover=0 unres=0 requeued=0
+  round 1: 395/396 roots 6s leaves=395 cliques=2982 local=11228 P2=121 cover=0 unres=0 requeued=0
+{"outer_leaves": 396, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 0, "cliques": 2982, "local_nodes": 11228, "T": 6984, "E": 0, "P2": 121, "lp_calls": 121, "cover": 0, "splits": 4123, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 699804, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 59.23002910614014, "wall": 6.15479850769043, "roots": 396, "rounds": 1}
+VERDICT: PROVED: no config in family with Phi > T
+n=9 SSS3 mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=0 free=6 cover_R=7.5691e-05
+  fixed supports: 496 cells kept, 55104 edges
+  round 1: 99/496 roots 11s leaves=99 cliques=4649 local=21185 P2=656 cover=0 unres=0 requeued=0
+  round 1: 198/496 roots 12s leaves=198 cliques=4649 local=21185 P2=656 cover=0 unres=0 requeued=0
+  round 1: 297/496 roots 12s leaves=297 cliques=4649 local=21185 P2=656 cover=0 unres=0 requeued=0
+  round 1: 396/496 roots 13s leaves=396 cliques=4649 local=21185 P2=656 cover=0 unres=0 requeued=0
+  round 1: 495/496 roots 13s leaves=495 cliques=4649 local=21185 P2=656 cover=0 unres=0 requeued=0
+{"outer_leaves": 496, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 0, "cliques": 4649, "local_nodes": 21185, "T": 12261, "E": 0, "P2": 656, "lp_calls": 656, "cover": 0, "splits": 8268, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 13174052, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 152.97205018997192, "wall": 12.72589635848999, "roots": 496, "rounds": 1}
+VERDICT: PROVED: no config in family with Phi > T
+n=9 MMS mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=2 free=5 cover_R=7.5691e-05
+  round 1: 11/57 roots 7s leaves=11 cliques=9826 local=37640 P2=390 cover=0 unres=0 requeued=0
+  round 1: 22/57 roots 9s leaves=22 cliques=29485 local=115749 P2=1559 cover=0 unres=0 requeued=0
+  round 1: 33/57 roots 10s leaves=33 cliques=35928 local=140738 P2=1877 cover=0 unres=0 requeued=0
+  round 1: 44/57 roots 10s leaves=44 cliques=36293 local=142205 P2=1895 cover=0 unres=0 requeued=0
+  round 1: 55/57 roots 12s leaves=55 cliques=68098 local=276894 P2=4922 cover=0 unres=0 requeued=0
+{"outer_leaves": 57, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 28375, "cliques": 89019, "local_nodes": 362225, "T": 218899, "E": 0, "P2": 6723, "lp_calls": 6723, "cover": 0, "splits": 136603, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 2762482, "unresolved_cliques": 0, "cell_p2_tests": 456, "cell_p2_excl": 73, "secs": 122.15579676628113, "wall": 12.569675922393799, "roots": 57, "rounds": 1}
+VERDICT: PROVED: no config in family with Phi > T
+n=9 MSS1 mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=2 free=5 cover_R=7.5691e-05
+  round 1: 12/64 roots 5s leaves=12 cliques=39 local=121 P2=0 cover=0 unres=0 requeued=0
+  round 1: 24/64 roots 6s leaves=24 cliques=331 local=1255 P2=21 cover=0 unres=0 requeued=0
+  round 1: 36/64 roots 8s leaves=36 cliques=3113 local=11975 P2=246 cover=0 unres=0 requeued=0
+  round 1: 48/64 roots 9s leaves=48 cliques=6088 local=24380 P2=467 cover=0 unres=0 requeued=0
+  round 1: 60/64 roots 10s leaves=60 cliques=11212 local=47620 P2=1211 cover=0 unres=0 requeued=0
+{"outer_leaves": 64, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 29256, "cliques": 23348, "local_nodes": 109146, "T": 61783, "E": 0, "P2": 4464, "lp_calls": 4464, "cover": 0, "splits": 42899, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 3960620, "unresolved_cliques": 0, "cell_p2_tests": 512, "cell_p2_excl": 14, "secs": 117.43041372299194, "wall": 15.441795587539673, "roots": 64, "rounds": 1}
+VERDICT: PROVED: no config in family with Phi > T
+n=9 SSS2 mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=2 free=5 cover_R=7.5691e-05
+  round 1: 12/64 roots 8s leaves=12 cliques=1851 local=8215 P2=147 cover=0 unres=0 requeued=0
+  round 1: 24/64 roots 10s leaves=24 cliques=5545 local=24727 P2=590 cover=0 unres=0 requeued=0
+  round 1: 36/64 roots 15s leaves=36 cliques=24729 local=113947 P2=3987 cover=0 unres=0 requeued=0
+  round 1: 48/64 roots 16s leaves=48 cliques=27877 local=127453 P2=4221 cover=0 unres=0 requeued=0
+  round 1: 60/64 roots 17s leaves=60 cliques=44408 local=212168 P2=8528 cover=0 unres=0 requeued=0
+{"outer_leaves": 64, "outer_splits": 0, "outer_E": 0, "outer_T": 17, "outer_deficit": 0, "cells_excl": 17846, "cliques": 50542, "local_nodes": 239448, "T": 135802, "E": 0, "P2": 9193, "lp_calls": 9193, "cover": 0, "splits": 94453, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 15920395, "unresolved_cliques": 0, "cell_p2_tests": 376, "cell_p2_excl": 121, "secs": 213.73151111602783, "wall": 18.576631784439087, "roots": 64, "rounds": 1}
+VERDICT: PROVED: no config in family with Phi > T
+n=9 MSS0 mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=4 free=4 cover_R=7.5691e-05
+  round 1: 51/256 roots 189s leaves=51 cliques=1427159 local=6464323 P2=266300 cover=0 unres=0 requeued=0
+  round 1: 102/256 roots 422s leaves=102 cliques=3560390 local=16476078 P2=776757 cover=0 unres=0 requeued=0
+  round 1: 153/256 roots 519s leaves=153 cliques=4528333 local=21044611 P2=1043809 cover=0 unres=0 requeued=0
+  round 1: 204/256 roots 537s leaves=204 cliques=4727432 local=21968360 P2=1085492 cover=0 unres=0 requeued=0
+  round 1: 255/256 roots 636s leaves=255 cliques=5643329 local=26262827 P2=1321736 cover=0 unres=0 requeued=0
+{"outer_leaves": 256, "outer_splits": 0, "outer_E": 0, "outer_T": 12, "outer_deficit": 0, "cells_excl": 128698, "cliques": 5802283, "local_nodes": 27042615, "T": 15050845, "E": 0, "P2": 1371604, "lp_calls": 1371605, "cover": 0, "splits": 10620166, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 6131233, "unresolved_cliques": 0, "cell_p2_tests": 1952, "cell_p2_excl": 490, "secs": 8247.839349508286, "wall": 651.016284942627, "roots": 256, "rounds": 1}
+VERDICT: PROVED: no config in family with Phi > T
+n=9 SSS1 mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=4 free=4 cover_R=7.5691e-05
+  round 1: 51/256 roots 67s leaves=51 cliques=411529 local=1892205 P2=94038 cover=0 unres=0 requeued=0
+  round 1: 102/256 roots 103s leaves=102 cliques=703108 local=3250482 P2=162907 cover=0 unres=0 requeued=0
+  round 1: 153/256 roots 299s leaves=153 cliques=2093940 local=9768468 P2=510826 cover=0 unres=0 requeued=0
+  round 1: 204/256 roots 588s leaves=204 cliques=4571794 local=21124434 P2=1094565 cover=0 unres=0 requeued=0
+  round 1: 255/256 roots 890s leaves=253 cliques=6135831 local=28325597 P2=1459299 cover=0 unres=0 requeued=4
+  round 2: 1/6 roots 1084s leaves=254 cliques=6247020 local=28896589 P2=1562287 cover=0 unres=0 requeued=0
+  round 2: 2/6 roots 1101s leaves=255 cliques=6313063 local=29211738 P2=1582077 cover=0 unres=0 requeued=0
+  round 2: 3/6 roots 1120s leaves=256 cliques=6391794 local=29610071 P2=1607604 cover=0 unres=0 requeued=0
+  round 2: 4/6 roots 1139s leaves=257 cliques=6518517 local=30211506 P2=1638635 cover=0 unres=0 requeued=0
+  round 2: 5/6 roots 1161s leaves=258 cliques=6637616 local=30793195 P2=1678031 cover=0 unres=0 requeued=0
+  round 2: 6/6 roots 1162s leaves=259 cliques=6775178 local=31447975 P2=1716174 cover=0 unres=0 requeued=0
+{"outer_leaves": 259, "outer_splits": 3, "outer_E": 0, "outer_T": 16, "outer_deficit": 0, "cells_excl": 106988, "cliques": 6775178, "local_nodes": 31447975, "T": 17595371, "E": 0, "P2": 1716174, "lp_calls": 1916990, "cover": 0, "splits": 12536430, "fail_nodes": 400002, "local_fail": 2, "unresolved": 0, "tri3": 23098101, "unresolved_cliques": 0, "cell_p2_tests": 1968, "cell_p2_excl": 599, "secs": 10688.896169424057, "wall": 1161.6406786441803, "roots": 262, "rounds": 2}
+VERDICT: PROVED: no config in family with Phi > T
+n=9 SSS0 mode=eps val=0.001 T=0.027450892857143 T/t-1=1.000e-03 G=37 Q=606208 l0=0.2209 cell_p2=8 params=6 free=3 cover_R=7.5691e-05
+  round 1: 179/897 roots 650s leaves=355 cliques=4441468 local=21475088 P2=1265221 cover=0 unres=0 requeued=36
+  round 1: 358/897 roots 1629s leaves=720 cliques=11024216 local=53062982 P2=3192897 cover=0 unres=0 requeued=96
+  round 1: 537/897 roots 2589s leaves=972 cliques=13891189 local=67025392 P2=4700370 cover=0 unres=0 requeued=159
+  round 1: 716/897 roots 2591s leaves=1151 cliques=13891209 local=67025492 P2=4700374 cover=0 unres=0 requeued=159
+  round 1: 895/897 roots 2700s leaves=1351 cliques=14601594 local=70420250 P2=4934879 cover=0 unres=0 requeued=164
+  round 2: 34/172 roots 3104s leaves=1394 cliques=15709466 local=75947358 P2=5415740 cover=0 unres=0 requeued=1
+  round 2: 68/172 roots 3297s leaves=1435 cliques=16931897 local=82135915 P2=5876422 cover=0 unres=0 requeued=3
+  round 2: 102/172 roots 3537s leaves=1477 cliques=18194245 local=88371903 P2=6295201 cover=0 unres=0 requeued=6
+  round 2: 136/172 roots 4538s leaves=1504 cliques=19086054 local=92821536 P2=7219741 cover=0 unres=0 requeued=38
+  round 2: 170/172 roots 5057s leaves=1533 cliques=20019156 local=97872090 P2=8148798 cover=0 unres=0 requeued=63
+  round 3: 13/67 roots 5234s leaves=1546 cliques=20138454 local=98576072 P2=8325875 cover=0 unres=0 requeued=0
+  round 3: 26/67 roots 5838s leaves=1558 cliques=20338785 local=99669562 P2=8452254 cover=0 unres=0 requeued=2
+  round 3: 39/67 roots 6009s leaves=1565 cliques=20459048 local=100328873 P2=8771458 cover=0 unres=0 requeued=14
+  round 3: 52/67 roots 6157s leaves=1573 cliques=20570126 local=100962986 P2=9121057 cover=0 unres=0 requeued=24
+  round 3: 65/67 roots 6761s leaves=1577 cliques=20738398 local=101877417 P2=9786487 cover=0 unres=0 requeued=42
+  round 4: 9/46 roots 6902s leaves=1586 cliques=20780199 local=102111722 P2=10005905 cover=0 unres=0 requeued=0
+  round 4: 18/46 roots 7570s leaves=1593 cliques=20861807 local=102579656 P2=10125292 cover=0 unres=0 requeued=4
+  round 4: 27/46 roots 7682s leaves=1598 cliques=20914278 local=102876097 P2=10363037 cover=0 unres=0 requeued=12
+  round 4: 36/46 roots 7846s leaves=1603 cliques=20965788 local=103168925 P2=10674435 cover=0 unres=0 requeued=20
+  round 4: 45/46 roots 8353s leaves=1603 cliques=21036867 local=103575667 P2=11445765 cover=0 unres=0 requeued=38
+  round 5: 8/40 roots 8369s leaves=1611 cliques=21055532 local=103677771 P2=11551464 cover=0 unres=0 requeued=0
+  round 5: 16/40 roots 8405s leaves=1619 cliques=21099771 local=103922698 P2=11576432 cover=0 unres=0 requeued=0
+  round 5: 24/40 roots 9099s leaves=1625 cliques=21150082 local=104203147 P2=11679181 cover=0 unres=0 requeued=4
+  round 5: 32/40 roots 9180s leaves=1628 cliques=21208105 local=104545677 P2=11987652 cover=0 unres=0 requeued=14
+  round 5: 40/40 roots 9534s leaves=1628 cliques=21250029 local=104782301 P2=12660748 cover=0 unres=0 requeued=30
+  round 6: 6/30 roots 9544s leaves=1634 cliques=21260707 local=104839301 P2=12666105 cover=0 unres=0 requeued=0
+  round 6: 12/30 roots 9562s leaves=1640 cliques=21295393 local=105040587 P2=12686771 cover=0 unres=0 requeued=0
+  round 6: 18/30 roots 9569s leaves=1646 cliques=21329742 local=105240318 P2=12708033 cover=0 unres=0 requeued=0
+  round 6: 24/30 roots 10009s leaves=1651 cliques=21365393 local=105444636 P2=12768549 cover=0 unres=0 requeued=2
+  round 6: 30/30 roots 10075s leaves=1651 cliques=21390120 local=105582765 P2=13075512 cover=0 unres=0 requeued=14
+  round 7: 2/14 roots 10075s leaves=1653 cliques=21390120 local=105582765 P2=13075512 cover=0 unres=0 requeued=0
+  round 7: 4/14 roots 10086s leaves=1655 cliques=21398478 local=105628751 P2=13078984 cover=0 unres=0 requeued=0
+  round 7: 6/14 roots 10088s leaves=1657 cliques=21411313 local=105694954 P2=13084190 cover=0 unres=0 requeued=0
+  round 7: 8/14 roots 10091s leaves=1659 cliques=21425779 local=105776020 P2=13091240 cover=0 unres=0 requeued=0
+  round 7: 10/14 roots 10094s leaves=1661 cliques=21439001 local=105853542 P2=13099490 cover=0 unres=0 requeued=0
+  round 7: 12/14 roots 10096s leaves=1663 cliques=21454911 local=105947986 P2=13109511 cover=0 unres=0 requeued=0
+  round 7: 14/14 roots 10516s leaves=1663 cliques=21456560 local=105956551 P2=13230839 cover=0 unres=0 requeued=4
+  round 8: 1/4 roots 10516s leaves=1664 cliques=21456560 local=105956551 P2=13230839 cover=0 unres=0 requeued=0
+  round 8: 2/4 roots 10516s leaves=1665 cliques=21456560 local=105956551 P2=13230839 cover=0 unres=0 requeued=0
+  round 8: 3/4 roots 10929s leaves=1665 cliques=21457831 local=105962841 P2=13289287 cover=0 unres=0 requeued=2
+  round 8: 4/4 roots 10947s leaves=1665 cliques=21458209 local=105965116 P2=13352167 cover=0 unres=0 requeued=4
+  round 9: 1/4 roots 10948s leaves=1666 cliques=21458426 local=105966559 P2=13352349 cover=0 unres=0 requeued=0
+  round 9: 2/4 roots 10951s leaves=1667 cliques=21460808 local=105979457 P2=13353591 cover=0 unres=0 requeued=0
+  round 9: 3/4 roots 10958s leaves=1668 cliques=21462701 local=105993248 P2=13355761 cover=0 unres=0 requeued=0
+  round 9: 4/4 roots 10958s leaves=1669 cliques=21463133 local=106000390 P2=13357825 cover=0 unres=0 requeued=0
+{"outer_leaves": 1669, "outer_splits": 772, "outer_E": 0, "outer_T": 152, "outer_deficit": 136, "cells_excl": 859941, "cliques": 21463133, "local_nodes": 106000390, "T": 61271800, "E": 0, "P2": 13357825, "lp_calls": 24353748, "cover": 0, "splits": 53170765, "fail_nodes": 21800109, "local_fail": 109, "unresolved": 0, "tri3": 8141010, "unresolved_cliques": 0, "cell_p2_tests": 11971, "cell_p2_excl": 7243, "secs": 119549.0392127037, "wall": 10958.512748003006, "roots": 1274, "rounds": 9}
+VERDICT: PROVED: no config in family with Phi > T
+BATCH DONE

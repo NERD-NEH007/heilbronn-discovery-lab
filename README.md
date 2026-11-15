@@ -1,7 +1,7 @@
 # Heilbronn discovery lab
 
 Papers, data and verification code on the Heilbronn triangle problem in the unit square and the triangle
-(place n points in the region to maximise the minimum triangle area t). Author of all four papers: Ethan Hendren.
+(place n points in the region to maximise the minimum triangle area t). Author of all five papers: Ethan Hendren.
 
 1. **A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal.**
    (`papers/heilbronn_n9.pdf`; code `code/exp110/`, run logs `certificates/exp110/`.)
@@ -15,9 +15,15 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
    Result: in the triangle {x, y ≥ 0, x + y ≤ 1}, 8 points have a triangle of area at most θ, the unique real root of
    the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892), attained only by the known
    configuration up to the 6 symmetries. **AI-assisted, not yet independently checked; verification welcome.**
-3. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
+3. **A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle.**
+   (`papers/heilbronn_tri9.pdf`; code `code/exp127/`, `code/exp136/`; run logs `certificates/exp127/`; release v1.2-tri9.)
+   Result: 9 points in a triangle have a triangle of area at most 43/784 of the container's area, attained only by
+   the known rational configuration up to the 6 symmetries. Method: minimum-enclosing-triangle normalization to 8
+   contact families, cell graph and exact local certificates (after Panorias's square n = 10 preprint).
+   **AI-assisted, not yet independently checked; verification welcome.**
+4. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. (`papers/heilbronn_structure.pdf`) Zenodo: https://doi.org/10.5281/zenodo.24235666
-4. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
+5. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
    arXiv: TBD. (`papers/critical_triangles_note.pdf`)
 
 In the table below, P1 and P2 are papers 3 and 4 of this list (the structure paper and the critical-triangles note)

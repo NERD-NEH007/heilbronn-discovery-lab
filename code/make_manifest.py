@@ -19,3 +19,12 @@ with open('MANIFEST-tri8.sha256', 'w', newline=chr(10)) as f:
     for p in TRI:
         f.write(hashlib.sha256(open(p, 'rb').read()).hexdigest() + '  ' + p.replace(os.sep, '/') + chr(10))
 print(len(TRI), 'files hashed -> MANIFEST-tri8.sha256')
+
+# triangle n = 9 (exp 127, 136)
+TRI9 = (sorted(glob.glob('code/exp127/*.py')) + ['code/exp127/batch.sh'] + sorted(glob.glob('code/exp127/cert/*'))
+        + sorted(glob.glob('code/exp136/*.py')) + sorted(glob.glob('certificates/exp127/results/*'))
+        + ['configurations/triangle/pool_tri_n9.json', 'papers/heilbronn_tri9.tex', 'papers/heilbronn_tri9.pdf', 'requirements.txt'])
+with open('MANIFEST-tri9.sha256', 'w', newline=chr(10)) as f:
+    for p in TRI9:
+        f.write(hashlib.sha256(open(p, 'rb').read()).hexdigest() + '  ' + p.replace(os.sep, '/') + chr(10))
+print(len(TRI9), 'files hashed -> MANIFEST-tri9.sha256')

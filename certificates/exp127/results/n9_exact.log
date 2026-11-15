@@ -1,0 +1,124 @@
+n=9 MMM mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=0 free=6 cover_R=7.5691e-05
+  fixed supports: 396 cells kept, 38372 edges
+  round 1: 79/396 roots 7s leaves=79 cliques=2121 local=8079 P2=80 cover=0 unres=0 requeued=0
+  round 1: 158/396 roots 8s leaves=158 cliques=2982 local=11196 P2=116 cover=0 unres=0 requeued=0
+  round 1: 237/396 roots 8s leaves=237 cliques=2982 local=11196 P2=116 cover=0 unres=0 requeued=0
+  round 1: 316/396 roots 8s leaves=316 cliques=2982 local=11196 P2=116 cover=0 unres=0 requeued=0
+  round 1: 395/396 roots 8s leaves=395 cliques=2982 local=11196 P2=116 cover=0 unres=0 requeued=0
+{"outer_leaves": 396, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 0, "cliques": 2982, "local_nodes": 11196, "T": 6973, "E": 0, "P2": 116, "lp_calls": 116, "cover": 0, "splits": 4107, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 699804, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 87.31033825874329, "wall": 7.873445510864258, "roots": 396, "rounds": 1}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 0x)
+n=9 SSS3 mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=0 free=6 cover_R=7.5691e-05
+  fixed supports: 496 cells kept, 55104 edges
+  round 1: 99/496 roots 9s leaves=99 cliques=4649 local=21127 P2=637 cover=0 unres=0 requeued=0
+  round 1: 198/496 roots 10s leaves=198 cliques=4649 local=21127 P2=637 cover=0 unres=0 requeued=0
+  round 1: 297/496 roots 10s leaves=297 cliques=4649 local=21127 P2=637 cover=0 unres=0 requeued=0
+  round 1: 396/496 roots 10s leaves=396 cliques=4649 local=21127 P2=637 cover=0 unres=0 requeued=0
+  round 1: 495/496 roots 10s leaves=495 cliques=4649 local=21127 P2=637 cover=0 unres=0 requeued=0
+{"outer_leaves": 496, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 0, "cliques": 4649, "local_nodes": 21127, "T": 12251, "E": 0, "P2": 637, "lp_calls": 637, "cover": 0, "splits": 8239, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 13174052, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 124.36122965812683, "wall": 10.502343893051147, "roots": 496, "rounds": 1}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 0x)
+n=9 MMS mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=2 free=5 cover_R=7.5691e-05
+  round 1: 11/57 roots 7s leaves=11 cliques=27676 local=111766 P2=1573 cover=0 unres=0 requeued=0
+  round 1: 22/57 roots 9s leaves=22 cliques=54429 local=223607 P2=3784 cover=0 unres=0 requeued=0
+  round 1: 33/57 roots 10s leaves=33 cliques=61828 local=251878 P2=4061 cover=0 unres=0 requeued=0
+  round 1: 44/57 roots 10s leaves=44 cliques=61847 local=251935 P2=4061 cover=0 unres=0 requeued=0
+  round 1: 55/57 roots 11s leaves=55 cliques=114683 local=468909 P2=8951 cover=0 unres=0 requeued=0
+{"outer_leaves": 57, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 28189, "cliques": 129762, "local_nodes": 534712, "T": 321285, "E": 0, "P2": 10952, "lp_calls": 10952, "cover": 0, "splits": 202475, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 3334063, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 128.2608606815338, "wall": 13.500701904296875, "roots": 57, "rounds": 1}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 0x)
+n=9 MSS1 mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=2 free=5 cover_R=7.5691e-05
+  round 1: 12/64 roots 3s leaves=12 cliques=38 local=122 P2=0 cover=0 unres=0 requeued=0
+  round 1: 24/64 roots 4s leaves=24 cliques=218 local=744 P2=7 cover=0 unres=0 requeued=0
+  round 1: 36/64 roots 6s leaves=36 cliques=3668 local=14300 P2=271 cover=0 unres=0 requeued=0
+  round 1: 48/64 roots 7s leaves=48 cliques=6757 local=26877 P2=482 cover=0 unres=0 requeued=0
+  round 1: 60/64 roots 8s leaves=60 cliques=13326 local=55908 P2=1305 cover=0 unres=0 requeued=0
+{"outer_leaves": 64, "outer_splits": 0, "outer_E": 0, "outer_T": 0, "outer_deficit": 0, "cells_excl": 29110, "cliques": 25464, "local_nodes": 117428, "T": 66908, "E": 0, "P2": 4538, "lp_calls": 4538, "cover": 0, "splits": 45982, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 4144893, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 96.79560399055481, "wall": 13.188991785049438, "roots": 64, "rounds": 1}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 0x)
+n=9 SSS2 mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=2 free=5 cover_R=7.5691e-05
+  round 1: 12/64 roots 6s leaves=12 cliques=3181 local=14499 P2=374 cover=0 unres=0 requeued=0
+  round 1: 24/64 roots 9s leaves=24 cliques=9366 local=41710 P2=893 cover=0 unres=0 requeued=0
+  round 1: 36/64 roots 13s leaves=36 cliques=33266 local=150990 P2=4774 cover=0 unres=0 requeued=0
+  round 1: 48/64 roots 14s leaves=48 cliques=43443 local=204495 P2=7433 cover=0 unres=0 requeued=0
+  round 1: 60/64 roots 16s leaves=60 cliques=53678 local=252386 P2=9578 cover=0 unres=0 requeued=0
+{"outer_leaves": 64, "outer_splits": 0, "outer_E": 0, "outer_T": 17, "outer_deficit": 0, "cells_excl": 17818, "cliques": 70045, "local_nodes": 327343, "T": 187129, "E": 0, "P2": 11565, "lp_calls": 11565, "cover": 0, "splits": 128649, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 19360815, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 200.22974467277527, "wall": 18.57659101486206, "roots": 64, "rounds": 1}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 0x)
+n=9 MSS0 mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=4 free=4 cover_R=7.5691e-05
+  round 1: 51/256 roots 178s leaves=51 cliques=1507797 local=6826119 P2=280637 cover=0 unres=0 requeued=0
+  round 1: 102/256 roots 404s leaves=102 cliques=3847031 local=17882429 P2=849724 cover=0 unres=0 requeued=0
+  round 1: 153/256 roots 494s leaves=153 cliques=4792656 local=22378938 P2=1118613 cover=0 unres=0 requeued=0
+  round 1: 204/256 roots 517s leaves=204 cliques=5046410 local=23542834 P2=1168318 cover=0 unres=0 requeued=0
+  round 1: 255/256 roots 621s leaves=255 cliques=6065579 local=28365739 P2=1439092 cover=0 unres=0 requeued=0
+{"outer_leaves": 256, "outer_splits": 0, "outer_E": 0, "outer_T": 12, "outer_deficit": 0, "cells_excl": 128290, "cliques": 6225497, "local_nodes": 29154773, "T": 16199491, "E": 0, "P2": 1490644, "lp_calls": 1490646, "cover": 0, "splits": 11464638, "fail_nodes": 0, "local_fail": 0, "unresolved": 0, "tri3": 6542561, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 8077.491508245468, "wall": 626.6496295928955, "roots": 256, "rounds": 1}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 0x)
+n=9 SSS1 mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=4 free=4 cover_R=7.5691e-05
+  round 1: 51/256 roots 70s leaves=51 cliques=510286 local=2296906 P2=101631 cover=0 unres=0 requeued=0
+  round 1: 102/256 roots 116s leaves=102 cliques=950780 local=4372728 P2=203383 cover=0 unres=0 requeued=0
+  round 1: 153/256 roots 360s leaves=153 cliques=3351946 local=15369518 P2=738604 cover=0 unres=0 requeued=0
+  round 1: 204/256 roots 628s leaves=202 cliques=6028746 local=27667752 P2=1347329 cover=0 unres=0 requeued=4
+  round 1: 255/256 roots 942s leaves=251 cliques=8176608 local=37350470 P2=1789777 cover=0 unres=0 requeued=8
+  round 2: 2/10 roots 1163s leaves=253 cliques=8403300 local=38413239 P2=1915935 cover=0 unres=0 requeued=0
+  round 2: 4/10 roots 1181s leaves=255 cliques=8605555 local=39286108 P2=1957701 cover=0 unres=0 requeued=0
+  round 2: 6/10 roots 1203s leaves=257 cliques=8814146 local=40270729 P2=2014522 cover=0 unres=0 requeued=0
+  round 2: 8/10 roots 1229s leaves=259 cliques=9086058 local=41576009 P2=2092644 cover=0 unres=0 requeued=0
+  round 2: 10/10 roots 1240s leaves=261 cliques=9418273 local=43104530 P2=2175926 cover=0 unres=0 requeued=0
+{"outer_leaves": 261, "outer_splits": 5, "outer_E": 0, "outer_T": 16, "outer_deficit": 0, "cells_excl": 108086, "cliques": 9418273, "local_nodes": 43104530, "T": 24285441, "E": 0, "P2": 2175926, "lp_calls": 2378147, "cover": 0, "splits": 17043163, "fail_nodes": 400002, "local_fail": 2, "unresolved": 0, "tri3": 32448734, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 12111.67168045044, "wall": 1239.5336661338806, "roots": 266, "rounds": 2}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 0x)
+n=9 SSS0 mode=exact val=1e-09 T=0.027423469360332 T/t-1=-1.000e-09 G=37 Q=606208 l0=0.2204 cell_p2=0 params=6 free=3 cover_R=7.5691e-05
+  round 1: 179/897 roots 684s leaves=352 cliques=5596560 local=27287600 P2=1617997 cover=0 unres=0 requeued=43
+  round 1: 358/897 roots 1678s leaves=715 cliques=13477199 local=65126409 P2=3850785 cover=0 unres=0 requeued=99
+  round 1: 537/897 roots 2612s leaves=965 cliques=17042037 local=82385511 P2=5402506 cover=2 unres=0 requeued=163
+  round 1: 716/897 roots 2613s leaves=1144 cliques=17043504 local=82391306 P2=5402628 cover=2 unres=0 requeued=163
+  round 1: 895/897 roots 2717s leaves=1339 cliques=17947302 local=86771309 P2=5725723 cover=2 unres=0 requeued=172
+  round 2: 36/180 roots 3157s leaves=1381 cliques=19342603 local=93699996 P2=6275816 cover=2 unres=0 requeued=1
+  round 2: 72/180 roots 3407s leaves=1425 cliques=21031844 local=102306063 P2=6881069 cover=2 unres=0 requeued=5
+  round 2: 108/180 roots 3754s leaves=1471 cliques=22855900 local=111302917 P2=7459396 cover=2 unres=0 requeued=10
+  round 2: 144/180 roots 4732s leaves=1496 cliques=24042981 local=117192133 P2=8604768 cover=2 unres=0 requeued=47
+  round 2: 180/180 roots 5446s leaves=1526 cliques=25472631 local=124669628 P2=9765883 cover=3 unres=0 requeued=75
+  round 3: 15/75 roots 5520s leaves=1541 cliques=25716862 local=125934577 P2=9861249 cover=3 unres=0 requeued=0
+  round 3: 30/75 roots 6094s leaves=1555 cliques=26020166 local=127590698 P2=10031394 cover=3 unres=0 requeued=2
+  round 3: 45/75 roots 6339s leaves=1563 cliques=26233981 local=128739224 P2=10475963 cover=4 unres=0 requeued=16
+  round 3: 60/75 roots 6503s leaves=1574 cliques=26466660 local=129995993 P2=10800855 cover=6 unres=0 requeued=24
+  round 3: 75/75 roots 7202s leaves=1577 cliques=26736726 local=131432063 P2=11721201 cover=8 unres=0 requeued=48
+  round 4: 9/48 roots 7274s leaves=1586 cliques=26775765 local=131653272 P2=11743711 cover=8 unres=0 requeued=0
+  round 4: 18/48 roots 7925s leaves=1593 cliques=26888388 local=132289563 P2=11887597 cover=8 unres=0 requeued=4
+  round 4: 27/48 roots 7964s leaves=1598 cliques=26945872 local=132590217 P2=12117880 cover=8 unres=0 requeued=12
+  round 4: 36/48 roots 8068s leaves=1604 cliques=27024744 local=133041774 P2=12344430 cover=9 unres=0 requeued=18
+  round 4: 45/48 roots 8488s leaves=1605 cliques=27142810 local=133686580 P2=13015600 cover=9 unres=0 requeued=34
+  round 5: 8/40 roots 8681s leaves=1613 cliques=27205003 local=134022708 P2=13320617 cover=9 unres=0 requeued=0
+  round 5: 16/40 roots 8744s leaves=1621 cliques=27289452 local=134496665 P2=13367772 cover=9 unres=0 requeued=0
+  round 5: 24/40 roots 9361s leaves=1627 cliques=27343895 local=134810900 P2=13487697 cover=10 unres=0 requeued=4
+  round 5: 32/40 roots 9439s leaves=1630 cliques=27424773 local=135269199 P2=13794180 cover=10 unres=0 requeued=14
+  round 5: 40/40 roots 9799s leaves=1630 cliques=27512708 local=135738946 P2=14440672 cover=10 unres=0 requeued=30
+  round 6: 6/30 roots 9815s leaves=1636 cliques=27528415 local=135822877 P2=14448915 cover=10 unres=0 requeued=0
+  round 6: 12/30 roots 9833s leaves=1642 cliques=27581238 local=136114036 P2=14476496 cover=10 unres=0 requeued=0
+  round 6: 18/30 roots 9855s leaves=1648 cliques=27636534 local=136426274 P2=14507429 cover=10 unres=0 requeued=0
+  round 6: 24/30 roots 10280s leaves=1653 cliques=27716009 local=136892804 P2=14590997 cover=11 unres=0 requeued=2
+  round 6: 30/30 roots 10335s leaves=1653 cliques=27757061 local=137111090 P2=14900282 cover=11 unres=0 requeued=14
+  round 7: 2/14 roots 10335s leaves=1655 cliques=27757061 local=137111090 P2=14900282 cover=11 unres=0 requeued=0
+  round 7: 4/14 roots 10347s leaves=1657 cliques=27769098 local=137179857 P2=14905840 cover=11 unres=0 requeued=0
+  round 7: 6/14 roots 10356s leaves=1659 cliques=27789937 local=137291232 P2=14915964 cover=11 unres=0 requeued=0
+  round 7: 8/14 roots 10357s leaves=1661 cliques=27813015 local=137419350 P2=14926943 cover=11 unres=0 requeued=0
+  round 7: 10/14 roots 10361s leaves=1663 cliques=27834775 local=137545904 P2=14939602 cover=11 unres=0 requeued=0
+  round 7: 12/14 roots 10364s leaves=1665 cliques=27861560 local=137699761 P2=14955492 cover=11 unres=0 requeued=0
+  round 7: 14/14 roots 10741s leaves=1665 cliques=27867325 local=137727476 P2=15065600 cover=11 unres=0 requeued=4
+  round 8: 1/4 roots 10741s leaves=1666 cliques=27867325 local=137727476 P2=15065600 cover=11 unres=0 requeued=0
+  round 8: 2/4 roots 10741s leaves=1667 cliques=27867325 local=137727476 P2=15065600 cover=11 unres=0 requeued=0
+  round 8: 3/4 roots 11141s leaves=1667 cliques=27869058 local=137736490 P2=15120344 cover=11 unres=0 requeued=2
+  round 8: 4/4 roots 11142s leaves=1667 cliques=27873090 local=137755191 P2=15175708 cover=11 unres=0 requeued=4
+  round 9: 1/4 roots 11144s leaves=1668 cliques=27873762 local=137759189 P2=15176149 cover=11 unres=0 requeued=0
+  round 9: 2/4 roots 11148s leaves=1669 cliques=27877504 local=137780091 P2=15178020 cover=11 unres=0 requeued=0
+  round 9: 3/4 roots 11160s leaves=1670 cliques=27881860 local=137808761 P2=15182073 cover=11 unres=0 requeued=0
+  round 9: 4/4 roots 11693s leaves=1670 cliques=27882709 local=137829835 P2=15290199 cover=12 unres=0 requeued=2
+  round 10: 1/2 roots 11693s leaves=1671 cliques=27882737 local=137829979 P2=15290210 cover=12 unres=0 requeued=0
+  round 10: 2/2 roots 12238s leaves=1671 cliques=27883586 local=137851053 P2=15398336 cover=13 unres=0 requeued=2
+  round 11: 1/2 roots 12238s leaves=1672 cliques=27883586 local=137851053 P2=15398336 cover=13 unres=0 requeued=0
+  round 11: 2/2 roots 12793s leaves=1672 cliques=27884435 local=137872127 P2=15506462 cover=14 unres=0 requeued=2
+  round 12: 1/2 roots 12793s leaves=1673 cliques=27884448 local=137872180 P2=15506465 cover=14 unres=0 requeued=0
+  round 12: 2/2 roots 13340s leaves=1673 cliques=27885297 local=137893254 P2=15614591 cover=15 unres=0 requeued=2
+  round 13: 1/2 roots 13340s leaves=1674 cliques=27885307 local=137893296 P2=15614591 cover=15 unres=0 requeued=0
+  round 13: 2/2 roots 13885s leaves=1674 cliques=27886156 local=137914370 P2=15722717 cover=16 unres=0 requeued=2
+  round 14: 1/2 roots 13885s leaves=1675 cliques=27886175 local=137914481 P2=15722724 cover=16 unres=0 requeued=0
+  round 14: 2/2 roots 14433s leaves=1675 cliques=27887024 local=137935555 P2=15830850 cover=17 unres=0 requeued=2
+  round 15: 1/2 roots 14441s leaves=1676 cliques=27887398 local=137941009 P2=15832615 cover=17 unres=0 requeued=0
+  round 15: 2/2 roots 14447s leaves=1677 cliques=27888098 local=137950703 P2=15835308 cover=18 unres=0 requeued=0
+{"outer_leaves": 1677, "outer_splits": 780, "outer_E": 0, "outer_T": 153, "outer_deficit": 129, "cells_excl": 866639, "cliques": 27888098, "local_nodes": 137950703, "T": 78781812, "E": 0, "P2": 15835308, "lp_calls": 27731046, "cover": 18, "splits": 66733565, "fail_nodes": 23400117, "local_fail": 117, "unresolved": 0, "tri3": 10345583, "unresolved_cliques": 0, "cell_p2_tests": 0, "cell_p2_excl": 0, "secs": 126994.57275748253, "wall": 14447.31126999855, "roots": 1304, "rounds": 15}
+VERDICT: PROVED: every config with Phi > T is in a basin ball (cover used 18x)
+BATCH DONE

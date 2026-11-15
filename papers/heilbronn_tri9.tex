@@ -1,0 +1,141 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Om}{\Omega}
+\newcommand{\area}{\operatorname{area}}
+
+\begin{document}
+\title[Heilbronn's problem for nine points in a triangle]{A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle}
+\author{Ethan Hendren}
+\email{eehendren007@gmail.com}
+\begin{abstract}
+For nine points in a triangle, the largest possible minimum triangle area divided by the container area is \(43/784\). Equality holds only for the listed rational configuration up to affine symmetries of the container and relabeling. An affine normalization gives eight contact families. We use exact geometric exclusions on a cell graph and rationally checked bounds in the surviving coordinate boxes. A local certificate closes the neighborhoods of the known configuration. \textbf{This is an AI-assisted, computer-assisted proof awaiting independent verification.} Section~\ref{sec:limits} describes the computational trust base.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+For a finite configuration \(P\), let \(f(P)\) be the minimum ordinary area of a triangle with vertices in \(P\). We use the reference triangle
+\(\Om=\{(x,y):x,y\ge0,\ x+y\le1\}\), of area \(1/2\).
+Affine maps scale container area and triangle areas by the same absolute determinant. Thus the normalized optimum is twice the raw optimum in \(\Om\).
+The record table \cite{Stead} provides the numerical comparison. Sudermann-Merx \cite{SM} treats the triangle through eight points by global optimization within solver tolerances. We use the contact-family and cell-graph approach of Panorias's ten-point square preprint \cite{Panorias}. The earlier square and triangle proofs \cite{Square,Tri8} supply context and the local-certificate method.
+
+\begin{theorem}\label{thm:main}
+The normalized Heilbronn optimum for nine points in a triangle is \(43/784\). In \(\Om\) every maximizer is a relabeling of an image under a vertex permutation of \(\Om\) of
+\[
+\begin{split}
+P_*=\{&(7/8,0),(0,1/8),(1/8,7/8),(0,25/28),\\
+      &(3/28,0),(25/28,3/28),(3/7,11/28),(11/28,5/28),(5/28,3/7)\}.
+\end{split}
+\]
+\end{theorem}
+Direct rational evaluation of the 84 triples gives \(t_*=f(P_*)=43/1568\), attained by 13 triples. The rest of the proof gives the upper bound and the equality cases.
+
+\section{Normalization and contact families}\label{sec:norm}
+\begin{lemma}
+Each configuration of positive minimum area in \(\Om\) has an affine image in \(\Om\) with area multiplier at least one and with each side midpoint belonging to the convex hull of the contacts on that side.
+\end{lemma}
+\begin{proof}
+Let \(K\) be the convex hull, which contains a disk of radius \(r>0\). Among triangles enclosing \(K\), restrict attention to those of area at most \(1/2\). Their inradii are at least \(r\), so their perimeters are bounded by \(1/r\). Every vertex is within that distance of a fixed point of \(K\). The set of enclosing vertex triples of area at most \(1/2\) is thus bounded and closed. The disk ensures a nondegenerate limit. The continuous area function attains its minimum at some triangle \(E\).
+
+Each side of \(E\) supports \(K\), since a disjoint side could be moved inward. If a side midpoint were outside its contact interval, orient the side from \(A\) to \(B\) so that the entire contact interval is in the half nearest \(A\). Pivot the line about the contact endpoint \(v\) nearest the midpoint, moving the \(A\) side outward and the \(B\) side inward. Every contact stays enclosed. The finitely many off-line hull vertices have positive clearance, which persists for a sufficiently small rotation. With the two other side lines fixed, the area added near \(A\) to first order is \(\tfrac12|Av|^2\,d\theta\), and the area removed near \(B\) is \(\tfrac12|Bv|^2\,d\theta\). These terms follow by expressing the thin triangles at the pivot using the sine rule. Since \(|Av|<|Bv|\), the net derivative is negative, contradicting minimality.
+
+Map \(E\) onto \(\Om\). The determinant in absolute value is \(\area(\Om)/\area(E)\ge1\). The midpoint condition is preserved by the affine map. A point of the hull on a supporting line is a convex combination of contacts on that line, which proves the claim.
+\end{proof}
+
+Positive area allows at most two points on a side. A single contact is the midpoint (type M). In type S, use one parameter from each closed half of the side. An occupied vertex forces two incident S sides and identifies their two near contacts. Write \(O=(0,0),X=(1,0),Y=(0,1)\), and \(B,L,H\) for bottom, left, and hypotenuse. On \(B,H\) the parameter is \(x\), and on \(L\) it is \(y\). A subscript 1 indicates the lower parameter half, 2 the upper half. Up to vertex permutations the possibilities are as follows.
+
+\begin{center}
+\begin{tabular}{llrr}
+\toprule
+Family & Supports & Parameters & Free points\\
+\midrule
+MMM & \(m_B,m_L,m_H\) &0&6\\
+MMS & \(B_1,B_2,m_L,m_H\) &2&5\\
+MSS0 & \(B_1,B_2,L_1,L_2,m_H\) &4&4\\
+MSS1 & \(O,B_2,L_2,m_H\) &2&5\\
+SSS0 & \(B_1,B_2,L_1,L_2,H_1,H_2\) &6&3\\
+SSS1 & \(O,B_2,L_2,H_1,H_2\) &4&4\\
+SSS2 & \(O,X,L_2,H_1\) &2&5\\
+SSS3 & \(O,X,Y\) &0&6\\
+\bottomrule
+\end{tabular}
+\end{center}
+There are one, one, two, and four patterns for zero through three S sides, respectively. Free labels are interchangeable. Closed contact ranges and allowing free labels anywhere in \(\Om\) enlarge each family safely. The stabilizers give the following additional orders. In MMS use \(x(B_1)+x(B_2)\le1\); in MSS0 use \(x(B_1)\le y(L_1)\); in MSS1 and SSS1 use \(y(L_2)\le x(B_2)\); in SSS2 use \(x(H_1)+y(L_2)\le1\). In SSS0 select the smallest of the six distances, expressed as fractions of side length, from a support to its associated vertex. The vertex permutations act transitively on the six vertex--side incidences, so the distance \(x(B_1)\) can be chosen smallest.
+
+For two contacts on a side with parameter separation \(d\), every other point in a configuration beating \(T\) has opposite barycentric coordinate greater than \(2T/d\). Their region is a similar triangle of linear scale \(1-2T/d\). With the seven-point raw upper bound \(U=7/144\) \cite{ZC}, this gives \(T<U(1-2T/d)^2\) and hence \(d>2T/(1-\sqrt{T/U})\). The code rounds the square root and then the required grid gap downward. The bound is applied to the unshared pairs of side contacts. The families with occupied vertices are still searched.
+
+\section{Global computation}
+Fix \(T=(43/1568)(1-10^{-9})=42999999957/1568000000000<t_*\).
+Support intervals and free cells have integer endpoints in units \(1/Q\), where \(Q=37\cdot2^{14}\). The search contains real coordinates. Parameter boxes are subdivided using closed halves. Order and sum inequalities tighten coordinate bounds by necessary inequalities in integer units. The point domains are clipped rectangles or hypotenuse segments. The signed doubled area \(D_i\) of triple \(i\) in grid coordinates is separately affine in each point, so its exact extremes occur at products of the point-domain vertices.
+
+\subsection{Cell graph and local trees}
+The closed square grid cells of side \(1/37\) that meet the triangle in positive area cover the triangle after clipping. For two points in one cell, their coordinate difference has each component at most \(1/37\) in magnitude. A third point anywhere in \(\Om\) gives an absolute doubled area at most \(2/37\le2T\). Thus free points in a configuration exceeding \(T\) occupy distinct cells. Delete a cell if two supports and that cell force a small triangle throughout their domains. Delete an edge if one support and its two cells do so. Three free cells can also give a witness during clique traversal. The remaining cliques of the required size are exhaustively enumerated. Fixed-support families distribute this enumeration by the smallest clique vertex.
+
+For each clique, subdivide its joint support and free-point box. Inconsistent propagated bounds, an exact uniform small-triangle bound, a positive integer combination, or the basin cover close a local node. Otherwise the local box splits. Running out of budget leaves work unresolved or triggers a support split. Rescheduling open support boxes preserves their coverage.
+
+\subsection{Positive combinations}
+Put \(r=\lfloor 2TQ^2\rfloor\). If the exact lower endpoint of \(D_i\) is at least \(-r\), any placement exceeding \(T\) must have \(D_i>2TQ^2\). If the upper endpoint is at most \(r\), it must have \(-D_i>2TQ^2\). Denote a sign certified in this fashion by \(\sigma_i\).
+Express a coordinate as \((C_j+W_js_{v(j)})/2\) with \(|s_{v(j)}|\le1\). Hypotenuse coordinates share a variable with opposite widths. Using the whole parameter box for clipped points is an outer relaxation. Bound each quadratic remainder upward by its absolute coefficient after expansion. This gives \(4\sigma_i D_i\le K_i+a_i\cdot s\). Nonnegative integer weights \(w_i\) with \(W=\sum_i w_i>0\) exclude the box if
+\[
+\sum_i w_iK_i+\left\|\sum_i w_i a_i\right\|_1\le 8TQ^2 W.
+\]
+An above-threshold placement would make the weighted left side of the original signed determinant inequalities strictly greater than \(8TQ^2W\). The floating-point LP proposes weights. The bound on their combination is checked exactly.
+
+The additional P2 test on supports plus a single free cell was enabled with cap eight in the \(n=9\) tolerance batch. The exact batch used cap zero. The cell version uses the same inequality on a subset of the points. Exp 133 gives its soundness argument, and Exp 134 tests it on cells containing exact above-threshold witnesses.
+
+\subsection{Local certificate and cover}
+The saved first-order certificate has nine core points, 13 loaded ties, six loaded wall contacts, and 19 independent loaded constraints with strictly positive multipliers. Its exact rational center is \(P_*\). The certificate uses a coordinate error bound \(e=2\cdot10^{-40}\) and proves a strict local optimality basin in the coordinate sup norm of radius \(r_b\approx7.56915\cdot10^{-5}\). The checker uses \(R=(1-10^{-6})r_b-e\), so \(R+e<r_b\). For a proposed injective labeling and affine symmetry, it applies the inverse symmetry to all vertices of each point domain. It checks the sup distance to the matched center coordinates exactly. Convexity proves the bound over the full product in the original certificate frame. This handles the triangle symmetries whose linear parts are not sup-norm isometries.
+
+\section{Enclosure uniqueness and the theorem}
+Every minimum enclosing triangle of a convex polygon has a flush side \cite{OR}. Its side midpoints lie on the hull by the pivot argument of Section~\ref{sec:norm}. We checked the six hull edges of \(P_*\) as possible flush sides. In an area-preserving affine frame with the selected side horizontal at height zero, the other side midpoints are the endpoints \((l,h),(r,h)\) of the hull slice at half the apex height. If \(h\) is not a hull vertex height, both midpoint contacts lie in the interiors of edges. The other two supporting lines must then be hull edge lines. Enumerate those line pairs and retain triangles enclosing the hull with all three midpoints on it.
+
+For each positive hull vertex height \(h\), compute \(l,r\) exactly. For \(l<r\), the triangle has vertices \((z+l-r,0),(z+r-l,0),(l+r-z,2h)\) for a base midpoint parameter \(z\). Containment of each hull vertex gives linear inequalities in \(z\), together with the constraint that the base midpoint lies on the base hull edge. Feasible intervals and their area \(2h(r-l)\) are rational. Exp 136 enumerates these cases and gives nine retained entries with repetitions. Their areas are \(1/2\) and \(43/32\). Every area-\(1/2\) entry is the reference triangle itself, and all such parameter intervals are singletons. Thus \(\Om\) is the unique minimum enclosing triangle of \(P_*\).
+
+To prove Theorem~\ref{thm:main}, normalize any configuration with area at least \(t_*\). Its image still exceeds \(T\) and lies in one of the eight families. The completed searches place that image in a certified basin, where its area is at most \(t_*\), with equality only for \(P_*\) up to symmetry and labels. In the equality case, compose with the symmetry taking the image to \(P_*\) and denote the resulting map by \(A\). Area equality gives \(|\det A|=1\). Hence \(A(\Om)\) encloses \(P_*\) with area \(1/2\). Enclosure uniqueness gives \(A(\Om)=\Om\), so \(A\) permutes the container vertices.
+
+\section{Validation and run statistics}
+The eight exact \(n=8\) family runs closed, providing a cell-graph re-proof using the earlier local certificate \cite{Tri8}. The no-cover \(n=8\) SSS1 negative control below the optimum left 13 unresolved boxes. On rerun, the soundness checks reported zero violations in vertex ranges, propagation, P2, the cover, and cell P2. The exact-coordinate negative tests reported zero wrongly closed boxes among 36 at \(n=8\) and 108 at \(n=9\). These are implementation checks.
+
+\begin{center}
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Family & Outer leaves & Cliques & Local nodes & Covers & Wall s\\
+\midrule
+MMM &396&2,982&11,196&0&8\\
+SSS3 &496&4,649&21,127&0&11\\
+MMS &57&129,762&534,712&0&14\\
+MSS1 &64&25,464&117,428&0&13\\
+SSS2 &64&70,045&327,343&0&19\\
+MSS0 &256&6,225,497&29,154,773&0&627\\
+SSS1 &261&9,418,273&43,104,530&0&1,240\\
+SSS0 &1,677&27,888,098&137,950,703&18&14,447\\
+\bottomrule
+\end{tabular}
+\end{center}
+All eight \(n=9\) exact runs recorded zero unresolved. Counts are from the batch JSON and log. The local-node column excludes work logged separately in abandoned local trees. The cover column counts logged closures, including any closures in work later resplit. Requeued tasks must be subtracted from the recorded root count before applying the outer-tree identity.
+
+\section{Limitations and independent verification}\label{sec:limits}
+The code was developed with AI assistance and awaits independent verification. The saved aggregate logs do not contain replayable witnesses for every pruned leaf. An independent check should pin the source and dependency versions, repeat the exact batch, review the family reduction and all integer bounds, and reproduce the local and enclosure certificates. Alternatively, record enough information to verify every split and terminal decision in a separate checker. The audit of the existing artifacts verifies run accounting and thresholds without replaying the global tree.
+
+\section*{Data and code availability}
+The code (normalization families, cell graph, local trees, local certificate, tests), the run logs and statistics of all sixteen family runs, and the exact enclosure check are in the companion repository, \url{https://github.com/NERD-NEH007/heilbronn-discovery-lab}, release \texttt{v1.2-tri9} (\texttt{code/exp127/}, \texttt{certificates/exp127/}), with SHA-256 checksums in \texttt{MANIFEST-tri9.sha256}.
+
+\section*{Use of AI tools}
+The author used AI systems, principally Claude, developed by Anthropic, for computation (writing and running search, certification and analysis code), for an independent review of the results, and for drafting text. All claims were checked against the computational records; the author takes responsibility for the content. AI systems are not authors of this work.
+\begin{thebibliography}{9}
+\bibitem{Panorias} C.~Panorias, \emph{An exact computer-assisted proof for ten points in Heilbronn's triangle problem}, preprint, 2026, DOI \href{https://doi.org/10.5281/zenodo.24186293}{10.5281/zenodo.24186293}.
+\bibitem{Square} E.~Hendren, \emph{A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal}, 2026, DOI \href{https://doi.org/10.5281/zenodo.24234317}{10.5281/zenodo.24234317}.
+\bibitem{Tri8} E.~Hendren, \emph{A computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle}, 2026, DOI \href{https://doi.org/10.5281/zenodo.24235152}{10.5281/zenodo.24235152}.
+\bibitem{SM} N.~Sudermann-Merx, \emph{Heilbronn's problem in the unit triangle: computational optimality certificates for \(n\le8\)}, arXiv:2607.15021v3, 2026.
+\bibitem{Stead} T.~Stead (maintainer), \emph{The Heilbronn Problem}, \url{https://math.tejstead.com/heilbronn}.
+\bibitem{ZC} Z.~Zeng and L.~Chen, \emph{Determining the Heilbronn configuration of seven points in triangles via symbolic computation}, CASC 2019, LNCS 11661, 458--477.
+\bibitem{OR} J.~O'Rourke, A.~Aggarwal, S.~Maddila and M.~Baldwin, \emph{An optimal algorithm for finding minimal enclosing triangles}, J. Algorithms 7 (1986), 258--269.
+\end{thebibliography}
+\end{document}
