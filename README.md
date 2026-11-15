@@ -16,7 +16,7 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
    the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892), attained only by the known
    configuration up to the 6 symmetries. **AI-assisted, not yet independently checked; verification welcome.**
 3. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
-   crossover at n = 43. arXiv: TBD. (`papers/heilbronn_structure.pdf`)
+   crossover at n = 43. (`papers/heilbronn_structure.pdf`) Zenodo: https://doi.org/10.5281/zenodo.24235666
 4. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
    arXiv: TBD. (`papers/critical_triangles_note.pdf`)
 
