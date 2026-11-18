@@ -45,7 +45,7 @@
 For Heilbronn's problem in a triangle we give a computer-assisted proof that the largest possible minimum triangle area of eight points, divided by the area of the triangle, is $2\theta = 0.0677892132\ldots$, where $\theta$ is the unique real root of the septic $1216512 t^7 + 1022976 t^6 - 2745456 t^5 + 2218730 t^4 + 32206304 t^3 - 19148615 t^2 + 3156103 t - 86233$. The record site attributes the conjecture that this is the optimal value to Chen, Zeng and Zhou. The value is attained only by the known configuration and its images under the six affine symmetries of the triangle.
 Optimality for $n = 8$ had previously been established by global optimization within solver tolerances, not rigorously.
 The proof is the branch and bound of our nine-point square paper, ported to the triangle with new normalisation reductions, new constraint rows for the slanted side, a Farkas-type prune for infeasible boxes, and a cover test that copes with symmetries that are not isometries. Every discarded box is discarded by a test evaluated in exact integer or rational arithmetic. The run took $2.44\cdot10^{8}$ nodes and $9.6$ hours on 14 worker processes, with no failures. The optimal value is identified exactly with the root of the septic.
-\textbf{This is an AI-assisted, computer-assisted proof. It has not been independently checked}: the code was written with an AI system, it is not formally verified, and nobody other than the author has re-run it. Section~\ref{sec:limits} states what an independent check would require.
+\textbf{This is an AI-assisted, computer-assisted proof.} A second, independent proof, by the cell-graph method of our nine-point triangle paper, records every split and closure in a certificate trace of 2{,}950 shards and 4{,}379{,}630 closures. A separate exact checker replays the trace without the search code (Section~\ref{sec:trace}). Section~\ref{sec:limits} states what remains to be trusted.
 \end{abstract}
 
 \maketitle
@@ -334,13 +334,45 @@ The Farkas prunes are counted inside the P2 discards: the code returns the same 
 The pre-run estimate from random probes was about $2\cdot10^8$ nodes and $8$ hours, with a heavy tail. % SRC: bb/NOTES.md n = 8 estimate
 
 % =====================================================================
+\section{A second proof with a replayable certificate trace}\label{sec:trace}
+We re-proved the theorem by a second, independent method: the minimum-enclosing-triangle normalization to eight contact families, cell graph and exact local trees of our nine-point triangle paper \cite{Tri9} (with one free point fewer, grid $G = 30$ and $Q = 30\cdot2^{14}$). This run recorded every decision. For each family, an emitter wrote every outer split, side-gap contraction, cell-graph clique and local-tree decision to a sharded trace. Each terminal record carries its own witness: a triangle whose vertex ranges lie below the cutoff, integer P2 multipliers, or a basin cover. A manifest pins the split tree and the SHA-256 of every shard. The side-gap contraction uses the proven raw bound $1/16$ for six points.
+
+The checker is a separate program that never imports the search code. It re-derives each shard root from the manifest, checks every split and contraction, re-verifies each witness in rational arithmetic, and requires every shard to close. The local certificate is checked by separately written exact code, not by the certifier of Section~\ref{sec:local}:
+\begin{itemize}
+\item \emph{Existence.} A Newton--Kantorovich test on the square system of the 11 ties and 6 wall contacts, with Lipschitz constant 12, shows an exact solution $P^*$ within $\rho\approx6.99\cdot10^{-32}$ of the certificate's rational centre ($h\approx5\cdot10^{-30}$). This agrees with the certificate's own existence radius.
+\item \emph{The value at $P^*$.} Every other triangle at $P^*$ is strictly larger.
+\item \emph{The basin.} A first-order basin about $P^*$ holds, with the Jacobian known up to an $O(\rho)$ perturbation and controlled by a Neumann bound. The coercivity constant is $\alpha\approx0.0251$, so the basin holds well beyond the cover radius $\approx2.78\cdot10^{-4}$.
+\end{itemize}
+All checks are in exact rationals.
+
+\begin{center}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Family & Shards & Closures & Covers\\
+\midrule
+MMM &1&192&0\\
+MMS &15&53{,}196&0\\
+MSS0 &203&527{,}976&0\\
+MSS1 &16&49{,}132&0\\
+SSS0 &2{,}471&2{,}481{,}837&0\\
+SSS1 &227&1{,}164{,}661&2\\
+SSS2 &16&102{,}009&0\\
+SSS3 &1&627&0\\
+\midrule
+Total &2{,}950&4{,}379{,}630&2\\
+\bottomrule
+\end{tabular}
+\end{center}
+The strict release replay checks all eight families from scratch and is complete. Seven families stay below the cutoff, and the two cover closures in SSS1 lie in the certified basin. Six mutation tests check that the checker rejects corrupted traces: a wrong cutoff, an invalid P2 certificate, a truncated shard, a wrong closing triangle, an edited shard, and an edit without rehashing. Extracting only the archived files into an empty folder and replaying there reproduces the release receipt exactly.
+
 \section{Limitations and what an independent check needs}\label{sec:limits}
 
 \begin{itemize}
-\item \emph{Not independently checked.} As stated in Remark~\ref{rem:status}, this is an AI-assisted computer proof that only its author has examined, apart from the code review mentioned there.
-\item \emph{No stored certificates.} The $1.2\cdot10^8$ leaves of the tree are not stored. The proof can be re-checked only by re-running the search, about $10$ hours on $14$ workers. Every P2 discard was decided by the exact integer certificate. The rational audit was additionally run on a random $0.2\%$ of them. Unlike \cite{N9}, no clean-room checker of P2 certificates has been run for the triangle rows.
+\item \emph{Status.} This is an AI-assisted computer proof. The branch and bound of Sections~\ref{sec:outline}--\ref{sec:run} has been examined only by its author, apart from the code review of Remark~\ref{rem:status}. The second proof of Section~\ref{sec:trace} no longer needs its search to be trusted: every decision is replayed from the archived trace by a separate checker. No third party has re-run that replay yet.
+\item \emph{No stored certificates for the first proof.} (The second proof stores all of its certificates; see Section~\ref{sec:trace}.) The $1.2\cdot10^8$ leaves of the tree are not stored. The proof can be re-checked only by re-running the search, about $10$ hours on $14$ workers. Every P2 discard was decided by the exact integer certificate. The rational audit was additionally run on a random $0.2\%$ of them. Unlike \cite{N9}, no clean-room checker of P2 certificates has been run for the triangle rows.
 \item \emph{New proof steps.} The P0 triangle rules, the rows (R4)--(R7), the conditional (R5) rows, the Farkas case and the cover with non-isometric symmetries are new compared with the code of \cite{N9}. They are justified in Sections~\ref{sec:reductions}--\ref{sec:tests} and tested in Section~\ref{sec:validation}, but they have not been reviewed by a person other than the author.
-\item \emph{Local certificate.} The certifier was modified for the triangle ((L1)--(L5)). The modified version has not been checked by separately written code.
+\item \emph{Local certificate.} The certifier was modified for the triangle ((L1)--(L5)). The existence, the value at $P^*$ and the first-order basin that the theorem needs are re-checked by separately written exact code in the second proof (Section~\ref{sec:trace}). The identification of the value with the root of the septic (Lemma~\ref{lem:ident}) is not re-checked there.
 \item \emph{Trust base} as in Section~\ref{sec:sound}; none of it is formally verified.
 \item \emph{Resume.} The driver can resume from a checkpoint, but the checkpoint does not store a hash of the problem definition beyond $T$ and a flag. The run did not resume, so this does not affect the result.
 \end{itemize}
@@ -357,6 +389,7 @@ An independent check would need at least the following.
 \section*{Data and code availability}
 The following are available in the public repository accompanying this paper, \repourl:
 the branch-and-bound code \texttt{bbt.py} and its drivers and tests (experiment~113, \texttt{bb/}); the triangle certifier \texttt{certify\_tri.py} and its output \texttt{local\_certs\_tri.json}; the identification script \texttt{identify\_n8.py} with its log and the exact coordinates in $\Q(\theta)$ (\texttt{identify\_n8.json}) (all in \texttt{cert/}); the run logs and statistics; and the consistency check \texttt{check\_paper4.py}.
+The certificate trace of the second proof (2{,}950 shards with manifests), its checker and the strict release receipt are archived at Zenodo, DOI \href{https://doi.org/10.5281/zenodo.24337873}{10.5281/zenodo.24337873}, with SHA-256 checksums for every file.
 
 \section*{Use of AI tools}
 The author used Claude, an AI system developed by Anthropic, for computation (writing and running search, certification and analysis code) and for drafting text. All claims were checked against the computational records; the author takes responsibility for the content. AI systems are not authors of this work.
@@ -365,6 +398,7 @@ The author used Claude, an AI system developed by Anthropic, for computation (wr
 \begin{thebibliography}{99}
 
 \bibitem{CZZ} L.~Chen, Z.~Zeng and W.~Zhou, An upper bound of Heilbronn number for eight points in triangles, \emph{J. Comb. Optim.} \textbf{28} (2014), no.~4, 854--874, doi:10.1007/s10878-012-9585-5.
+\bibitem{Tri9} E.~Hendren, A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle, Zenodo, 2026, doi:10.5281/zenodo.24331376.
 \bibitem{N9} E.~Hendren, A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal, companion paper, 2026.
 \bibitem{Stead} T.~Stead (maintainer), The Heilbronn Problem (record tables, exact verification and attributions), \url{https://math.tejstead.com/heilbronn}, triangle pages and methods page accessed 14 November 2026.
 \bibitem{SMtri} N.~Sudermann-Merx, Heilbronn's problem in the unit triangle: computational optimality certificates for $n \le 8$, arXiv:2607.15021v3, 30 October 2026; to appear in \emph{Operations Research Proceedings 2026}.

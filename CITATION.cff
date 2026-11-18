@@ -21,7 +21,13 @@ references:
     authors:
       - family-names: Hendren
         given-names: Ethan
-    doi: 10.5281/zenodo.24235152
+    doi: 10.5281/zenodo.24338251
+  - type: data
+    title: "Certificate trace and checker for the computer-assisted proof of Heilbronn's problem for eight points in a triangle"
+    authors:
+      - family-names: Hendren
+        given-names: Ethan
+    doi: 10.5281/zenodo.24337873
   - type: article
     title: "A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle"
     authors:

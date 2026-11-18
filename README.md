@@ -10,11 +10,18 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
    **The code was written with AI assistance (Claude, Anthropic), and the proof has not yet been independently
    checked. Independent verification is welcome.**
 2. **A computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle.**
-   (`papers/heilbronn_tri8.pdf`; code `code/exp113/`, run logs `certificates/exp113/`.)
-   Zenodo: https://doi.org/10.5281/zenodo.24235152
-   Result: in the triangle {x, y ≥ 0, x + y ≤ 1}, 8 points have a triangle of area at most θ, the unique real root of
-   the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892), attained only by the known
-   configuration up to the 6 symmetries. **AI-assisted, not yet independently checked; verification welcome.**
+   (`papers/heilbronn_tri8.pdf`; code `code/exp113/`, run logs `certificates/exp113/`;
+   trace checker `code/trace-tri8/`; release v1.4-tri8.)
+   Zenodo: https://doi.org/10.5281/zenodo.24338251 (paper, v2)
+   Certificate trace and checker: https://doi.org/10.5281/zenodo.24337873 (dataset)
+   Result: in the triangle {x, y ≥ 0, x + y ≤ 1}, 8 points have a triangle of area at most θ, the unique real
+   root of the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892). The value is attained
+   only by the known configuration, up to the 6 symmetries.
+   **Two proofs.** The first is an exact branch and bound. The second, independent proof uses the cell-graph
+   method of paper 3 and comes with a **replayable certificate trace**: 2,950 shards and 4,379,630 closures,
+   replayed in exact arithmetic by a separate checker that does not use the search code. That checker also
+   re-checks the local certificate (Newton–Kantorovich existence, and the first-order basin). The proof is
+   AI-assisted, and independent re-runs of the replay are welcome. See `code/trace-tri8/README.md`.
 3. **A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle.**
    (`papers/heilbronn_tri9.pdf`; code `code/exp127/`, `code/exp136/`; run logs `certificates/exp127/`;
    trace checker `code/trace-tri9/`; release v1.3-tri9.)
