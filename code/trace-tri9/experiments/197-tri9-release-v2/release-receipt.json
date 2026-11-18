@@ -1,0 +1,377 @@
+{
+  "complete": true,
+  "conclusion": "optimal value and S3 uniqueness modulo labels",
+  "dependencies": {
+    "basin_sha256": "b2aacb0951690932d2401ffaf27763e3ce97c91ef2a093c037eee4ac6b8f6c69",
+    "canonical_sss0_reduction_sha256": "ba8bb511e63fe82b3724ee77106c12193c5ab9ad80eaaaaca1c19cbafdac39d7",
+    "contraction_bound_n7_raw": "7/144",
+    "enclosure": {
+      "areas": [
+        "1/2",
+        "43/32"
+      ],
+      "candidates": 9,
+      "hull": [
+        [
+          "0",
+          "1/8"
+        ],
+        [
+          "3/28",
+          "0"
+        ],
+        [
+          "7/8",
+          "0"
+        ],
+        [
+          "25/28",
+          "3/28"
+        ],
+        [
+          "1/8",
+          "7/8"
+        ],
+        [
+          "0",
+          "25/28"
+        ]
+      ]
+    },
+    "enclosure_sha256": "179bbe2c89f8f7affe1db163b830bc9cee7544d0264c86a00e917b0c1bec412d",
+    "sss0_scope": "SSS0 replayed over canonical representatives (exp 186)"
+  },
+  "families": {
+    "MMM": {
+      "artifact_sha256": "4b832dfc06a9c1b1d6dbc90051f368c632328db829d0045a412f9965c506d89e",
+      "cover_closures": 0,
+      "ordinary_closures": 7089,
+      "root_upper_bound": "42999999957/1568000000000",
+      "shards": 1,
+      "status": "replayed"
+    },
+    "MMS": {
+      "artifact_sha256": "224671b6a220b458764e192887b8bc2dc5e84129aa271a2efcca50155fe0c17f",
+      "cover_closures": 0,
+      "ordinary_closures": 792769,
+      "root_upper_bound": "42999999957/1568000000000",
+      "shards": 44,
+      "status": "replayed"
+    },
+    "MSS0": {
+      "artifact_sha256": "093bc9be58734466eb457c6f352719780efe18f2fbc75bf30912f81e6899ec41",
+      "cover_closures": 0,
+      "ordinary_closures": 14058921,
+      "root_upper_bound": "42999999957/1568000000000",
+      "shards": 702,
+      "status": "replayed"
+    },
+    "MSS1": {
+      "artifact_sha256": "68e62dc8b57501d8a3ed287c313457da67c223021c747f2415c157560479476e",
+      "cover_closures": 0,
+      "ordinary_closures": 132008,
+      "root_upper_bound": "42999999957/1568000000000",
+      "shards": 57,
+      "status": "replayed"
+    },
+    "SSS0": {
+      "artifact_sha256": "d861a66b25ffea5453b839b50a083dd1635eeb2522edac1fbd2d2f6850eba38a",
+      "cover_closures": 32,
+      "ordinary_closures": 35490128,
+      "root_upper_bound": "43/1568",
+      "shards": 1981,
+      "status": "replayed"
+    },
+    "SSS1": {
+      "artifact_sha256": "a3d01cf1347c776051d51b81194426f83a043dff67ca4bfc428a932efba4e1cc",
+      "cover_closures": 0,
+      "ordinary_closures": 18073130,
+      "root_upper_bound": "42999999957/1568000000000",
+      "shards": 1030,
+      "status": "replayed"
+    },
+    "SSS2": {
+      "artifact_sha256": "88e0e950b96530214aaeef907075a50f60eedb5a44b9a5b45e37d8ca036db22f",
+      "cover_closures": 0,
+      "ordinary_closures": 627454,
+      "root_upper_bound": "42999999957/1568000000000",
+      "shards": 38,
+      "status": "replayed"
+    },
+    "SSS3": {
+      "artifact_sha256": "285e0e2af10f7c7c3200283cab1434e2e2a02002b56cca3d76ec32ce07c8b68b",
+      "cover_closures": 0,
+      "ordinary_closures": 12888,
+      "root_upper_bound": "42999999957/1568000000000",
+      "shards": 1,
+      "status": "replayed"
+    }
+  },
+  "mode": "replay",
+  "theorem": {
+    "canonical_roots": {
+      "MMM": [
+        [
+          "R",
+          303104,
+          303104,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          303104,
+          303104
+        ],
+        [
+          "R",
+          303104,
+          303104,
+          303104,
+          303104
+        ]
+      ],
+      "MMS": [
+        [
+          "R",
+          0,
+          303104,
+          0,
+          0
+        ],
+        [
+          "R",
+          303104,
+          606208,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          303104,
+          303104
+        ],
+        [
+          "R",
+          303104,
+          303104,
+          303104,
+          303104
+        ]
+      ],
+      "MSS0": [
+        [
+          "R",
+          0,
+          303104,
+          0,
+          0
+        ],
+        [
+          "R",
+          303104,
+          606208,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          0,
+          303104
+        ],
+        [
+          "R",
+          0,
+          0,
+          303104,
+          606208
+        ],
+        [
+          "R",
+          303104,
+          303104,
+          303104,
+          303104
+        ]
+      ],
+      "MSS1": [
+        [
+          "R",
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          "R",
+          303104,
+          606208,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          303104,
+          606208
+        ],
+        [
+          "R",
+          303104,
+          303104,
+          303104,
+          303104
+        ]
+      ],
+      "SSS0": [
+        [
+          "R",
+          0,
+          303104,
+          0,
+          0
+        ],
+        [
+          "R",
+          303104,
+          606208,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          0,
+          303104
+        ],
+        [
+          "R",
+          0,
+          0,
+          303104,
+          606208
+        ],
+        [
+          "H",
+          0,
+          303104,
+          303104,
+          606208
+        ],
+        [
+          "H",
+          303104,
+          606208,
+          0,
+          303104
+        ]
+      ],
+      "SSS1": [
+        [
+          "R",
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          "R",
+          303104,
+          606208,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          303104,
+          606208
+        ],
+        [
+          "H",
+          0,
+          303104,
+          303104,
+          606208
+        ],
+        [
+          "H",
+          303104,
+          606208,
+          0,
+          303104
+        ]
+      ],
+      "SSS2": [
+        [
+          "R",
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          "R",
+          606208,
+          606208,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          303104,
+          606208
+        ],
+        [
+          "H",
+          0,
+          303104,
+          303104,
+          606208
+        ]
+      ],
+      "SSS3": [
+        [
+          "R",
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          "R",
+          606208,
+          606208,
+          0,
+          0
+        ],
+        [
+          "R",
+          0,
+          0,
+          606208,
+          606208
+        ]
+      ]
+    },
+    "cutoff_raw": "42999999957/1568000000000",
+    "domain": "x>=0,y>=0,x+y<=1",
+    "domain_area": "1/2",
+    "n": 9,
+    "normalization": "minimum enclosing triangle, midpoint contacts, S3, Exp 127 N1\u2013N3",
+    "optimum_normalized": "43/784",
+    "optimum_raw": "43/1568",
+    "units": "raw triangle area; normalized value is twice raw"
+  }
+}

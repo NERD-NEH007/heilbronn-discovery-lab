@@ -1,0 +1,197 @@
+{
+ "9": [
+  {
+   "certified": true,
+   "reason": "proved (first order): unique exact tie solution in box, all other triangles > t, 19 independent loaded constraints with multipliers > 0",
+   "mode": "first-order",
+   "existence_radius": 1.0000000000000001e-40,
+   "box_rho": 2.0000000000000003e-40,
+   "basin_radius": 7.569148927283834e-05,
+   "t_lower": "2742346938775510204081632653061e-32",
+   "t_upper": "2742346938775510204081632653062e-32",
+   "symmetry": [
+    "id",
+    "rot",
+    "rot2"
+   ],
+   "n_core": 9,
+   "rattlers": [],
+   "loaded_ties": 13,
+   "loaded_walls": 6,
+   "y_min_lower": 0.006921373199623425,
+   "t_exact": "43/1568",
+   "alt": 0,
+   "points_exact": [
+    [
+     "7/8",
+     "0"
+    ],
+    [
+     "0",
+     "1/8"
+    ],
+    [
+     "1/8",
+     "7/8"
+    ],
+    [
+     "0",
+     "25/28"
+    ],
+    [
+     "3/28",
+     "0"
+    ],
+    [
+     "25/28",
+     "3/28"
+    ],
+    [
+     "3/7",
+     "11/28"
+    ],
+    [
+     "11/28",
+     "5/28"
+    ],
+    [
+     "5/28",
+     "3/7"
+    ]
+   ],
+   "frame": "right triangle {x>=0, y>=0, x+y<=1}, area 1/2; t = min |area|; site normalised value = 2t",
+   "extra": {
+    "active_ties": 13,
+    "wall_contacts": 6,
+    "tie_spread_input": 1.3322676295501878e-15,
+    "next_gap_input": 0.49999999999999956,
+    "dim_full": 19,
+    "reduced_unknowns": 5,
+    "tie_orbits": 5,
+    "unloaded_wall_contacts": 0,
+    "reduced_rank": 5,
+    "dropped_tie_orbits": 0,
+    "polish_residuals": [
+     "3.5e-17",
+     "5.6e-33"
+    ],
+    "exact_rational_centre": true,
+    "t_polished": "2742346938775510204081632653061e-32",
+    "Y": 0.0,
+    "Z0": 1.167320208748736e-14,
+    "Z2": 69.1395348837209,
+    "cond_reduced": 23.795021959663767,
+    "uniqueness_radius_1e6": true,
+    "existence_radius_exact": "1/10000000000000000000000000000000000000000",
+    "box_rho_exact": "1/5000000000000000000000000000000000000000",
+    "exact_ties": [
+     [
+      0,
+      3,
+      6
+     ],
+     [
+      0,
+      5,
+      6
+     ],
+     [
+      0,
+      5,
+      7
+     ],
+     [
+      1,
+      4,
+      7
+     ],
+     [
+      1,
+      4,
+      8
+     ],
+     [
+      1,
+      5,
+      7
+     ],
+     [
+      2,
+      3,
+      6
+     ],
+     [
+      2,
+      3,
+      8
+     ],
+     [
+      2,
+      4,
+      8
+     ],
+     [
+      3,
+      7,
+      8
+     ],
+     [
+      4,
+      6,
+      7
+     ],
+     [
+      5,
+      6,
+      8
+     ],
+     [
+      6,
+      7,
+      8
+     ]
+    ],
+    "min_margin_other": 0.01371173469387755,
+    "exact_wall_contacts": [
+     [
+      0,
+      "B"
+     ],
+     [
+      1,
+      "L"
+     ],
+     [
+      2,
+      "H"
+     ],
+     [
+      3,
+      "L"
+     ],
+     [
+      4,
+      "B"
+     ],
+     [
+      5,
+      "H"
+     ]
+    ],
+    "exact_constraints": 19,
+    "cond_full": 47.352010681997754,
+    "stress_rows": 19,
+    "stress_ties": 13,
+    "stress_walls": 6,
+    "Minv_norm_upper": 22.860473700928818,
+    "basin_radius_exact": "149944287686380167712356950156249986409957188422023812930216967649/1980992699798644525826740060160000000000000000000000000000000000000000",
+    "strict": "strict local max",
+    "seconds": 0.0,
+    "input": {
+     "source": "105-shape-universality/results/pool_tri_n9.json[0]",
+     "value_normalised": 0.054846938775510154
+    }
+   }
+  }
+ ]
+}

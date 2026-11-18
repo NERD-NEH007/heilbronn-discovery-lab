@@ -16,11 +16,18 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
    the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892), attained only by the known
    configuration up to the 6 symmetries. **AI-assisted, not yet independently checked; verification welcome.**
 3. **A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle.**
-   (`papers/heilbronn_tri9.pdf`; code `code/exp127/`, `code/exp136/`; run logs `certificates/exp127/`; release v1.2-tri9.)
-   Result: 9 points in a triangle have a triangle of area at most 43/784 of the container's area, attained only by
-   the known rational configuration up to the 6 symmetries. Method: minimum-enclosing-triangle normalization to 8
-   contact families, cell graph and exact local certificates (after Panorias's square n = 10 preprint).
-   **AI-assisted, not yet independently checked; verification welcome.**
+   (`papers/heilbronn_tri9.pdf`; code `code/exp127/`, `code/exp136/`; run logs `certificates/exp127/`;
+   trace checker `code/trace-tri9/`; release v1.3-tri9.)
+   Zenodo: https://doi.org/10.5281/zenodo.24331376 (paper, v2)
+   Certificate trace and checker: https://doi.org/10.5281/zenodo.24331022 (dataset)
+   Result: 9 points in a triangle have a triangle of area at most 43/784 of the container's area. The value is
+   attained only by the known rational configuration, up to the 6 symmetries. Method: minimum-enclosing-triangle
+   normalization to 8 contact families, cell graph and exact local certificates (after Panorias's square n = 10
+   preprint).
+   **Replayable certificate trace:** every split and closure of the exact search, 3,854 shards and 69,194,387
+   closures, is replayed in exact arithmetic by a separate checker that does not use the search code. The strict
+   eight-family release receipt is complete. The proof is AI-assisted, and independent re-runs of the replay are
+   welcome. See `code/trace-tri9/README.md`.
 4. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. (`papers/heilbronn_structure.pdf`) Zenodo: https://doi.org/10.5281/zenodo.24235666
 5. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.

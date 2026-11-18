@@ -15,7 +15,7 @@
 \author{Ethan Hendren}
 \email{eehendren007@gmail.com}
 \begin{abstract}
-For nine points in a triangle, the largest possible minimum triangle area divided by the container area is \(43/784\). Equality holds only for the listed rational configuration up to affine symmetries of the container and relabeling. An affine normalization gives eight contact families. We use exact geometric exclusions on a cell graph and rationally checked bounds in the surviving coordinate boxes. A local certificate closes the neighborhoods of the known configuration. \textbf{This is an AI-assisted, computer-assisted proof awaiting independent verification.} Section~\ref{sec:limits} describes the computational trust base.
+For nine points in a triangle, the largest possible minimum triangle area divided by the container area is \(43/784\). Equality holds only for the listed rational configuration up to affine symmetries of the container and relabeling. An affine normalization gives eight contact families. We use exact geometric exclusions on a cell graph and rationally checked bounds in the surviving coordinate boxes. A local certificate closes the neighborhoods of the known configuration. \textbf{This is an AI-assisted, computer-assisted proof.} Every split and closure of the global search is recorded in a certificate trace of 3,854 shards, which a separate exact checker replays without the search code. Section~\ref{sec:limits} describes the remaining trust base.
 \end{abstract}
 \maketitle
 
@@ -121,11 +121,37 @@ SSS0 &1,677&27,888,098&137,950,703&18&14,447\\
 \end{center}
 All eight \(n=9\) exact runs recorded zero unresolved. Counts are from the batch JSON and log. The local-node column excludes work logged separately in abandoned local trees. The cover column counts logged closures, including any closures in work later resplit. Requeued tasks must be subtracted from the recorded root count before applying the outer-tree identity.
 
+\subsection{Replayable certificate trace}\label{sec:trace}
+For each family, a separate emitter re-ran the exact search and wrote every outer split, side-gap contraction, cell-graph clique and local-tree decision to a sharded trace. Each terminal record carries its own witness: the triangle whose vertex ranges lie below the cutoff, the integer P2 multipliers, or the basin cover. A manifest pins the binary split tree and the SHA-256 of every shard. The checker is a separate program that never imports the search engine. It re-derives each shard root from the manifest, checks every split and contraction, re-verifies each witness in rational arithmetic, and requires every shard to close. Tests check that it rejects malformed coverage, a wrong statement, a wrong clique stream and an invalid cover.
+
+The release check pins the eight canonical support roots, \(Q=606208\), the raw cutoff \(42999999957/1568000000000\) and the raw optimum \(43/1568\). It re-verifies both basin radii with the exact basin checker and runs the enclosure check. It then replays all eight families from scratch. The family SSS0 is replayed over canonical representatives: the \(S_3\) action on its six vertex--side incidences is transitive, so only one ordering representative per orbit is traced.
+
+\begin{center}
+\small
+\begin{tabular}{lrrrl}
+\toprule
+Family & Shards & Closures & Covers & Replayed bound (raw)\\
+\midrule
+MMM &1&7,089&0&cutoff\\
+MMS &44&792,769&0&cutoff\\
+MSS0 &702&14,058,921&0&cutoff\\
+MSS1 &57&132,008&0&cutoff\\
+SSS0 &1,981&35,490,128&32&\(43/1568\)\\
+SSS1 &1,030&18,073,130&0&cutoff\\
+SSS2 &38&627,454&0&cutoff\\
+SSS3 &1&12,888&0&cutoff\\
+\midrule
+Total &3,854&69,194,387&32&\\
+\bottomrule
+\end{tabular}
+\end{center}
+Every shard replayed complete. Seven families stay below the cutoff throughout. In SSS0, the only boxes reaching the candidate value are the 32 basin-cover closures around \(P_*\). The strict release receipt therefore concludes the optimal value and its uniqueness up to \(S_3\) and labels.
+
 \section{Limitations and independent verification}\label{sec:limits}
-The code was developed with AI assistance and awaits independent verification. The saved aggregate logs do not contain replayable witnesses for every pruned leaf. An independent check should pin the source and dependency versions, repeat the exact batch, review the family reduction and all integer bounds, and reproduce the local and enclosure certificates. Alternatively, record enough information to verify every split and terminal decision in a separate checker. The audit of the existing artifacts verifies run accounting and thresholds without replaying the global tree.
+The code was developed with AI assistance. The global search no longer has to be trusted: Section~\ref{sec:trace} replays every decision from the trace in a separate checker. The remaining trust base is (i) the checker sources, which are small and separate from the search engine; (ii) the hand-proved reductions, namely the normalization and contact-family completeness of Section~\ref{sec:norm}, the exact \(n=7\) side-gap bound, and the orbit reduction behind canonical SSS0; and (iii) the local basin and enclosure certificates, which are re-verified exactly. Independent review of the checker and of these lemmas is welcome. Reproducing the receipt needs only the archived trace, the checker sources and Python with its standard library.
 
 \section*{Data and code availability}
-The code (normalization families, cell graph, local trees, local certificate, tests), the run logs and statistics of all sixteen family runs, and the exact enclosure check are in the companion repository, \url{https://github.com/NERD-NEH007/heilbronn-discovery-lab}, release \texttt{v1.2-tri9} (\texttt{code/exp127/}, \texttt{certificates/exp127/}), with SHA-256 checksums in \texttt{MANIFEST-tri9.sha256}.
+The search code, run logs and statistics of all sixteen family runs, and the exact enclosure check are in the companion repository, \url{https://github.com/NERD-NEH007/heilbronn-discovery-lab}, release \texttt{v1.2-tri9}. The certificate trace (3,854 shards with manifests), the checker sources and the strict release receipt are archived at Zenodo, DOI \href{https://doi.org/10.5281/zenodo.24331022}{10.5281/zenodo.24331022}, with SHA-256 checksums for every file.
 
 \section*{Use of AI tools}
 The author used AI systems, principally Claude, developed by Anthropic, for computation (writing and running search, certification and analysis code), for an independent review of the results, and for drafting text. All claims were checked against the computational records; the author takes responsibility for the content. AI systems are not authors of this work.

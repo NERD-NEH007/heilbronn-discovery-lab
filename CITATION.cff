@@ -1,30 +1,48 @@
 cff-version: 1.2.0
 message: "If you use these data or this code, please cite the papers below."
 title: "Heilbronn discovery lab: papers, certificates and verification code"
-abstract: "Three papers on the Heilbronn triangle problem in the unit square with data and code: a computer-assisted proof that the known 9-point configuration is optimal, H(9) = (9 sqrt(65) - 55)/320 (code written with AI assistance, Claude, Anthropic; not yet independently checked), certificates for best-known configurations for n = 37-100, and a study of critical triangles."
+abstract: "Papers on the Heilbronn triangle problem in the unit square and the triangle, with data and code: computer-assisted optimality proofs for nine points in the square, eight points in a triangle and nine points in a triangle (the last with a replayable certificate trace), certificates for best-known square configurations for n = 37-100, and a study of critical triangles. The code was written with AI assistance (Claude, Anthropic)."
 type: dataset
 authors:
   - family-names: Hendren
     given-names: Ethan
 license: [MIT, CC-BY-4.0]
-date-released: 2026-11-12
-keywords: [Heilbronn triangle problem, discrete geometry, computer-assisted proof, interval arithmetic]
+date-released: 2026-11-18
+keywords: [Heilbronn triangle problem, discrete geometry, computer-assisted proof, certificate trace, exact arithmetic]
 references:
   - type: article
     title: "A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal"
     authors:
       - family-names: Hendren
         given-names: Ethan
-    notes: "arXiv identifier to be added"
+    doi: 10.5281/zenodo.24234317
+  - type: article
+    title: "A computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle"
+    authors:
+      - family-names: Hendren
+        given-names: Ethan
+    doi: 10.5281/zenodo.24235152
+  - type: article
+    title: "A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle"
+    authors:
+      - family-names: Hendren
+        given-names: Ethan
+    doi: 10.5281/zenodo.24331376
+  - type: data
+    title: "Certificate trace and checker for the computer-assisted proof of Heilbronn's problem for nine points in a triangle"
+    authors:
+      - family-names: Hendren
+        given-names: Ethan
+    doi: 10.5281/zenodo.24331022
   - type: article
     title: "The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a crossover at n = 43"
     authors:
       - family-names: Hendren
         given-names: Ethan
-    notes: "arXiv identifier to be added"
+    doi: 10.5281/zenodo.24235666
   - type: article
     title: "Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions"
     authors:
       - family-names: Hendren
         given-names: Ethan
-    notes: "arXiv identifier to be added"
+    notes: "identifier to be added"
