@@ -24,13 +24,14 @@ QUEUE = ROOT/"163-tri9-trace-queue"
 CANON = ROOT/"186-tri9-sss0-canonical-production"
 sys.path.insert(0,str(CANON))
 import stream_trace, verify_manifest as manifests          # exp 186 copies, imported first so they are the ones cached
-sys.path.insert(0,str(QUEUE))
-from queue_traces import contract
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from contract9 import contract                      # standalone copy (2026-11-19): no emitter modules are imported
 import canonical
 CANONICAL_DIGEST = "ba8bb511e63fe82b3724ee77106c12193c5ab9ad80eaaaaca1c19cbafdac39d7"   # reviewed exp 186 reduction (audit exp 198)
 assert canonical.DIGEST==CANONICAL_DIGEST, "canonical reduction rules differ from the reviewed release"
 require_files = [Path(stream_trace.__file__).parent, Path(manifests.__file__).parent]
 assert all(p==CANON for p in require_files), require_files
+sys.path.insert(0,str(ROOT/"160-tri9-sss3-production-trace"))   # was added by the emitter import chain
 from graph_replay import graph_boxes
 from verify_trace import read_record, require, unique_object
 from verify_basin import SOURCE, load, verify as verify_basin

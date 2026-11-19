@@ -28,7 +28,7 @@ a468b81f7c02ea8a3e9907c00bc82b2492bae7bf3d92e79cddb9ac31ba087c5e  code/trace-tri
 b9beca4e7baeebdd9f4bb5a3bdb34b49f5acbc255339c9f0f1089ba20865b4fe  code/trace-tri8/experiments/202-tri8-trace/emit8.py
 cbef90985d2759845490ce5a27067fb2962c371435c0e6e6eee0057934127b6b  code/trace-tri8/experiments/202-tri8-trace/emit_sub8.py
 b37072e7d424911b0fd6a89247d4edd8a944a89463e44026c481190b8fbb21d8  code/trace-tri8/experiments/202-tri8-trace/plan8.py
-2445c69f684f03c80acd6e7b7905e0361df4d636cb84208d75b528bf90f995d9  code/trace-tri8/experiments/202-tri8-trace/release-receipt.json
+f735bc895bca87549ece77abc00b9544e76612103be741a22b17f522336d6fa9  code/trace-tri8/experiments/202-tri8-trace/release-receipt.json
 af5fd45b1a7089ae3e005ab5816e63ee9d36df5c14c9cdbf4b249312b2f13619  code/trace-tri8/experiments/202-tri8-trace/run_family8.py
 2fa6870e6e40745750b892ecc5d8676ec419ae71ff77dd023ee49b2c93809aed  code/trace-tri8/experiments/202-tri8-trace/run_parallel8.py
 8cf82439fcfc04e6dbd6f70f2cab5c794968cb483df497321f61c6c552685dbd  code/trace-tri8/experiments/202-tri8-trace/stream_trace8.py
@@ -36,4 +36,4 @@ e13b9f06f18f284fdd751a92f268a6a518383003c38ad6ce8b4026309d9c8a88  code/trace-tri
 649f657938d1e994338915bee7525fc02507722120c16ad924fca4fb4254277d  code/trace-tri8/experiments/202-tri8-trace/test_mutations8.py
 a781fd33f52d5e34d28e8eb71ce4b2a9df5a68c49e379785f1af0bdaadfabb0f  code/trace-tri8/experiments/202-tri8-trace/verify_manifest8.py
 7a040e48a461e1428a4157236bdff2924a044de43c9980ee591dd99bf98826d2  code/trace-tri8/experiments/202-tri8-trace/verify_release8.py
-59759a74691d825d0357e2229586802ff7bef9672007785ffe073b7904f25bd8  code/trace-tri8/README.md
+527cb7941df70c81ae766266f1be868ec3ed0ca0bd8360d0b19e8c208a14dfb7  code/trace-tri8/README.md

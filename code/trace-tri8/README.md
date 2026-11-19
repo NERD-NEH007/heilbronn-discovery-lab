@@ -27,7 +27,7 @@ This archive holds the complete certificate trace for the computer-assisted proo
 
 ## Reproduce the release receipt
 
-Requirements: Python 3.12 or later (standard library only) and about 1 GB of free disk space. With 15 workers the replay takes about 3 minutes.
+Requirements: Python 3.12 or later with numpy (the cell-graph replay in `graph_replay.py` uses numpy int64 arithmetic with a static overflow guard; everything else is the standard library) and about 1 GB of free disk space. With 8 workers on an 8-core Apple M3 the replay takes about 2 minutes; with 15 workers on our Windows machine, about 3 minutes.
 
 1. Extract every archive into one empty directory:
    ```
@@ -45,6 +45,9 @@ Requirements: Python 3.12 or later (standard library only) and about 1 GB of fre
    ```
    - The output must contain `"complete": true`.
    - The family counts must match `experiments/202-tri8-trace/release-receipt.json`.
+   - Compare the receipts as JSON, which ignores line endings:
+     `python -c "import json,sys; a,b=(json.load(open(f)) for f in sys.argv[1:]); print(a==b)" receipt.json experiments/202-tri8-trace/release-receipt.json`
+   - The shipped receipt uses LF line endings. Its SHA-256 is `f735bc895bca87549ece77abc00b9544e76612103be741a22b17f522336d6fa9` (LF), or `2445c69f684f03c80acd6e7b7905e0361df4d636cb84208d75b528bf90f995d9` for a receipt written with CRLF line endings (for example by redirecting the output in cmd.exe). Windows PowerShell 5 writes UTF-16 when redirecting, so on Windows use cmd.exe or PowerShell 7 for step 3.
    - Run it without `-O`, because the dependency assertions must stay active.
    - `python -B experiments/202-tri8-trace/test_mutations8.py` runs the mutation tests, which check that the replay rejects six kinds of corrupted traces.
 
@@ -68,3 +71,9 @@ Requirements: Python 3.12 or later (standard library only) and about 1 GB of fre
 - the hand-proved reductions: the minimum-enclosing-triangle normalization and contact-family completeness (shared with the n = 9 proof) and the side-gap contraction. The contraction uses the proven raw bound 1/16 for six points (Yang, Zhang and Zeng).
 
 The search code that produced the trace is not needed to verify it.
+
+## Changes in v1.1 (2026-11-19)
+
+- The release receipt is shipped with LF line endings; SHA-256 values for both conventions are given above. Its content is unchanged.
+- numpy is listed as a requirement.
+- The checker and the trace files are unchanged.

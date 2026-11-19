@@ -90,7 +90,9 @@ d8a870309084c925f9e2d6758313d7dffb9cae26e036af62300065de1b53793a  code/trace-tri
 bc10d4839d9594191d479414346fd6bcef961759a8cbb7111c99219578147525  code/trace-tri9/experiments/186-tri9-sss0-canonical-production/test_pilot.py
 89018b03d3713654db9f0faaf52f86a5d97555a4bf8b58590f9a91801b08c13f  code/trace-tri9/experiments/186-tri9-sss0-canonical-production/verify_manifest.py
 c570be09b5238d5df3842927e7c52f83d2e259d19d9e110d1cc329481c68bd40  code/trace-tri9/experiments/186-tri9-sss0-canonical-production/verify_release.py
-08bbf836d30f92313ea0b2cf9a048069f1139071e067b50df7e8cc63ae6a7b14  code/trace-tri9/experiments/197-tri9-release-v2/release-receipt.json
+f6090b7a461f18d1e7fb4646c3b260ffa490cfcee5381c20912b2f7ada29b9a6  code/trace-tri9/experiments/197-tri9-release-v2/release-receipt.json
 9f77c4ec9abb074eeaa9fef5229450792ce49d41270f9ee454483ee457bb897b  code/trace-tri9/experiments/197-tri9-release-v2/test_release.py
-190d3d7cbeca22b908eb6b5ba72f1f9fbd6d90c29be965d1428424950814b59f  code/trace-tri9/experiments/197-tri9-release-v2/verify_release.py
-fa675e843a149497f39ae19784a5e165944b5bcab8fab07b8844bfa739a61f0d  code/trace-tri9/README.md
+cb5a4724710f27e982ecf47e2716c9ffb221fb3339aa0f87c9c1271bcb0790f6  code/trace-tri9/experiments/197-tri9-release-v2/verify_release.py
+2be03a815ad485f7456936565e7a7702c74af833329c4b9438c208c5ddf4bf24  code/trace-tri9/experiments/197-tri9-release-v2/contract9.py
+57423e81a29b5fd8f4af3821ceafeadb9e687b22e8fb332fe300730dfe2e8d83  code/trace-tri9/experiments/197-tri9-release-v2/test_contract9.py
+5ecf2b36f706118163115e7912a9e4b6aece599bc78a477f09bcbeeee34a433b  code/trace-tri9/README.md
