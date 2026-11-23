@@ -1,7 +1,7 @@
 # Heilbronn discovery lab
 
 Papers, data and verification code on the Heilbronn triangle problem in the unit square and the triangle
-(place n points in the region to maximise the minimum triangle area t). Author of all five papers: Ethan Hendren.
+(place n points in the region to maximise the minimum triangle area t). Author of all six papers: Ethan Hendren.
 
 1. **A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal.**
    (`papers/heilbronn_n9.pdf`; code `code/exp110/`, run logs `certificates/exp110/`.)
@@ -35,9 +35,21 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
    closures, is replayed in exact arithmetic by a separate checker that does not use the search code. The strict
    eight-family release receipt is complete. The proof is AI-assisted, and independent re-runs of the replay are
    welcome. See `code/trace-tri9/README.md`.
-4. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
+4. **A computer-assisted proof of optimality for Heilbronn's problem with ten points in a triangle.**
+   (`papers/heilbronn_tri10.pdf`; trace checker `code/trace-tri10/`; release v1.5-tri10.)
+   Zenodo: https://doi.org/10.5281/zenodo.24426068 (paper)
+   Certificate trace and checker: https://doi.org/10.5281/zenodo.24426026 (dataset, 2.6 GB)
+   Result: for ten points in a triangle, the largest possible minimum triangle area divided by the container area is
+   δ₁₀ = 0.0433767406780570017601…, attained only by David Cantrell's configuration (June 2007), up to the
+   6 symmetries and relabeling.
+   **Replayable certificate trace:** every split and closure of the exact search, 16,166 shards and 92,003,233
+   closures, is replayed in exact arithmetic by a separate checker that does not use the search code; an exact
+   second-order certificate closes the neighbourhood of the optimum (2,285 cover closures). The strict
+   eight-family release receipt is complete. The proof is AI-assisted, and independent re-runs of the replay are
+   welcome. See `code/trace-tri10/README.md`.
+5. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. (`papers/heilbronn_structure.pdf`) Zenodo: https://doi.org/10.5281/zenodo.24235666
-5. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
+6. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
    arXiv: TBD. (`papers/critical_triangles_note.pdf`)
 
 In the table below, P1 and P2 are papers 3 and 4 of this list (the structure paper and the critical-triangles note)
