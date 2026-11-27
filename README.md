@@ -1,31 +1,59 @@
 # Heilbronn discovery lab
 
-Papers, data and verification code on the Heilbronn triangle problem in the unit square and the triangle
-(place n points in the region to maximise the minimum triangle area t). Author of all six papers: Ethan Hendren.
+Papers, data and verification code on the Heilbronn triangle problem in the unit square, the triangle and the disk
+(place n points in the region to maximize the minimum triangle area t). Author of all papers: Ethan Hendren.
+
+**News (2026-11-26):** disk, n = 8. The largest possible minimum triangle area of eight points in the unit disk is
+½ sin(π/7), attained only by the regular heptagon plus its center (proved, conditional on T. Stead's Lean theorem for
+F₈; see the table).
+
+## Results
+
+| problem | value | status | conditional on | paper | data |
+|---|---|---|---|---|---|
+| square, n = 9 | (9√65 − 55)/320 = 0.0548759991… | proved (computer-assisted), unique up to the symmetries of the square; an independent second proof (first exact proof: Orden, 10 November 2026) | — | [10.5281/zenodo.24440646](https://doi.org/10.5281/zenodo.24440646) (v1.1) | this repository, release v1.0-n9 |
+| triangle, n = 8 | 2θ = 0.0677892132…, θ the real root of the Chen–Zeng–Zhou septic | proved (computer-assisted), unique up to affine maps; the certificate trace (value) was independently replayed (Sudermann-Merx, 19 November 2026), and the equality case rests on the branch and bound | — | [10.5281/zenodo.24520863](https://doi.org/10.5281/zenodo.24520863) (v3, erratum) | [10.5281/zenodo.24337873](https://doi.org/10.5281/zenodo.24337873) |
+| triangle, n = 9 | 43/784 | proved (computer-assisted), unique up to affine maps; trace independently replayed (Sudermann-Merx, 19 November 2026) | — | [10.5281/zenodo.24563442](https://doi.org/10.5281/zenodo.24563442) (v3, erratum) | [10.5281/zenodo.24331022](https://doi.org/10.5281/zenodo.24331022) |
+| triangle, n = 10 | δ₁₀ = 0.0433767406780570017601… | proved (computer-assisted), unique up to affine maps (Cantrell's configuration, June 2007); independent replays welcome | — | [10.5281/zenodo.24426068](https://doi.org/10.5281/zenodo.24426068) | [10.5281/zenodo.24426026](https://doi.org/10.5281/zenodo.24426026) |
+| disk, n = 8 | ½ sin(π/7) ≈ 0.216942 (unit radius) | proved (computer-assisted), equality only for the regular heptagon plus its center | T. Stead's Lean theorem for F₈ (used as F₈ < 80001/10⁶) | [10.5281/zenodo.24572451](https://doi.org/10.5281/zenodo.24572451) | [10.5281/zenodo.24572455](https://doi.org/10.5281/zenodo.24572455) |
+
+Values in the triangle are the minimum area divided by the area of the triangle. Priority digests (hash commitments
+deposited before the full releases): triangle n = 10, [10.5281/zenodo.24447262](https://doi.org/10.5281/zenodo.24447262);
+disk n = 8, [10.5281/zenodo.24570480](https://doi.org/10.5281/zenodo.24570480).
+
+## Papers
+
+The PDFs in `papers/` are the versions first released here. The current version of each paper is the one on Zenodo.
 
 1. **A computer-assisted proof that the known nine-point Heilbronn configuration in the unit square is optimal.**
    (`papers/heilbronn_n9.pdf`; code `code/exp110/`, run logs `certificates/exp110/`.)
-   Zenodo: https://doi.org/10.5281/zenodo.24234317
+   Zenodo: https://doi.org/10.5281/zenodo.24440646 (paper, v1.1, which credits Orden; v1.0:
+   https://doi.org/10.5281/zenodo.24234317)
    Result: H(9) = (9√65 − 55)/320, attained only by the known configuration up to the symmetries of the square.
-   **The code was written with AI assistance (Claude, Anthropic), and the proof has not yet been independently
-   checked. Independent verification is welcome.**
+   An exact computer-assisted proof by Orden (https://doi.org/10.5281/zenodo.24094373, 10 November 2026) predates
+   ours; ours is an independent second proof, with a different reduction, search, local certificate and code.
+   **The code was written with AI assistance (Claude, Anthropic). No one outside has re-run our branch and bound
+   yet. Independent verification is welcome.**
 2. **A computer-assisted proof of optimality for Heilbronn's problem with eight points in a triangle.**
    (`papers/heilbronn_tri8.pdf`; code `code/exp113/`, run logs `certificates/exp113/`;
    trace checker `code/trace-tri8/`; release v1.4-tri8.)
-   Zenodo: https://doi.org/10.5281/zenodo.24338251 (paper, v2)
+   Zenodo: https://doi.org/10.5281/zenodo.24520863 (paper, v3 erratum; v2: https://doi.org/10.5281/zenodo.24338251)
    Certificate trace and checker: https://doi.org/10.5281/zenodo.24337873 (dataset)
    Result: in the triangle {x, y ≥ 0, x + y ≤ 1}, 8 points have a triangle of area at most θ, the unique real
-   root of the septic conjectured by Chen, Zeng and Zhou (normalised value 2θ ≈ 0.0677892). The value is attained
+   root of the septic conjectured by Chen, Zeng and Zhou (normalized value 2θ ≈ 0.0677892). The value is attained
    only by the known configuration, up to the 6 symmetries.
-   **Two proofs.** The first is an exact branch and bound. The second, independent proof uses the cell-graph
-   method of paper 3 and comes with a **replayable certificate trace**: 2,950 shards and 4,379,630 closures,
-   replayed in exact arithmetic by a separate checker that does not use the search code. That checker also
-   re-checks the local certificate (Newton–Kantorovich existence, and the first-order basin). The proof is
-   AI-assisted, and independent re-runs of the replay are welcome. See `code/trace-tri8/README.md`.
+   **Two proofs.** The first is an exact branch and bound; it proves the value and the equality case. The second,
+   independent proof of the value uses the cell-graph method of paper 3 and comes with a **replayable certificate
+   trace**: 2,950 shards and 4,379,630 closures, replayed in exact arithmetic by a separate checker that does not
+   use the search code. That checker also re-checks the local certificate (Newton–Kantorovich existence, and the
+   first-order basin). The v3 erratum makes this split explicit: the trace proves the value, and the equality case
+   rests on the branch and bound. The proof is AI-assisted. The trace was replayed independently by
+   N. Sudermann-Merx on 19 November 2026, and his receipt matches ours. See `code/trace-tri8/README.md`.
 3. **A computer-assisted proof of optimality for Heilbronn's problem with nine points in a triangle.**
    (`papers/heilbronn_tri9.pdf`; code `code/exp127/`, `code/exp136/`; run logs `certificates/exp127/`;
    trace checker `code/trace-tri9/`; release v1.3-tri9.)
-   Zenodo: https://doi.org/10.5281/zenodo.24331376 (paper, v2)
+   Zenodo: https://doi.org/10.5281/zenodo.24563442 (paper, v3 erratum: both cover radii; v2:
+   https://doi.org/10.5281/zenodo.24331376)
    Certificate trace and checker: https://doi.org/10.5281/zenodo.24331022 (dataset)
    Result: 9 points in a triangle have a triangle of area at most 43/784 of the container's area. The value is
    attained only by the known rational configuration, up to the 6 symmetries. Method: minimum-enclosing-triangle
@@ -33,26 +61,39 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
    preprint).
    **Replayable certificate trace:** every split and closure of the exact search, 3,854 shards and 69,194,387
    closures, is replayed in exact arithmetic by a separate checker that does not use the search code. The strict
-   eight-family release receipt is complete. The proof is AI-assisted, and independent re-runs of the replay are
-   welcome. See `code/trace-tri9/README.md`.
+   eight-family release receipt is complete. The proof is AI-assisted. The trace was replayed independently by
+   N. Sudermann-Merx on 19 November 2026, and his receipt matches ours. See `code/trace-tri9/README.md`.
 4. **A computer-assisted proof of optimality for Heilbronn's problem with ten points in a triangle.**
    (`papers/heilbronn_tri10.pdf`; trace checker `code/trace-tri10/`; release v1.5-tri10.)
    Zenodo: https://doi.org/10.5281/zenodo.24426068 (paper)
    Certificate trace and checker: https://doi.org/10.5281/zenodo.24426026 (dataset, 2.6 GB)
+   Priority digest: https://doi.org/10.5281/zenodo.24447262
    Result: for ten points in a triangle, the largest possible minimum triangle area divided by the container area is
    δ₁₀ = 0.0433767406780570017601…, attained only by David Cantrell's configuration (June 2007), up to the
    6 symmetries and relabeling.
    **Replayable certificate trace:** every split and closure of the exact search, 16,166 shards and 92,003,233
    closures, is replayed in exact arithmetic by a separate checker that does not use the search code; an exact
-   second-order certificate closes the neighbourhood of the optimum (2,285 cover closures). The strict
+   second-order certificate closes the neighborhood of the optimum (2,285 cover closures). The strict
    eight-family release receipt is complete. The proof is AI-assisted, and independent re-runs of the replay are
    welcome. See `code/trace-tri10/README.md`.
-5. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
+5. **Eight points in a disk: the Heilbronn value ½ sin(π/7).**
+   Zenodo: https://doi.org/10.5281/zenodo.24572451 (paper)
+   Data (certificate, checker and enumeration programs): https://doi.org/10.5281/zenodo.24572455
+   Priority digest: https://doi.org/10.5281/zenodo.24570480
+   Result: for eight points in the unit disk the smallest triangle has area at most ½ sin(π/7) = 0.216941…, with
+   equality only for the regular heptagon plus its center. Proved, conditional on T. Stead's Lean theorem for F₈
+   (used as F₈ < 80001/10⁶). The paper and its data are on Zenodo, not in this repository.
+6. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. (`papers/heilbronn_structure.pdf`) Zenodo: https://doi.org/10.5281/zenodo.24235666
-6. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
-   arXiv: TBD. (`papers/critical_triangles_note.pdf`)
+   The configurations for 37 ≤ n ≤ 100 were the first entries at these sizes on the record site (12–13 November
+   2026); most have since been improved there. The crossover at n = 43 and the empty-center statement for n ≤ 42
+   were measured on those 12–13 November records and have not been re-measured on the current ones.
+7. Critical triangles in best-known Heilbronn configurations: rattlers, walls and flat directions.
+   Zenodo: https://doi.org/10.5281/zenodo.24500509 (version 2). (`papers/critical_triangles_note.pdf`)
+8. Heilbronn optima as area-constraint stress frameworks: text to follow. SHA-256 fingerprints of the manuscript are
+   deposited on Zenodo: v1 https://doi.org/10.5281/zenodo.24485369, v2 https://doi.org/10.5281/zenodo.24497922.
 
-In the table below, P1 and P2 are papers 3 and 4 of this list (the structure paper and the critical-triangles note)
+In the tables below, P1 and P2 are papers 6 and 7 of this list (the structure paper and the critical-triangles note)
 and P3 is the n = 9 proof. The triangle proof (exp 113) is checked by `code/smoke_test.py` (run accounting and the exact septic identification).
 
 Quick check (about 10 seconds; must print `ALL PASSED`):
@@ -71,12 +112,12 @@ script from the repository root. Scripts write to `output/`, which git ignores.
 |---|---|---|
 | `configurations/best/n{37..100}.json` | our best configurations. Each file holds the coordinates as exact decimal expansions of the stored IEEE doubles, the stored value, the exact minimum area as a fraction `p/q` (with 40 decimals), n²t and tie counts (exactly equal, within 1e-9 and within 1e-6, relative) | P1 §4 (value tables 37–64, 65–100), P2 App. A |
 | `configurations/n97_polished.json` | n = 97 re-polished (experiment 108). Its value is above the stored best, but it is **not certified**: it is a KKT point with d = 2 | P1 §4, App. C |
-| `configurations/polished/n{37..100}.json` | experiment 44 polished centres, as exact rationals about 1e-31 from the certified exact local maximum. `points_30` holds these truncated toward zero to 30 decimals, with the exact minimum area of the truncated coordinates | P1 §2.3, Data availability |
+| `configurations/polished/n{37..100}.json` | experiment 44 polished centers, as exact rationals about 1e-31 from the certified exact local maximum. `points_30` holds these truncated toward zero to 30 decimals, with the exact minimum area of the truncated coordinates | P1 §2.3, Data availability |
 | `configurations/record_values.json` | published record values for 19 ≤ n ≤ 36: the exact minimum of the published coordinates. Values only | P1 App. A, App. C |
 | `configurations/records_printed/` | only what the papers print about records: the n = 22 coordinates (P2 Appendix "Coordinates") and the rattler nudges of records 21, 35 and 36 (moved points only) | P2 §4, §5, App. B |
 | `configurations/small_n/optima_small.json` | n = 5–18, rebuilt by our own search without the site's coordinates | P1 §7.1, P2 §7.1 |
 | `certificates/exp44/` | certificate runs of experiment 44 (`certs*.jsonl`, one line per size and run). `certs_report.jsonl` is the full run on the current library. `certs97_exp108.jsonl` is the failed n = 97 attempt | P1 §2.3, App. C |
-| `certificates/exp78/` | the independent full-KKT check of experiment 78: first run, re-check of 2026-11-12, current bests (`kkt78_current.jsonl`), polished centres at the second-order sizes (`kkt78_polished.jsonl`), n = 97, the comparison with exp 44, the conjecture linter and the nudge LP | P1 §2.3, P2 §4–6 |
+| `certificates/exp78/` | the independent full-KKT check of experiment 78: first run, re-check of 2026-11-12, current bests (`kkt78_current.jsonl`), polished centers at the second-order sizes (`kkt78_polished.jsonl`), n = 97, the comparison with exp 44, the conjecture linter and the nudge LP | P1 §2.3, P2 §4–6 |
 | `certificates/exp103/` | branch-and-bound re-proofs for n = 7 and 8: local certificates, run statistics and progress logs, the n = 9 probe | P1 §7.2 |
 | `certificates/exp104/exact_forms.json` | exact values: minimal polynomials, closed forms, Galois data, and t to 300 digits. Coordinates are omitted for n ≥ 19 (published records) | P1 §7.3 (table of exact values) |
 | `certificates/appendix_data.json` | the critical-triangle counts behind paper 2. Record coordinates are omitted; ours (n ≥ 39) are included | P2 §5 (records table), App. A |
@@ -96,7 +137,7 @@ script from the repository root. Scripts write to `output/`, which git ignores.
 | `code/verify_record_file.py` | verifies a record file **you downloaded yourself** from the record site: exact minimum, tie counts, and agreement with the value used in the papers |
 | `code/exp44/certify_interval.py` | the certificate of P1 §2.3 (experiment 44): reduced tie system, radii-polynomial (Krawczyk-type) existence test, exact post-checks, first- and second-order modes. `python code/exp44/certify_interval.py --sizes 37-64` |
 | `code/exp78/kkt_check.py` | the independent check (experiment 78): full KKT system and an exact Newton–Kantorovich test. `--sizes 37,40,61` |
-| `code/exp78/kkt78_polished.py` | exp 78 on the exp 44 polished centres (second-order sizes 65, 76, 81, 89, 100) |
+| `code/exp78/kkt78_polished.py` | exp 78 on the exp 44 polished centers (second-order sizes 65, 76, 81, 89, 100) |
 | `code/exp78/appendix.py`, `nudge.py`, `lint_conjecture.py` | critical-triangle counts, rattler nudges (LP), and the 2n−7 linter (P2) |
 | `code/exp103/bb.py`, `run_par.py`, `probe.py`, `get_certs.py`, `test_sound.py` | global branch and bound for n = 7, 8 (P1 §7.2). Example: `python code/exp103/run_par.py 7 exact --workers 4 --tag n7`. This takes about 73 minutes on one core; n = 8 takes several hours |
 | `code/exp104/exact_core.py`, `run.py` | exact values: high-precision Newton, LLL, exact check in Q[x]/(p), Krawczyk. Example: `python code/exp104/run.py --sizes 5` |
@@ -141,7 +182,9 @@ Also note:
 
 ## Independent verification of the n = 9 proof
 
-The proof has not yet been independently checked; checks are welcome. What can be checked, and how:
+The value was first proved exactly, and independently, by Orden (https://doi.org/10.5281/zenodo.24094373,
+10 November 2026). No one outside has re-run or reviewed our own proof yet; checks are welcome. What can be checked,
+and how:
 
 | what | how | time |
 |---|---|---|
@@ -153,7 +196,7 @@ The proof has not yet been independently checked; checks are welcome. What can b
 
 Trusted components, and their status:
 - **The search code** (`code/exp110/bb2.py`, `code/exp103/bb.py`): every discard is decided in exact integer arithmetic. The LP solver (HiGHS) only proposes multipliers. P2 has been cross-checked by the clean-room checker on samples (all of n = 7; a sample at n = 9); P0, P1 and the cover test have not been re-implemented independently. `verify_run.py` checks the run's recorded counters for consistency; it does not re-derive the boxes.
-- **The local certificate** (`code/exp44/certify_interval.py`): this closes the neighbourhood of the optimum. The appendices of the n = 9 paper (`papers/heilbronn_n9.pdf`) derive the P2 certificate and the basin radius; an external review of that derivation is welcome.
+- **The local certificate** (`code/exp44/certify_interval.py`): this closes the neighborhood of the optimum. The appendices of the n = 9 paper (`papers/heilbronn_n9.pdf`) derive the P2 certificate and the basin radius; an external review of that derivation is welcome.
 - **Python, numpy, numba and the OS:** standard.
 
 ## Not included
@@ -161,7 +204,7 @@ Trusted components, and their status:
 - **Record coordinates 19 ≤ n ≤ 36.** These belong to the record site and its contributors and are not
   redistributed here. Download them from https://math.tejstead.com/heilbronn and check them with
   `code/verify_record_file.py`. The only exception is the n = 22 coordinates that paper 2 prints, which are included
-  with attribution. For the same reason, exp 44 polished centres for n ≤ 36 and exact record coordinates from
+  with attribution. For the same reason, exp 44 polished centers for n ≤ 36 and exact record coordinates from
   exp 104 are omitted. Paper 2 says the coordinates of record 29 are in the data repository. They are the published
   coordinates, so get them from the site.
 - The search engine and the exploratory experiments behind the configurations are not included (P1 §2.2 describes them).
@@ -175,7 +218,7 @@ Trusted components, and their status:
   N. Sudermann-Merx (October 2026).
 - Exact value at n = 12: F. Comellas and J. L. A. Yebra, *New lower bounds for Heilbronn numbers*, Electron. J.
   Combin. 9 (2002), #R6.
-- Exact realisation at n = 14: R. Chappell, https://github.com/rhyschappell/heilbronn-n14-exact. The configuration is
+- Exact realization at n = 14: R. Chappell, https://github.com/rhyschappell/heilbronn-n14-exact. The configuration is
   due to M. Beyleveld (2006).
 - The affine wall identity (every side carries total wall force t; opposite sides have equal first moments) and the
   existence of KKT multipliers are D. Trela's: *KKT stresses, affine moments, and separator flux in the Heilbronn
@@ -188,8 +231,8 @@ The author used Claude, an AI system developed by Anthropic, for computation (wr
 certification and analysis code) and for drafting text. All claims were checked against the computational records;
 the author takes responsibility for the content. AI systems are not authors of this work.
 
-## Citation and licence
+## Citation and license
 
 Cite the papers above (see `CITATION.cff`). Code: MIT (`LICENSE`). Data (`configurations/`, `certificates/`,
-`code/figure_data/`): CC BY 4.0 (`LICENSE-DATA`). The licence covers our own data only. Record data from the record
+`code/figure_data/`): CC BY 4.0 (`LICENSE-DATA`). The license covers our own data only. Record data from the record
 site stays under the terms of its source.
