@@ -15,7 +15,7 @@ F₈; see the table).
 | triangle, n = 8 | 2θ = 0.0677892132…, θ the real root of the Chen–Zeng–Zhou septic | proved (computer-assisted), unique up to affine maps; the certificate trace (value) was independently replayed (Sudermann-Merx, 19 November 2026), and the equality case rests on the branch and bound | — | [10.5281/zenodo.24520863](https://doi.org/10.5281/zenodo.24520863) (v3, erratum) | [10.5281/zenodo.24337873](https://doi.org/10.5281/zenodo.24337873) |
 | triangle, n = 9 | 43/784 | proved (computer-assisted), unique up to affine maps; trace independently replayed (Sudermann-Merx, 19 November 2026) | — | [10.5281/zenodo.24563442](https://doi.org/10.5281/zenodo.24563442) (v3, erratum) | [10.5281/zenodo.24331022](https://doi.org/10.5281/zenodo.24331022) |
 | triangle, n = 10 | δ₁₀ = 0.0433767406780570017601… | proved (computer-assisted), unique up to affine maps (Cantrell's configuration, June 2007); independent replays welcome | — | [10.5281/zenodo.24426068](https://doi.org/10.5281/zenodo.24426068) | [10.5281/zenodo.24426026](https://doi.org/10.5281/zenodo.24426026) |
-| disk, n = 8 | ½ sin(π/7) ≈ 0.216942 (unit radius) | proved (computer-assisted), equality only for the regular heptagon plus its center | T. Stead's Lean theorem for F₈ (used as F₈ < 80001/10⁶) | [10.5281/zenodo.24572451](https://doi.org/10.5281/zenodo.24572451) | [10.5281/zenodo.24572455](https://doi.org/10.5281/zenodo.24572455) |
+| disk, n = 8 | ½ sin(π/7) ≈ 0.216942 (unit radius) | proved (computer-assisted), equality only for the regular heptagon plus its center | T. Stead's Lean theorem for F₈ (used as F₈ < 80001/10⁶) | [10.5281/zenodo.24616992](https://doi.org/10.5281/zenodo.24616992) (v2) | [10.5281/zenodo.24572455](https://doi.org/10.5281/zenodo.24572455) |
 
 Values in the triangle are the minimum area divided by the area of the triangle. Priority digests (hash commitments
 deposited before the full releases): triangle n = 10, [10.5281/zenodo.24447262](https://doi.org/10.5281/zenodo.24447262);
@@ -77,12 +77,14 @@ The PDFs in `papers/` are the versions first released here. The current version 
    eight-family release receipt is complete. The proof is AI-assisted, and independent re-runs of the replay are
    welcome. See `code/trace-tri10/README.md`.
 5. **Eight points in a disk: the Heilbronn value ½ sin(π/7).**
-   Zenodo: https://doi.org/10.5281/zenodo.24572451 (paper)
+   Zenodo: https://doi.org/10.5281/zenodo.24616992 (paper, v2; v1: https://doi.org/10.5281/zenodo.24572451)
+   (`papers/disk8_v2.pdf`). v2: the F₈ input is T. Stead's Lean-verified bound, rebuilt and axiom-audited by the
+   author; the second sector program was replayed on an independent machine with matching receipts. Claims unchanged.
    Data (certificate, checker and enumeration programs): https://doi.org/10.5281/zenodo.24572455
    Priority digest: https://doi.org/10.5281/zenodo.24570480
    Result: for eight points in the unit disk the smallest triangle has area at most ½ sin(π/7) = 0.216941…, with
    equality only for the regular heptagon plus its center. Proved, conditional on T. Stead's Lean theorem for F₈
-   (used as F₈ < 80001/10⁶). The paper and its data are on Zenodo, not in this repository.
+   (used as F₈ < 80001/10⁶). The data are on Zenodo, not in this repository.
 6. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. (`papers/heilbronn_structure.pdf`) Zenodo: https://doi.org/10.5281/zenodo.24235666
    The configurations for 37 ≤ n ≤ 100 were the first entries at these sizes on the record site (12–13 November
@@ -92,6 +94,11 @@ The PDFs in `papers/` are the versions first released here. The current version 
    Zenodo: https://doi.org/10.5281/zenodo.24500509 (version 2). (`papers/critical_triangles_note.pdf`)
 8. Heilbronn optima as area-constraint stress frameworks: text to follow. SHA-256 fingerprints of the manuscript are
    deposited on Zenodo: v1 https://doi.org/10.5281/zenodo.24485369, v2 https://doi.org/10.5281/zenodo.24497922.
+9. The second variation of the smallest ear of a polygon.
+   Zenodo: https://doi.org/10.5281/zenodo.24617074 (`papers/ear_second_variation.pdf`)
+   Near the regular n-gon, on a slice transverse to its affine orbit, the minimum ear area divided by the polygon
+   area decreases at least quadratically, with an explicit coefficient for n ≥ 6 and a closed form for n = 7; a
+   quantitative refinement of the Gronchi–Longinetti inequality.
 
 In the tables below, P1 and P2 are papers 6 and 7 of this list (the structure paper and the critical-triangles note)
 and P3 is the n = 9 proof. The triangle proof (exp 113) is checked by `code/smoke_test.py` (run accounting and the exact septic identification).
@@ -122,7 +129,7 @@ script from the repository root. Scripts write to `output/`, which git ignores.
 | `certificates/exp104/exact_forms.json` | exact values: minimal polynomials, closed forms, Galois data, and t to 300 digits. Coordinates are omitted for n ≥ 19 (published records) | P1 §7.3 (table of exact values) |
 | `certificates/appendix_data.json` | the critical-triangle counts behind paper 2. Record coordinates are omitted; ours (n ≥ 39) are included | P2 §5 (records table), App. A |
 | `certificates/exp109/loo.json` | leave-one-family-out control for the n = 43 break | P1 §6.2 |
-| `papers/` | the three papers (PDF and LaTeX source; `figures/` and `repro_table.tex` are inputs of the structure paper) | P1, P2, P3 |
+| `papers/` | the papers (PDF, with LaTeX source for the earlier ones; `figures/` and `repro_table.tex` are inputs of the structure paper); `disk8_v2.pdf` and `ear_second_variation.pdf` are the published Zenodo versions | P1, P2, P3 |
 | `certificates/exp110/` | the n = 9 run (`results/run_n9/`: `stats.json`, `progress.log`, `fails.jsonl` = empty, i.e. zero unprunable boxes), the n = 8 run, size probes and validation runs, and `EXP110_NOTES.md` | P3 |
 | `certificates/exp112/` | rattler-repair runs (`repair.py`, `exact_check.py`). n = 39, 40, 40_global, 81 in full. For records 21, 22, 29, 35, 36 only summary fields and the moved points (record coordinates are not redistributed). `EXP112_NOTES.md` | P2 §4 |
 | `code/` | verification scripts (see below) | |
