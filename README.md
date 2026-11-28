@@ -4,8 +4,8 @@ Papers, data and verification code on the Heilbronn triangle problem in the unit
 (place n points in the region to maximize the minimum triangle area t). Author of all papers: Ethan Hendren.
 
 **News (2026-11-26):** disk, n = 8. The largest possible minimum triangle area of eight points in the unit disk is
-½ sin(π/7), attained only by the regular heptagon plus its center (proved, conditional on T. Stead's Lean theorem for
-F₈; see the table).
+½ sin(π/7), attained only by the regular heptagon plus its center (proved, using T. Stead's Lean-verified bound on
+F₈, rebuilt and axiom-audited; see the table).
 
 ## Results
 
@@ -15,7 +15,7 @@ F₈; see the table).
 | triangle, n = 8 | 2θ = 0.0677892132…, θ the real root of the Chen–Zeng–Zhou septic | proved (computer-assisted), unique up to affine maps; the certificate trace (value) was independently replayed (Sudermann-Merx, 19 November 2026), and the equality case rests on the branch and bound | — | [10.5281/zenodo.24520863](https://doi.org/10.5281/zenodo.24520863) (v3, erratum) | [10.5281/zenodo.24337873](https://doi.org/10.5281/zenodo.24337873) |
 | triangle, n = 9 | 43/784 | proved (computer-assisted), unique up to affine maps; trace independently replayed (Sudermann-Merx, 19 November 2026) | — | [10.5281/zenodo.24563442](https://doi.org/10.5281/zenodo.24563442) (v3, erratum) | [10.5281/zenodo.24331022](https://doi.org/10.5281/zenodo.24331022) |
 | triangle, n = 10 | δ₁₀ = 0.0433767406780570017601… | proved (computer-assisted), unique up to affine maps (Cantrell's configuration, June 2007); independent replays welcome | — | [10.5281/zenodo.24426068](https://doi.org/10.5281/zenodo.24426068) | [10.5281/zenodo.24426026](https://doi.org/10.5281/zenodo.24426026) |
-| disk, n = 8 | ½ sin(π/7) ≈ 0.216942 (unit radius) | proved (computer-assisted), equality only for the regular heptagon plus its center | T. Stead's Lean theorem for F₈ (used as F₈ < 80001/10⁶) | [10.5281/zenodo.24616992](https://doi.org/10.5281/zenodo.24616992) (v2) | [10.5281/zenodo.24572455](https://doi.org/10.5281/zenodo.24572455) |
+| disk, n = 8 | ½ sin(π/7) ≈ 0.216942 (unit radius) | proved (computer-assisted), equality only for the regular heptagon plus its center | T. Stead's Lean-verified F₈ < 80001/10⁶ (rebuilt and axiom-audited) | [10.5281/zenodo.24616992](https://doi.org/10.5281/zenodo.24616992) (v2) | [10.5281/zenodo.24618238](https://doi.org/10.5281/zenodo.24618238) (v2) |
 
 Values in the triangle are the minimum area divided by the area of the triangle. Priority digests (hash commitments
 deposited before the full releases): triangle n = 10, [10.5281/zenodo.24447262](https://doi.org/10.5281/zenodo.24447262);
@@ -80,11 +80,12 @@ The PDFs in `papers/` are the versions first released here. The current version 
    Zenodo: https://doi.org/10.5281/zenodo.24616992 (paper, v2; v1: https://doi.org/10.5281/zenodo.24572451)
    (`papers/disk8_v2.pdf`). v2: the F₈ input is T. Stead's Lean-verified bound, rebuilt and axiom-audited by the
    author; the second sector program was replayed on an independent machine with matching receipts. Claims unchanged.
-   Data (certificate, checker and enumeration programs): https://doi.org/10.5281/zenodo.24572455
+   Data (certificate, checker and enumeration programs): https://doi.org/10.5281/zenodo.24618238 (v2; v1:
+   https://doi.org/10.5281/zenodo.24572455)
    Priority digest: https://doi.org/10.5281/zenodo.24570480
    Result: for eight points in the unit disk the smallest triangle has area at most ½ sin(π/7) = 0.216941…, with
-   equality only for the regular heptagon plus its center. Proved, conditional on T. Stead's Lean theorem for F₈
-   (used as F₈ < 80001/10⁶). The data are on Zenodo, not in this repository.
+   equality only for the regular heptagon plus its center. Proved, using T. Stead's Lean-verified F₈ < 80001/10⁶
+   (rebuilt and axiom-audited by the author). The data are on Zenodo, not in this repository.
 6. The structure of best-known Heilbronn configurations in the unit square: certificates, geometric families and a
    crossover at n = 43. (`papers/heilbronn_structure.pdf`) Zenodo: https://doi.org/10.5281/zenodo.24235666
    The configurations for 37 ≤ n ≤ 100 were the first entries at these sizes on the record site (12–13 November
